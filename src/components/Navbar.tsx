@@ -35,6 +35,22 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   return (
     <>
       <nav className={`navbar ${isScrolled ? 'fixed' : ''} ${isHidden ? 'hidden' : ''}`}>
@@ -109,7 +125,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Drawer */}
-      <div className={`mobile-drawer ${menuOpen ? 'open' : ''}`}>
+      <div className={`mobile-drawer ${menuOpen ? 'open' : ''}`} data-lenis-prevent>
 
         {/* Close button inside drawer */}
         <button

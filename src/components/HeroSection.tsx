@@ -15,8 +15,8 @@ export default function HeroSection() {
       <div className="hero-bg-image"></div>
       <div className="hero-overlay"></div>
       
+      <Navbar />
       <div className="hero-content">
-        <Navbar />
 
         {/* Main Content */}
         <div className="main-grid">
