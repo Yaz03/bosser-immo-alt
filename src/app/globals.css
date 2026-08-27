@@ -4016,3 +4016,94 @@ body {
   font-family: var(--font-instrument), serif;
   font-size: 2.5rem;
 }
+
+/* ---------------------------------
+   PHASE 2 - RESPONSIVE QUERIES
+--------------------------------- */
+@media (max-width: 1024px) {
+  .property-details-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .property-sidebar-widget {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .inner-page-container {
+    padding: 0 1rem;
+  }
+
+  /* Gallery Grid Stacking */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 1rem;
+  }
+  
+  .gallery-main {
+    height: 400px;
+  }
+
+  .gallery-side {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px;
+    gap: 1rem;
+  }
+  
+  /* Header Stacking */
+  .property-header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .property-header-info h1 {
+    font-size: 2.5rem;
+  }
+  
+  .property-header-action {
+    text-align: left;
+    width: 100%;
+    align-items: flex-start;
+  }
+  
+  /* Media Tabs */
+  .media-tabs-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .media-tab-btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .media-iframe {
+    height: 350px;
+  }
+  
+  /* Location POIs */
+  .location-pois-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  /* Mortgage Calc */
+  .calc-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  /* Lightbox */
+  .lightbox-content {
+    width: 95vw;
+    height: 60vh;
+  }
+  
+  .lightbox-nav {
+    padding: 1rem;
+  }
+}
