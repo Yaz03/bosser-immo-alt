@@ -5,11 +5,12 @@ interface AccordionCardProps {
   category: string;
   title: string;
   subtitle: string;
+  description: string;
   linkText: string;
   bgImage: string;
 }
 
-export default function AccordionCard({ number, category, title, subtitle, linkText, bgImage }: AccordionCardProps) {
+export default function AccordionCard({ number, category, title, subtitle, description, linkText, bgImage }: AccordionCardProps) {
   return (
     <div className="accordion-card">
       <div className="accordion-bg" style={{ backgroundImage: `url('${bgImage}')` }}></div>
@@ -22,6 +23,9 @@ export default function AccordionCard({ number, category, title, subtitle, linkT
       <div className="card-bottom">
         <h3 className="card-title">{title}</h3>
         <p className="card-subtitle">{subtitle}</p>
+        <div className="card-desc-wrapper">
+          <p className="card-desc">{description}</p>
+        </div>
         <a href="#" className="card-link">{linkText} &rarr;</a>
       </div>
     </div>

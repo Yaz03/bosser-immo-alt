@@ -10,8 +10,10 @@ export default function SearchSection() {
   const [propertyType, setPropertyType] = useState('Any type');
   const [bedrooms, setBedrooms] = useState('Any');
   const [yearBuilt, setYearBuilt] = useState('Any year');
+  const [isVisible, setIsVisible] = useState(false);
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
+  const searchBarRef = useRef<HTMLDivElement>(null);
 
   // Close dropdowns if clicked outside
   useEffect(() => {
@@ -25,6 +27,25 @@ export default function SearchSection() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Intersection Observer for entrance animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (searchBarRef.current) {
+      observer.observe(searchBarRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const toggleDropdown = (dropdown: string) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
@@ -36,8 +57,13 @@ export default function SearchSection() {
 
   return (
     <section className="search-section">
-      <div className="search-container" ref={searchContainerRef}>
+      <div className={`search-container ${isVisible ? 'animate-pop' : ''}`} ref={searchBarRef}>
         
+        <div className="search-header">
+          <h2>Find your ideal property.</h2>
+          <p>Search premium listings across the Rhein-Main region.</p>
+        </div>
+
         {/* Main Search Bar */}
         <div className="search-bar">
           <div className="search-filter">

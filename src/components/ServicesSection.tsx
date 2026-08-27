@@ -8,6 +8,7 @@ export default function ServicesSection() {
       category: "FIND",
       title: "Discover",
       subtitle: "Properties worth knowing about",
+      description: "Carefully selected across the Rhein-Main region, matched to what matters to you.",
       linkText: "EXPLORE PROPERTIES",
       bgImage: "/card1.jpg"
     },
@@ -16,6 +17,7 @@ export default function ServicesSection() {
       category: "FOR OWNERS",
       title: "Sell",
       subtitle: "A strategy built around your property",
+      description: "From valuation to presentation and negotiation — your property, properly positioned.",
       linkText: "SELL YOUR PROPERTY",
       bgImage: "/card2.jpg"
     },
@@ -24,6 +26,7 @@ export default function ServicesSection() {
       category: "VALUATION",
       title: "Value",
       subtitle: "Know the value before you make the move",
+      description: "Local market knowledge, current data and three decades of hands-on experience.",
       linkText: "REQUEST A VALUATION",
       bgImage: "/card3.jpg"
     },
@@ -32,6 +35,7 @@ export default function ServicesSection() {
       category: "ADVISORY",
       title: "Advise",
       subtitle: "A local perspective you can rely on",
+      description: "Personal guidance from the first conversation to the final handover.",
       linkText: "DISCOVER OUR APPROACH",
       bgImage: "/card4.jpg"
     }

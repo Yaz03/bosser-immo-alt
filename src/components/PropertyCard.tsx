@@ -13,6 +13,7 @@ export default function PropertyCard({ imageSrc, type, price, location, specs }:
   return (
     <a href="#" className="property-card">
       <Image src={imageSrc} alt={location} fill className="property-image" sizes="(max-width: 768px) 100vw, 50vw" />
+      
       <div className="property-details-box">
         <div className="property-info-row">
           <span className="property-location">{location}</span>
