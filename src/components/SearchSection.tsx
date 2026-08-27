@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function SearchSection() {
+export default function SearchSection({ hideHeader = false, isDarkBg = false, hideResultsCount = false }: { hideHeader?: boolean, isDarkBg?: boolean, hideResultsCount?: boolean }) {
   const { t } = useLanguage();
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [transactionType, setTransactionType] = useState('purchase');
   
   const [propertyType, setPropertyType] = useState('Any');
   const [bedrooms, setBedrooms] = useState('Any');
@@ -62,15 +63,39 @@ export default function SearchSection() {
   };
 
   return (
-    <section className="search-section">
+    <section className={`search-section ${isDarkBg ? 'search-section-dark' : ''}`}>
       <div className={`search-container reveal-base reveal-scale ${isVisible ? 'is-revealed' : ''}`} ref={(el) => {
         searchBarRef.current = el;
         if (el) containerRef.current = el;
       }}>
         
-        <div className="search-header">
-          <h2>{t.search.headline}</h2>
-          <p>{t.search.subhead}</p>
+        {!hideHeader && (
+          <div className="search-header">
+            <h2>{t.search.headline}</h2>
+            <p>{t.search.subhead}</p>
+          </div>
+        )}
+
+        {/* Transaction Type Tabs */}
+        <div className="search-tabs-container">
+          <button 
+            className={`search-tab ${transactionType === 'purchase' ? 'active' : ''}`} 
+            onClick={() => setTransactionType('purchase')}
+          >
+            {t.search.purchase}
+          </button>
+          <button 
+            className={`search-tab ${transactionType === 'rent' ? 'active' : ''}`} 
+            onClick={() => setTransactionType('rent')}
+          >
+            {t.search.rent}
+          </button>
+          <button 
+            className={`search-tab ${transactionType === 'investment' ? 'active' : ''}`} 
+            onClick={() => setTransactionType('investment')}
+          >
+            {t.search.investment}
+          </button>
         </div>
 
         {/* Main Search Bar */}
@@ -267,7 +292,7 @@ export default function SearchSection() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg> 
                 {t.search.reset}
               </button>
-              <div className="adv-results">{t.search.found}</div>
+              {!hideResultsCount && <div className="adv-results">{t.search.found}</div>}
               <button className="adv-submit">{t.search.show} &rarr;</button>
             </div>
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface PropertyCardProps {
+  id?: string;
   imageSrc: string;
   type: string;
   price: string;
@@ -10,10 +12,13 @@ interface PropertyCardProps {
   className?: string;
 }
 
-export default function PropertyCard({ imageSrc, type, price, location, specs, className = "" }: PropertyCardProps) {
+export default function PropertyCard({ id, imageSrc, type, price, location, specs, className = "" }: PropertyCardProps) {
+  const href = id ? `/properties/${id}` : "#";
   return (
-    <a href="#" className={`property-card ${className}`}>
-      <Image src={imageSrc} alt={location} fill className="property-image" sizes="(max-width: 768px) 100vw, 50vw" />
+    <Link href={href} className={`property-card ${className}`}>
+      <div className="property-image-wrapper">
+        <Image src={imageSrc} alt={location} fill className="property-image" sizes="(max-width: 768px) 100vw, 50vw" />
+      </div>
       
       <div className="property-details-box">
         <div className="property-info-row">
@@ -32,6 +37,6 @@ export default function PropertyCard({ imageSrc, type, price, location, specs, c
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }

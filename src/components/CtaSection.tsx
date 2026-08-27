@@ -4,10 +4,18 @@ import React, { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function CtaSection() {
+interface CtaSectionProps {
+  variant?: 'default' | 'properties';
+}
+
+export default function CtaSection({ variant = 'default' }: CtaSectionProps) {
   const { ref: sectionRef, isVisible } = useScrollReveal(0.2);
   const { t } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+
+  const headline = variant === 'properties' ? t.propertiesCta.headline : t.cta.headline;
+  const headlineSerif = variant === 'properties' ? t.propertiesCta.headlineSerif : t.cta.headlineSerif;
+  const subhead = variant === 'properties' ? t.propertiesCta.subhead : t.cta.subhead;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,17 +37,20 @@ export default function CtaSection() {
   return (
     <section className="cta-section" ref={sectionRef}>
       {/* Left Column: Portrait Image */}
-      <div className={`cta-image-col reveal-base reveal-scale ${isVisible ? 'is-revealed' : ''}`}></div>
+      <div 
+        className={`cta-image-col reveal-base reveal-scale ${isVisible ? 'is-revealed' : ''}`}
+        style={variant === 'properties' ? { backgroundImage: 'url("/test_bg_villa.jpg")' } : undefined}
+      ></div>
 
       {/* Right Column: Form Block */}
       <div className="cta-form-col">
         <div className={`cta-form-container reveal-base reveal-up delay-100 ${isVisible ? 'is-revealed' : ''}`}>
           <h2 className="cta-headline">
-            {t.cta.headline}<br/>
-            <span className="italic-serif">{t.cta.headlineSerif}</span>
+            {headline}<br/>
+            <span className="italic-serif">{headlineSerif}</span>
           </h2>
           <p className="cta-subhead">
-            {t.cta.subhead}
+            {subhead}
           </p>
           
           <form className="cta-form" onSubmit={handleSubmit} noValidate>

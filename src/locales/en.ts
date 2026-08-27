@@ -23,6 +23,9 @@ export const en = {
   search: {
     headline: 'Find your ideal property.',
     subhead: 'Search premium listings across the Rhein-Main region.',
+    purchase: 'Purchase',
+    rent: 'Rent',
+    investment: 'Investment',
     location: 'LOCATION',
     placeholder: 'Where are you looking?',
     type: 'PROPERTY TYPE',
@@ -176,5 +179,34 @@ export const en = {
     hours: 'Mon – Fri · 9:00 AM – 6:00 PM',
     privacy: 'Privacy Policy',
     imprint: 'Imprint'
+  },
+  propertiesPage: {
+    heroTag: 'THE COLLECTION',
+    heroHeadline: 'Our',
+    heroHeadlineSerif: 'Properties.',
+    heroSubhead: 'Our complete portfolio of extraordinary properties, defined by uncompromising quality and prime locations across the Rhein-Main region.',
+    ctaHeadline: 'Private',
+    ctaHeadlineSerif: 'Representation.',
+    ctaSubhead: 'Seeking something entirely unlisted? Our private network grants access to the most exclusive off-market properties worldwide.',
+    ctaBtn: 'CONTACT US',
+    resultsCount: 'Showing {start}-{end} of {total} properties',
+    sortBy: 'Sort by',
+    sortNewest: 'Newest',
+    sortPriceHigh: 'Price (High to Low)',
+    sortPriceLow: 'Price (Low to High)'
+  },
+  servicesSection: {
+    headline: 'Beyond Brokerage.',
+    service1Title: 'Mediation & Advice',
+    service1Desc: 'We provide expert support for sales, rentals and all real estate matters – individually, professionally and with foresight.',
+    service2Title: 'Assessment & Expert Opinion',
+    service2Desc: 'Receive well-founded property valuations and professional appraisals – tailored to your property and the current market.',
+    service3Title: 'Comprehensive Services',
+    service3Desc: 'Because every detail counts, we take care of all the important formalities and support you with our partner network for renovation and financing.'
+  },
+  propertiesCta: {
+    headline: 'Require',
+    headlineSerif: 'Guidance?',
+    subhead: 'Our senior advisors are at your disposal to help you navigate our exclusive portfolio and find the property that perfectly matches your vision.'
   }
 };

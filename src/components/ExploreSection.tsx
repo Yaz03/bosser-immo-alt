@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import PropertyCard from './PropertyCard';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
+import { mockProperties } from '../data/properties';
 
 export default function ExploreSection() {
   const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
@@ -65,34 +66,17 @@ export default function ExploreSection() {
         
         {/* Bottom Functional Grid */}
         <div className="explore-grid">
-          <PropertyCard 
-            imageSrc="/images/prop_villa_1787771383699.jpg"
-            type="Luxury Villa"
-            price="€ 4,250,000"
-            location="Los Angeles, CA"
-            specs="5 Beds • 6 Baths • 650 m²"
-          />
-          <PropertyCard 
-            imageSrc="/images/prop_estate_1787771411381.jpg"
-            type="Historic Estate"
-            price="€ 8,900,000"
-            location="Cotswolds, UK"
-            specs="8 Beds • 10 Baths • 1,200 m²"
-          />
-          <PropertyCard 
-            imageSrc="/images/prop_penthouse_1787771396787.jpg"
-            type="Penthouse"
-            price="€ 3,100,000"
-            location="London, UK"
-            specs="3 Beds • 3 Baths • 280 m²"
-          />
-          <PropertyCard 
-            imageSrc="/images/prop_apartment_new.jpg"
-            type="Modern Apartment"
-            price="€ 1,850,000"
-            location="Malibu, CA"
-            specs="2 Beds • 2 Baths • 160 m²"
-          />
+          {mockProperties.slice(0, 4).map((prop, idx) => (
+            <PropertyCard 
+              key={prop.id}
+              id={prop.id}
+              imageSrc={prop.imageSrc}
+              type={prop.type}
+              price={prop.price}
+              location={prop.location}
+              specs={prop.specs}
+            />
+          ))}
         </div>
         
       </div>

@@ -21,8 +21,11 @@ export const de = {
     scroll: 'SCROLLEN & ENTDECKEN'
   },
   search: {
-    headline: 'Finden Sie Ihre Traumimmobilie.',
-    subhead: 'Durchsuchen Sie Premium-Angebote im gesamten Rhein-Main-Gebiet.',
+    headline: 'Finden Sie Ihre ideale Immobilie.',
+    subhead: 'Durchsuchen Sie erstklassige Angebote in der Rhein-Main-Region.',
+    purchase: 'Kauf',
+    rent: 'Miete',
+    investment: 'Anlage',
     location: 'STANDORT',
     placeholder: 'Wo suchen Sie?',
     type: 'IMMOBILIENTYP',
@@ -176,5 +179,34 @@ export const de = {
     hours: 'Mo – Fr · 9:00 – 18:00 Uhr',
     privacy: 'Datenschutz',
     imprint: 'Impressum'
+  },
+  propertiesPage: {
+    heroTag: 'DIE KOLLEKTION',
+    heroHeadline: 'Unsere',
+    heroHeadlineSerif: 'Immobilien.',
+    heroSubhead: 'Unser vollständiges Portfolio außergewöhnlicher Immobilien, geprägt von kompromissloser Qualität und erstklassigen Lagen in der Rhein-Main-Region.',
+    ctaHeadline: 'Private',
+    ctaHeadlineSerif: 'Vertretung.',
+    ctaSubhead: 'Suchen Sie etwas völlig Ungelistetes? Unser privates Netzwerk bietet Zugang zu den exklusivsten Off-Market-Immobilien weltweit.',
+    ctaBtn: 'KONTAKTIEREN SIE UNS',
+    resultsCount: 'Zeige {start}-{end} von {total} Immobilien',
+    sortBy: 'Sortieren nach',
+    sortNewest: 'Neueste',
+    sortPriceHigh: 'Preis (Absteigend)',
+    sortPriceLow: 'Preis (Aufsteigend)'
+  },
+  servicesSection: {
+    headline: 'Mehr als Makler.',
+    service1Title: 'Vermittlung & Beratung',
+    service1Desc: 'Wir bieten fachkundige Unterstützung bei Verkauf, Vermietung und allen Immobilienfragen – individuell, professionell und vorausschauend.',
+    service2Title: 'Bewertung & Gutachten',
+    service2Desc: 'Erhalten Sie fundierte Immobilienbewertungen und professionelle Gutachten – maßgeschneidert auf Ihre Immobilie und den aktuellen Markt.',
+    service3Title: 'Umfassende Services',
+    service3Desc: 'Weil jedes Detail zählt, übernehmen wir alle wichtigen Formalitäten und unterstützen Sie mit unserem Partnernetzwerk bei Renovierung und Finanzierung.'
+  },
+  propertiesCta: {
+    headline: 'Benötigen Sie',
+    headlineSerif: 'Beratung?',
+    subhead: 'Unsere erfahrenen Berater stehen Ihnen zur Verfügung, um Sie durch unser exklusives Portfolio zu führen und die Immobilie zu finden, die perfekt zu Ihren Vorstellungen passt.'
   }
 };

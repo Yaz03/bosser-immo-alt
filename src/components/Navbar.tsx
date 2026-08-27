@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function Navbar() {
+export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
   const { lang, setLang, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
@@ -51,16 +53,18 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
+  const invertClass = invertOnLoad && !isScrolled && !menuOpen ? 'navbar-invert' : '';
+
   return (
     <>
-      <nav className={`navbar ${isScrolled ? 'fixed' : ''} ${isHidden ? 'hidden' : ''}`}>
-        <div className="logo">
+      <nav className={`navbar ${isScrolled ? 'fixed' : ''} ${isHidden ? 'hidden' : ''} ${invertClass}`}>
+        <a href="/" className="logo">
           <img src="/logo.png" alt="Bossert Immobilien Logo" className="logo-img" />
-        </div>
+        </a>
 
         {/* Desktop Nav */}
         <div className="nav-links desktop-nav">
-          <a href="#" className="nav-item">{t.nav.properties}</a>
+          <a href="/properties" className={`nav-item ${pathname === '/properties' ? 'active' : ''}`}>{t.nav.properties}</a>
           <a href="#" className="nav-item">{t.nav.forOwners}</a>
           <a href="#" className="nav-item">{t.nav.services}</a>
           <a href="#" className="nav-item">{t.nav.about}</a>
@@ -140,7 +144,7 @@ export default function Navbar() {
         </button>
 
         <div className="mobile-nav-links">
-          <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.properties}</a>
+          <a href="/properties" className={`mobile-nav-item ${pathname === '/properties' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.properties}</a>
           <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.forOwners}</a>
           <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.services}</a>
           <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.about}</a>
