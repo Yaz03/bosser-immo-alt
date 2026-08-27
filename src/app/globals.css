@@ -2087,6 +2087,7 @@ body {
 
 .footer-subscribe-input {
   flex: 1;
+  min-width: 0;
   border: none;
   background: transparent;
   padding: 0.5rem 1rem;
@@ -2101,6 +2102,7 @@ body {
 }
 
 .footer-subscribe-btn {
+  flex-shrink: 0;
   background-color: var(--navy);
   color: var(--white);
   border: none;
