@@ -5,6 +5,7 @@ import ExploreSection from '@/components/ExploreSection';
 import WhySection from '@/components/WhySection';
 import TestimonialSection from '@/components/TestimonialSection';
 import CtaSection from '@/components/CtaSection';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <WhySection />
       <TestimonialSection />
       <CtaSection />
+      <Footer />
     </main>
   );
 }

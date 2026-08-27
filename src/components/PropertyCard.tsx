@@ -7,11 +7,12 @@ interface PropertyCardProps {
   price: string;
   location: string;
   specs: string;
+  className?: string;
 }
 
-export default function PropertyCard({ imageSrc, type, price, location, specs }: PropertyCardProps) {
+export default function PropertyCard({ imageSrc, type, price, location, specs, className = "" }: PropertyCardProps) {
   return (
-    <a href="#" className="property-card">
+    <a href="#" className={`property-card ${className}`}>
       <Image src={imageSrc} alt={location} fill className="property-image" sizes="(max-width: 768px) 100vw, 50vw" />
       
       <div className="property-details-box">

@@ -1,6 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
+export const metadata: Metadata = {
+  title: "Bossert Immobilien | Premium Real Estate Rhein-Main",
+  description: "Bossert Immobilien — Discretion and precision in every transaction. Premium residential real estate in the Rhein-Main region since 1991.",
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,6 +25,9 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument",
 });
 
+import SmoothScroll from "@/components/SmoothScroll";
+import { LanguageProvider } from "@/context/LanguageContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${instrumentSerif.variable}`}>
-        {children}
+        <LanguageProvider>
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
+        </LanguageProvider>
       </body>
     </html>
   );

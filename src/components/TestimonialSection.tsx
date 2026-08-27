@@ -1,30 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-
-const testimonials = [
-  {
-    quote: "An entirely different caliber of service. The discretion and strategic approach they brought to the sale of our property was unmatched.",
-    author: "M.K.",
-    location: "Villa in Taunus",
-    image: "/test_bg_villa.jpg"
-  },
-  {
-    quote: "Bossert understands that true luxury is silence. Everything was handled privately, efficiently, and with total precision.",
-    author: "L.S.",
-    location: "Penthouse, Frankfurt",
-    image: "/test_bg_penthouse.jpg"
-  },
-  {
-    quote: "Their network is invisible but immensely powerful. They connected us with the exact buyer we needed before the property was ever listed.",
-    author: "Dr. A.H.",
-    location: "Historic Estate",
-    image: "/test_bg_estate.jpg"
-  }
-];
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function TestimonialSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { ref: sectionRef, isVisible } = useScrollReveal(0.2);
+  const { t } = useLanguage();
+  const testimonials = t.testimonials.list;
 
   const nextSlide = () => {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
@@ -39,23 +23,23 @@ export default function TestimonialSection() {
       setActiveIndex((current) => (current + 1) % testimonials.length);
     }, 7000); // Auto-advance every 7 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
 
   return (
-    <section className="testimonial-section">
+    <section className="testimonial-section" ref={sectionRef}>
       <div className="test-header-row">
-        <div className="test-header-left">
+        <div className={`test-header-left reveal-base reveal-up ${isVisible ? 'is-revealed' : ''}`}>
           <h2 className="test-headline">
-            A legacy of
-            <span className="italic-serif">exceptional results.</span>
+            {t.testimonials.headline}
+            <span className="italic-serif"> {t.testimonials.headlineSerif}</span>
           </h2>
         </div>
-        <div className="test-header-right">
-          <p>Experience real estate at the highest level. Hear directly from those who have entrusted us with their most valuable assets, where discretion and precision are paramount.</p>
+        <div className={`test-header-right reveal-base reveal-up delay-100 ${isVisible ? 'is-revealed' : ''}`}>
+          <p>{t.testimonials.subhead}</p>
         </div>
       </div>
 
-      <div className="test-card-container">
+      <div className={`test-card-container reveal-base reveal-scale delay-200 ${isVisible ? 'is-revealed' : ''}`}>
         {/* Background Images */}
         {testimonials.map((test, index) => (
           <div 

@@ -1,7 +1,10 @@
 import React from 'react';
 import GlassSurface from './ui/GlassSurface';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function StatsCard() {
+  const { t } = useLanguage();
+
   return (
     <GlassSurface
       width="100%"
@@ -18,11 +21,9 @@ export default function StatsCard() {
       mixBlendMode="screen"
     >
       <div className="stats-card" style={{ background: 'transparent', backdropFilter: 'none', border: 'none', boxShadow: 'none' }}>
-        <div className="stats-number">500+</div>
-        <div className="stats-desc">
-          Successful innovative projects<br />
-          delivered across the Rhine-<br />
-          Main area from 1991.
+        <div className="stats-number">{t.hero.statsNumber}</div>
+        <div className="stats-desc" style={{ whiteSpace: 'pre-line' }}>
+          {t.hero.statsDesc}
         </div>
       </div>
     </GlassSurface>

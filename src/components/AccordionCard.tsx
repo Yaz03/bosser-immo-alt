@@ -8,11 +8,12 @@ interface AccordionCardProps {
   description: string;
   linkText: string;
   bgImage: string;
+  className?: string;
 }
 
-export default function AccordionCard({ number, category, title, subtitle, description, linkText, bgImage }: AccordionCardProps) {
+export default function AccordionCard({ number, category, title, subtitle, description, linkText, bgImage, className = "" }: AccordionCardProps) {
   return (
-    <div className="accordion-card">
+    <div className={`accordion-card ${className}`}>
       <div className="accordion-bg" style={{ backgroundImage: `url('${bgImage}')` }}></div>
       <div className="card-overlay"></div>
       <div className="card-top">

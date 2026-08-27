@@ -1,62 +1,69 @@
+"use client";
+
 import React from 'react';
 import AccordionCard from './AccordionCard';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ServicesSection() {
+  const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
+  const { t } = useLanguage();
+
   const cards = [
     {
       number: "01",
-      category: "FIND",
-      title: "Discover",
-      subtitle: "Properties worth knowing about",
-      description: "Carefully selected across the Rhein-Main region, matched to what matters to you.",
-      linkText: "EXPLORE PROPERTIES",
+      category: t.services.cards[0].category,
+      title: t.services.cards[0].title,
+      subtitle: t.services.cards[0].subtitle,
+      description: t.services.cards[0].description,
+      linkText: t.services.cards[0].linkText,
       bgImage: "/card1.jpg"
     },
     {
       number: "02",
-      category: "FOR OWNERS",
-      title: "Sell",
-      subtitle: "A strategy built around your property",
-      description: "From valuation to presentation and negotiation — your property, properly positioned.",
-      linkText: "SELL YOUR PROPERTY",
+      category: t.services.cards[1].category,
+      title: t.services.cards[1].title,
+      subtitle: t.services.cards[1].subtitle,
+      description: t.services.cards[1].description,
+      linkText: t.services.cards[1].linkText,
       bgImage: "/card2.jpg"
     },
     {
       number: "03",
-      category: "VALUATION",
-      title: "Value",
-      subtitle: "Know the value before you make the move",
-      description: "Local market knowledge, current data and three decades of hands-on experience.",
-      linkText: "REQUEST A VALUATION",
+      category: t.services.cards[2].category,
+      title: t.services.cards[2].title,
+      subtitle: t.services.cards[2].subtitle,
+      description: t.services.cards[2].description,
+      linkText: t.services.cards[2].linkText,
       bgImage: "/card3.jpg"
     },
     {
       number: "04",
-      category: "ADVISORY",
-      title: "Advise",
-      subtitle: "A local perspective you can rely on",
-      description: "Personal guidance from the first conversation to the final handover.",
-      linkText: "DISCOVER OUR APPROACH",
+      category: t.services.cards[3].category,
+      title: t.services.cards[3].title,
+      subtitle: t.services.cards[3].subtitle,
+      description: t.services.cards[3].description,
+      linkText: t.services.cards[3].linkText,
       bgImage: "/card4.jpg"
     }
   ];
 
   return (
-    <section className="services-section">
-      <div className="services-left">
+    <section className="services-section" ref={sectionRef}>
+      <div className={`services-left reveal-base reveal-scale ${isVisible ? 'is-revealed' : ''}`}>
         <div className="services-subtitle">
-          <span className="dot"></span> What We Do
+          <span className="dot"></span> {t.services.tag}
         </div>
         <div className="services-headline">
-          <div className="headline-top-s">A MORE CONSIDERED WAY</div>
-          <div className="headline-mid-s">to navigate</div>
-          <div className="headline-bot-s"><span>real</span> estate.</div>
+          <div className="headline-top-s">{t.services.headline}</div>
+          <div className="headline-mid-s">{t.services.headlineMid}</div>
+          <div className="headline-bot-s"><span>{t.services.headlineSerif}</span> {t.services.headlineBot}</div>
         </div>
         <div className="services-desc">
-          From finding the right property to understanding its value, Bossert brings together local expertise, personal advice and a complete range of real-estate services — from the first conversation to the final handover.
+          {t.services.subhead}
         </div>
         <div className="services-footer">
-          Rhein-Main Region • Since 1991
+          {t.services.footer}
         </div>
       </div>
 

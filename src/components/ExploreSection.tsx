@@ -1,28 +1,46 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import PropertyCard from './PropertyCard';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ExploreSection() {
+  const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
+  const { t } = useLanguage();
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const filters = [
+    { id: 'all', label: t.explore.filters.all },
+    { id: 'villas', label: t.explore.filters.villas },
+    { id: 'penthouses', label: t.explore.filters.penthouses },
+    { id: 'historic', label: t.explore.filters.historic },
+    { id: 'apartments', label: t.explore.filters.apartments },
+    { id: 'waterfront', label: t.explore.filters.waterfront },
+    { id: 'offMarket', label: t.explore.filters.offMarket },
+  ];
+
   return (
-    <section className="explore-section">
+    <section className="explore-section" ref={sectionRef}>
       <div className="explore-container">
         
         {/* Top Header */}
         <div className="explore-header">
-          <div className="explore-header-left">
+          <div className={`explore-header-left reveal-base reveal-up ${isVisible ? 'is-revealed' : ''}`}>
             <div className="explore-subtitle">
-              <span className="dot"></span> FEATURED LISTINGS
+              <span className="dot"></span> {t.explore.tag}
             </div>
             <h2 className="explore-headline">
-              Selected <br /><span className="italic-serif">properties.</span>
+              {t.explore.headline} <br /><span className="italic-serif">{t.explore.headlineSerif}</span>
             </h2>
           </div>
           
-          <div className="explore-header-right">
+          <div className={`explore-header-right reveal-base reveal-up delay-100 ${isVisible ? 'is-revealed' : ''}`}>
             <p className="explore-subhead">
-              Discover a curated collection of exceptional homes tailored to your lifestyle. Every property is hand-selected for its architectural merit and premium location.
+              {t.explore.subhead}
             </p>
             <a href="#" className="explore-btn explore-btn-dark">
-              VIEW ALL PROPERTIES
+              {t.explore.btn}
               <div className="explore-icon-wrapper">
                 <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
@@ -34,13 +52,15 @@ export default function ExploreSection() {
         
         {/* Category Filters */}
         <div className="explore-filters">
-          <button className="filter-pill active">All Properties</button>
-          <button className="filter-pill">Villas</button>
-          <button className="filter-pill">Penthouses</button>
-          <button className="filter-pill">Historic Estates</button>
-          <button className="filter-pill">Apartments</button>
-          <button className="filter-pill">Waterfront</button>
-          <button className="filter-pill">Off-Market</button>
+          {filters.map((filter) => (
+            <button 
+              key={filter.id}
+              className={`filter-pill ${activeFilter === filter.id ? 'active' : ''}`}
+              onClick={() => setActiveFilter(filter.id)}
+            >
+              {filter.label}
+            </button>
+          ))}
         </div>
         
         {/* Bottom Functional Grid */}

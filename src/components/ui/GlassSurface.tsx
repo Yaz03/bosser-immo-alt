@@ -162,30 +162,26 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     setTimeout(updateDisplacementMap, 0);
   }, [width, height]);
-
-  useEffect(() => {
-    setSvgSupported(supportsSVGFilters());
-  }, []);
 
   const supportsSVGFilters = () => {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
       return false;
     }
-
-    const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-    const isFirefox = /Firefox/.test(navigator.userAgent);
-
-    if (isWebkit || isFirefox) {
-      return false;
-    }
-
     const div = document.createElement('div');
-    div.style.backdropFilter = `url(#${filterId})`;
-
+    div.style.cssText = `
+      -webkit-backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);
+    `;
     return div.style.backdropFilter !== '';
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
+    setSvgSupported(supportsSVGFilters());
+  }, []);
 
   const containerStyle: React.CSSProperties = {
     ...style,
