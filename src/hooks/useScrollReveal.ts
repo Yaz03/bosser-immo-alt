@@ -10,15 +10,15 @@ import { useEffect, useState, useRef } from 'react';
  */
 export function useScrollReveal(threshold = 0.15, triggerOnce = true) {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<IntersectionObserverEntry>(null);
+  const ref = useRef<any>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      ([entry]: IntersectionObserverEntry[]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
           if (triggerOnce && ref.current) {
-            observer.unobserve(ref.current as any);
+            observer.unobserve(ref.current);
           }
         }
       },
