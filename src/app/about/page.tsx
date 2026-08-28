@@ -6,7 +6,6 @@ import Footer from '@/components/Footer';
 import CtaSection from '@/components/CtaSection';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useLanguage } from '@/context/LanguageContext';
-import AboutHero from '@/components/AboutHero';
 import ApproachHeadline from '@/components/ApproachHeadline';
 import HorizontalScrollPhilosophy from '@/components/HorizontalScrollPhilosophy';
 import AboutStats from '@/components/AboutStats';
