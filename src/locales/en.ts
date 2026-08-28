@@ -208,5 +208,19 @@ export const en = {
     headline: 'Require',
     headlineSerif: 'Guidance?',
     subhead: 'Our senior advisors are at your disposal to help you navigate our exclusive portfolio and find the property that perfectly matches your vision.'
+  },
+  propertyTranslations: {
+    types: {
+      'Luxury Villa': 'Luxury Villa',
+      'Historic Estate': 'Historic Estate',
+      'Penthouse': 'Penthouse',
+      'Modern Apartment': 'Modern Apartment',
+      'City Townhouse': 'City Townhouse',
+      'Minimalist Loft': 'Minimalist Loft',
+    },
+    specs: {
+      beds: 'Beds',
+      baths: 'Baths'
+    }
   }
 };

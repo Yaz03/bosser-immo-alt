@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLanguage } from '../context/LanguageContext';
 
 interface PropertyCardProps {
   id?: string;
@@ -14,6 +15,18 @@ interface PropertyCardProps {
 
 export default function PropertyCard({ id, imageSrc, type, price, location, specs, className = "" }: PropertyCardProps) {
   const href = id ? `/properties/${id}` : "#";
+  const { t } = useLanguage();
+
+  const displayType = (t as any).propertyTranslations?.types?.[type] || type;
+  
+  // Replace "Beds" and "Baths" safely
+  let displaySpecs = specs;
+  if ((t as any).propertyTranslations?.specs) {
+    displaySpecs = displaySpecs
+      .replace('Beds', (t as any).propertyTranslations.specs.beds)
+      .replace('Baths', (t as any).propertyTranslations.specs.baths);
+  }
+
   return (
     <Link href={href} className={`property-card ${className}`}>
       <div className="property-image-wrapper">
@@ -23,10 +36,10 @@ export default function PropertyCard({ id, imageSrc, type, price, location, spec
       <div className="property-details-box">
         <div className="property-info-row">
           <span className="property-location">{location}</span>
-          <span className="property-specs">{specs}</span>
+          <span className="property-specs">{displaySpecs}</span>
         </div>
         <div className="property-bottom-row">
-          <h3 className="property-type">{type}</h3>
+          <h3 className="property-type">{displayType}</h3>
           <div className="property-action-group">
             <div className="property-price-tag">{price}</div>
             <div className="property-arrow-box">

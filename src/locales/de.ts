@@ -208,5 +208,19 @@ export const de = {
     headline: 'Benötigen Sie',
     headlineSerif: 'Beratung?',
     subhead: 'Unsere erfahrenen Berater stehen Ihnen zur Verfügung, um Sie durch unser exklusives Portfolio zu führen und die Immobilie zu finden, die perfekt zu Ihren Vorstellungen passt.'
+  },
+  propertyTranslations: {
+    types: {
+      'Luxury Villa': 'Luxusvilla',
+      'Historic Estate': 'Historisches Anwesen',
+      'Penthouse': 'Penthouse',
+      'Modern Apartment': 'Modernes Apartment',
+      'City Townhouse': 'Stadthaus',
+      'Minimalist Loft': 'Minimalistisches Loft',
+    },
+    specs: {
+      beds: 'Schlafzimmer',
+      baths: 'Bäder'
+    }
   }
 };

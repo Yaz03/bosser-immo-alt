@@ -2704,7 +2704,7 @@ body {
 }
 
 .mobile-lang-inline {
-  color: var(--white);
+  color: inherit;
 }
 
 .mobile-drawer {
@@ -3311,6 +3311,8 @@ body {
     border-radius: 12px;
     background: var(--white);
     box-shadow: 0 4px 24px rgba(4, 36, 51, 0.08);
+    width: 100%;
+    min-width: 0;
   }
   .property-image-wrapper {
     position: relative !important;
@@ -3349,7 +3351,7 @@ body {
     min-width: 0;
   }
   .property-type {
-    font-size: 1.4rem;
+    font-size: 1.15rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
