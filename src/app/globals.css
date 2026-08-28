@@ -2703,8 +2703,55 @@ body {
   gap: 1rem;
 }
 
+/* Default State (e.g. Homepage dark hero) */
 .mobile-lang-inline {
-  color: inherit;
+  color: var(--white);
+}
+.mobile-lang-inline .lang-btn {
+  color: rgba(255, 255, 255, 0.5);
+}
+.mobile-lang-inline .lang-btn.active {
+  color: var(--white);
+}
+.mobile-lang-inline .lang-divider {
+  color: rgba(255, 255, 255, 0.3);
+}
+.mobile-lang-inline svg {
+  stroke: var(--white);
+}
+
+/* Inverted State (e.g. Properties page cream background) */
+.navbar.navbar-invert .mobile-lang-inline {
+  color: var(--navy);
+}
+.navbar.navbar-invert .mobile-lang-inline .lang-btn {
+  color: rgba(4, 36, 51, 0.5);
+}
+.navbar.navbar-invert .mobile-lang-inline .lang-btn.active {
+  color: var(--navy);
+}
+.navbar.navbar-invert .mobile-lang-inline .lang-divider {
+  color: rgba(4, 36, 51, 0.3);
+}
+.navbar.navbar-invert .mobile-lang-inline svg {
+  stroke: var(--navy) !important;
+}
+
+/* Scrolled State (Solid Navy background) */
+.navbar.fixed .mobile-lang-inline {
+  color: var(--white);
+}
+.navbar.fixed .mobile-lang-inline .lang-btn {
+  color: rgba(255, 255, 255, 0.5);
+}
+.navbar.fixed .mobile-lang-inline .lang-btn.active {
+  color: var(--white);
+}
+.navbar.fixed .mobile-lang-inline .lang-divider {
+  color: rgba(255, 255, 255, 0.3);
+}
+.navbar.fixed .mobile-lang-inline svg {
+  stroke: var(--white) !important;
 }
 
 .mobile-drawer {

@@ -98,7 +98,7 @@ export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolea
         {/* Mobile Right Side: Lang Toggle + Hamburger */}
         <div className="mobile-nav-right">
           <div className="lang-toggle mobile-lang-inline">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.7 }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mobile-lang-icon">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="2" y1="12" x2="22" y2="12"></line>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
@@ -106,13 +106,11 @@ export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolea
             <span 
               className={`lang-btn ${lang === 'en' ? 'active' : ''}`} 
               onClick={() => setLang('en')}
-              style={{ color: lang === 'en' ? 'var(--white)' : 'rgba(255,255,255,0.5)' }}
             >EN</span>
-            <span className="lang-divider" style={{ color: 'rgba(255,255,255,0.3)' }}>|</span>
+            <span className="lang-divider">|</span>
             <span 
               className={`lang-btn ${lang === 'de' ? 'active' : ''}`} 
               onClick={() => setLang('de')}
-              style={{ color: lang === 'de' ? 'var(--white)' : 'rgba(255,255,255,0.5)' }}
             >DE</span>
           </div>
 
