@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 interface PropertyGalleryProps {
@@ -11,6 +11,10 @@ interface PropertyGalleryProps {
 export default function PropertyGallery({ images, fallbackImage }: PropertyGalleryProps) {
   const displayImages = images && images.length > 0 ? images : [fallbackImage];
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  // We limit the mosaic to max 5 images
+  const mosaicImages = displayImages.slice(0, 5);
+  const dataCount = Math.min(displayImages.length, 5);
 
   const openLightbox = (index: number = 0) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
@@ -31,49 +35,45 @@ export default function PropertyGallery({ images, fallbackImage }: PropertyGalle
 
   return (
     <div className="property-gallery-container">
-      {displayImages.length === 1 ? (
-        <div className="gallery-hero-single" onClick={() => openLightbox(0)} style={{ cursor: 'pointer' }}>
+      <div className="gallery-mosaic" data-count={dataCount}>
+        <div className="gallery-main" onClick={() => openLightbox(0)}>
           <Image 
-            src={displayImages[0]} 
-            alt="Property Hero" 
+            src={mosaicImages[0]} 
+            alt="Property Main" 
             fill 
             className="gallery-image"
             style={{ objectFit: 'cover' }}
           />
         </div>
-      ) : (
-        <div className="gallery-grid" onClick={() => openLightbox(0)} style={{ cursor: 'pointer' }}>
-          {/* Main Hero Image */}
-          <div className="gallery-main">
+        {mosaicImages.slice(1).map((img, idx) => (
+          <div key={idx} className={`gallery-mosaic-item item-${idx + 1}`} onClick={() => openLightbox(idx + 1)}>
             <Image 
-              src={displayImages[0]} 
-              alt="Property Main" 
+              src={img} 
+              alt={`Property view ${idx + 2}`} 
               fill 
               className="gallery-image"
               style={{ objectFit: 'cover' }}
             />
-          </div>
-          {/* Side Images (up to 2) */}
-          <div className="gallery-side">
-            {displayImages.slice(1, 3).map((img, idx) => (
-              <div key={idx} className="gallery-side-item">
-                <Image 
-                  src={img} 
-                  alt={`Property view ${idx + 1}`} 
-                  fill 
-                  className="gallery-image"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-            ))}
-            {displayImages.length > 3 && (
+            {idx === 3 && displayImages.length > 5 && (
               <div className="gallery-more-overlay">
-                <span>+ {displayImages.length - 3} Photos</span>
+                <span>+ {displayImages.length - 5} Photos</span>
               </div>
             )}
           </div>
-        </div>
-      )}
+        ))}
+        
+        {displayImages.length > 0 && (
+          <button className="show-all-photos-btn" onClick={() => openLightbox(0)}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16" style={{marginRight: '6px'}}>
+              <circle cx="9" cy="9" r="2"></circle>
+              <circle cx="15" cy="9" r="2"></circle>
+              <circle cx="9" cy="15" r="2"></circle>
+              <circle cx="15" cy="15" r="2"></circle>
+            </svg>
+            Show all photos
+          </button>
+        )}
+      </div>
 
       {/* Lightbox */}
       {lightboxIndex !== null && (

@@ -222,5 +222,229 @@ export const en = {
       beds: 'Beds',
       baths: 'Baths'
     }
+  },
+  about: {
+    hero: {
+      title: 'A legacy of trust.',
+      titleSerif: 'Since 1991.',
+      description: 'Founded on discretion and profound local knowledge, we curate exceptional real estate experiences tailored for discerning clients.'
+    },
+    approach: {
+      tag: 'OUR APPROACH',
+      l1: 'We build ',
+      s1: 'tailored',
+      l2: ' real estate strategies that transcend traditional brokerage, ',
+      l3: 'empowering our clients to secure their ',
+      s2: 'ideal',
+      l4: ' properties and build enduring legacies.',
+      textLeft: 'With decades of experience in the German real estate market, Bossert Immobilien is a trusted partner for buying, selling, and managing properties of all scales.',
+      textRight: 'Our process combines profound market knowledge with a deeply personal approach, ensuring every client receives the guidance they need to achieve their goals.',
+    },
+    team: {
+      tag: 'THE LEADERSHIP',
+      title: 'Guided by',
+      titleSerif: 'experience.',
+      members: [
+        {
+          name: 'Klaus Bossert',
+          title: 'Founder & Managing Director',
+          quote: '"True luxury in real estate is found in the details—both in the properties we represent and the service we provide."'
+        },
+        {
+          name: 'Elena Bossert',
+          title: 'Director of Premium Sales',
+          quote: '"We don\'t just sell homes; we match unique individuals with spaces that perfectly reflect their lifestyle."'
+        }
+      ]
+    },
+    philosophy: {
+      tag: 'OUR PHILOSOPHY',
+      title: 'Three pillars of',
+      titleSerif: 'excellence.',
+      description: 'Our business is built on a foundation of absolute discretion, unmatched exclusivity, and a deeply personalized approach to every client\'s unique portfolio.',
+      pillars: [
+        {
+          title: 'Discretion',
+          description: 'We understand the value of privacy. Our most exclusive transactions are handled entirely off-market, ensuring absolute confidentiality.'
+        },
+        {
+          title: 'Exclusivity',
+          description: 'Our portfolio is carefully curated. We represent only properties that meet our stringent standards for quality, architecture, and location.'
+        },
+        {
+          title: 'Local Expertise',
+          description: 'Thirty years in the Rhein-Main area gives us an unparalleled perspective on neighborhood dynamics, hidden gems, and true market value.'
+        }
+      ]
+    },
+    stats: [
+      { number: '30+', label: 'Years of Experience' },
+      { number: '€500M+', label: 'Volume Sold' },
+      { number: '100%', label: 'Off-Market Discretion' },
+      { number: '50+', label: 'Exclusive Properties' }
+    ],
+    heritage: {
+      headline: 'Discuss your property with us.',
+      subhead: 'Private Consultations available.',
+      button: 'CONTACT US'
+    }
+  },
+  contact: {
+    hero: {
+      tag: 'Get in Touch',
+      title: 'Contact',
+      titleSerif: 'Us.',
+      subhead: 'We\'re here to help you find the right property.',
+    },
+    info: {
+      locationTitle: 'Office Location',
+      phoneTitle: 'Phone',
+      emailTitle: 'Email',
+    },
+    form: {
+      name: 'Full Name',
+      namePlaceholder: 'Your name',
+      phone: 'Phone Number',
+      phonePlaceholder: 'Your phone number',
+      inquiry: 'Inquiry Type',
+      options: ['Buying Property', 'Selling Property', 'Off-Market Portfolio', 'General Inquiry'],
+      message: 'Message (Optional)',
+      messagePlaceholder: 'Tell us more about your property request.',
+      submit: 'Submit Inquiry',
+      submitting: 'Submitting...',
+      success: 'Thank you. We will contact you discreetly within 24 hours.',
+      privacy: 'By submitting this form, I agree to the Privacy Policy.'
+    },
+    faq: {
+      tag: 'Help Center',
+      title: 'Support and',
+      titleSerif: 'Guidance.',
+      subhead: 'Answers about properties, viewings, services.',
+      cardTitle: 'Looking for guidance?',
+      cardSub: 'Quick support for property questions.',
+      questions: [
+        { q: 'How do I get started with buying property?', a: 'Our principals will schedule a private consultation to understand your exact portfolio requirements before presenting curated, off-market options.' },
+        { q: 'Do you offer support for property rentals?', a: 'We focus exclusively on high-net-worth acquisitions and sales, ensuring absolute discretion for luxury properties.' },
+        { q: 'How does the off-market process work?', a: 'We leverage a private network of investors and owners, allowing you to buy or sell without public listings or portals.' }
+      ]
+    }
+  },
+  owners: {
+    hero: {
+      tag: 'For Owners',
+      title: 'Your Gateway to',
+      titleSerif: 'Successful Deals.',
+      subhead: 'From sales and rentals to professional valuations — we ensure your property receives the expertise it deserves.',
+    },
+    narrative: {
+      tag: 'THE CHALLENGE',
+      headline: 'Selling or renting a property involves far more than most anticipate.',
+      body: 'Pricing uncertainties, difficulty reaching the right audience, legal and administrative complexities—without professional support, delays and financial drawbacks are almost inevitable. Ensure your property receives the visibility and value it deserves.'
+    },
+    pillars: [
+      {
+        title: 'Selling',
+        desc: 'Achieve the best possible price — through targeted marketing and professional support from start to finish.'
+      },
+      {
+        title: 'Rent out',
+        desc: 'Rent out your property quickly and securely — we identify the ideal tenant and ensure a smooth, worry-free process.'
+      },
+      {
+        title: 'Valuation',
+        desc: 'Precise property valuation — backed by deep market expertise to support confident, well-informed decisions.'
+      }
+    ],
+    selling: {
+      tag: 'SELLING',
+      title: 'Maximize the Value of',
+      titleSerif: 'Your Property.',
+      subhead: 'Our commitment: professional, results-driven, and personal. From valuation to handover — we support you reliably.',
+      steps: [
+        { name: 'Preparation', desc: 'Comprehensive property inspection, document verification, data-driven valuation, and individual sales concept.' },
+        { name: 'Marketing', desc: 'Professional property presentation and exclusive viewing coordination and management.' },
+        { name: 'Negotiation', desc: 'Strict buyer screening, qualification, and strategic price management.' },
+        { name: 'Transaction', desc: 'Coordination of contract drafting, notary appointment, payment processing, and final handover.' }
+      ]
+    },
+    renting: {
+      tag: 'RENT OUT',
+      title: 'Renting Out',
+      titleSerif: 'Made Easy.',
+      subhead: 'Enjoy a smooth, efficient, and secure rental process. We take care of everything from tenant qualification to the final handover.',
+      steps: [
+        { name: 'Preparation', desc: 'Property inspection, document preparation, and determination of the optimal rental price.' },
+        { name: 'Marketing', desc: 'High-end property presentation and meticulous viewing management.' },
+        { name: 'Transaction', desc: 'Rigorous tenant qualification, contract execution, and secure key handover.' }
+      ]
+    },
+    valuation: {
+      tag: 'VALUATION',
+      title: 'Expert-Guided',
+      titleSerif: 'Property Valuation.',
+      subhead: 'Property valuation is shaped by many factors. Our deep local market knowledge enables an accurate and reliable assessment.',
+      benefits: [
+        { title: 'Transparent Valuation', desc: 'Clear, well-structured valuation reports with meaningful explanations.' },
+        { title: 'Certified Expertise', desc: 'Benefit from the knowledge of our experienced and certified valuation professionals.' },
+        { title: 'Complimentary Valuation', desc: 'When you appoint us to sell your property, you receive a complimentary market valuation.' },
+        { title: 'Comprehensive Service', desc: 'Tailored analyses of potential, development options, and market outlook.' }
+      ],
+      steps: [
+        { title: '01. Data Collection', desc: 'Gathering key property information — including condition, upgrades, and all relevant features.' },
+        { title: '02. Valuation Analysis', desc: 'In-depth market analysis forms the foundation of your property’s value.' },
+        { title: '03. Assessment', desc: 'A refined market value derived through cost, income, and comparable benchmarks.' }
+      ]
+    }
+  },
+  knowledge: {
+    hero: {
+      tag: 'INSIGHTS & REPORTS',
+      title: 'Market',
+      titleSerif: 'Knowledge.',
+      subhead: 'Expert analysis, off-market trends, and architectural perspectives from Bossert Immobilien.'
+    },
+    categories: ['All', 'Market Reports', 'Architecture', 'Investment', 'Legal'],
+    readMore: 'Read Article',
+    featured: {
+      tag: 'Market Reports',
+      date: 'OCTOBER 2023',
+      title: 'The Q3 Frankfurt Luxury Market Report',
+      desc: 'An in-depth analysis of high-end residential real estate trends, off-market shifts, and capital appreciation in Frankfurt\'s most exclusive districts.',
+      image: '/images/owners_bg_wide.jpg'
+    },
+    articles: [
+      {
+        id: 1,
+        category: 'Architecture',
+        date: 'SEPTEMBER 2023',
+        title: 'Preserving Heritage: The Revival of Altbau Estates',
+        desc: 'How historical properties are being modernized without sacrificing their original architectural integrity.',
+        image: '/images/owners_editorial.jpg'
+      },
+      {
+        id: 2,
+        category: 'Investment',
+        date: 'AUGUST 2023',
+        title: 'Navigating the Off-Market Landscape',
+        desc: 'Why the most significant transactions in prime locations happen behind closed doors, and how to access them.',
+        image: '/images/prop_penthouse_1787771396787.jpg'
+      },
+      {
+        id: 3,
+        category: 'Legal',
+        date: 'JULY 2023',
+        title: 'New Regulations for Heritage Properties',
+        desc: 'A comprehensive guide to navigating the latest zoning and renovation laws for listed buildings.',
+        image: '/images/prop_villa_1787771383699.jpg'
+      },
+      {
+        id: 4,
+        category: 'Investment',
+        date: 'JUNE 2023',
+        title: 'The Rise of Turnkey Luxury',
+        desc: 'Why international buyers are increasingly demanding fully furnished, design-ready homes.',
+        image: '/images/prop_apartment_new.jpg'
+      }
+    ]
   }
 };

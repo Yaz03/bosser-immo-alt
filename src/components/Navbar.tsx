@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -58,18 +59,18 @@ export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolea
   return (
     <>
       <nav className={`navbar ${isScrolled ? 'fixed' : ''} ${isHidden ? 'hidden' : ''} ${invertClass}`}>
-        <a href="/" className="logo">
+        <Link href="/" className="logo">
           <img src="/logo.png" alt="Bossert Immobilien Logo" className="logo-img" />
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="nav-links desktop-nav">
-          <a href="/properties" className={`nav-item ${pathname === '/properties' ? 'active' : ''}`}>{t.nav.properties}</a>
-          <a href="#" className="nav-item">{t.nav.forOwners}</a>
-          <a href="#" className="nav-item">{t.nav.services}</a>
-          <a href="#" className="nav-item">{t.nav.about}</a>
-          <a href="#" className="nav-item">{t.nav.references}</a>
-          <a href="#" className="nav-item">{t.nav.knowledge}</a>
+          <Link href="/properties" className={`nav-item ${pathname === '/properties' ? 'active' : ''}`}>{t.nav.properties}</Link>
+          <Link href="/owners" className={`nav-item ${pathname === '/owners' ? 'active' : ''}`}>{t.nav.forOwners}</Link>
+          <Link href="/services" className={`nav-item ${pathname === '/services' ? 'active' : ''}`}>{t.nav.services}</Link>
+          <Link href="/about" className={`nav-item ${pathname === '/about' ? 'active' : ''}`}>{t.nav.about}</Link>
+          <Link href="/references" className={`nav-item ${pathname === '/references' ? 'active' : ''}`}>{t.nav.references}</Link>
+          <Link href="/knowledge" className={`nav-item ${pathname === '/knowledge' ? 'active' : ''}`}>{t.nav.knowledge}</Link>
           
           <div className="lang-toggle">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}>
@@ -92,7 +93,7 @@ export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolea
             </span>
           </div>
 
-          <a href="#" className="contact-btn">{t.nav.contact}</a>
+          <Link href="/contact" className="contact-btn">{t.nav.contact}</Link>
         </div>
 
         {/* Mobile Right Side: Lang Toggle + Hamburger */}
@@ -142,15 +143,15 @@ export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolea
         </button>
 
         <div className="mobile-nav-links">
-          <a href="/properties" className={`mobile-nav-item ${pathname === '/properties' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.properties}</a>
-          <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.forOwners}</a>
-          <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.services}</a>
-          <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.about}</a>
-          <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.references}</a>
-          <a href="#" className="mobile-nav-item" onClick={() => setMenuOpen(false)}>{t.nav.knowledge}</a>
+          <Link href="/properties" className={`mobile-nav-item ${pathname === '/properties' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.properties}</Link>
+          <Link href="/owners" className={`mobile-nav-item ${pathname === '/owners' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.forOwners}</Link>
+          <Link href="/services" className={`mobile-nav-item ${pathname === '/services' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.services}</Link>
+          <Link href="/about" className={`mobile-nav-item ${pathname === '/about' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.about}</Link>
+          <Link href="/references" className={`mobile-nav-item ${pathname === '/references' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.references}</Link>
+          <Link href="/knowledge" className={`mobile-nav-item ${pathname === '/knowledge' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.knowledge}</Link>
         </div>
         <div className="mobile-nav-footer">
-          <a href="#" className="mobile-contact-btn" onClick={() => setMenuOpen(false)}>{t.nav.contact}</a>
+          <Link href="/contact" className="mobile-contact-btn" onClick={() => setMenuOpen(false)}>{t.nav.contact}</Link>
         </div>
       </div>
     </>
