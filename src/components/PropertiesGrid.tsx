@@ -7,7 +7,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function PropertiesGrid() {
-  const { ref: gridRef, isVisible } = useScrollReveal(0.1);
+  const { ref: gridRef, isVisible } = useScrollReveal(0);
   const { t } = useLanguage();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [currentPage, setCurrentPage] = useState(1);
