@@ -24,7 +24,7 @@ body {
 /* --- Hero Section --- */
 .hero-section {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -772,7 +772,7 @@ body {
   color: var(--navy);
   gap: 4rem;
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   box-sizing: border-box;
   align-items: center;
 }
@@ -1029,7 +1029,7 @@ body {
 
 /* --- Search Section --- */
 .search-section {
-  width: 100vw;
+  width: 100%;
   padding: 0 4rem 6rem 4rem;
   background-color: var(--cream);
   display: flex;
@@ -1930,7 +1930,7 @@ body {
 
 /* --- Testimonial Section --- */
 .testimonial-section {
-  width: 100vw;
+  width: 100%;
   background-color: var(--navy);
   color: var(--cream);
   padding: 6rem 4rem 8rem 4rem;
@@ -2236,7 +2236,7 @@ body {
 
 /* --- CTA / Contact Section (Editorial Portrait) --- */
 .cta-section {
-  width: 100vw;
+  width: 100%;
   min-height: 80vh;
   display: flex;
   flex-direction: row;
@@ -2367,7 +2367,7 @@ body {
 
 /* --- Newsletter Section --- */
 .newsletter-section {
-  width: 100vw;
+  width: 100%;
   background-color: var(--cream);
   padding: 4rem 2rem;
   display: flex;
@@ -2461,7 +2461,7 @@ body {
 }
 /* --- Footer Section --- */
 .site-footer-wrapper {
-  width: 100vw;
+  width: 100%;
 }
 
 .site-footer {
@@ -3671,7 +3671,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background: rgba(4, 36, 51, 0.95);
   z-index: 9999;
