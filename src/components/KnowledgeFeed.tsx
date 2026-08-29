@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface Article {
-  id: number;
+  id: string;
   category: string;
   date: string;
   title: string;
@@ -17,6 +18,7 @@ interface Props {
     categories: string[];
     readMore: string;
     featured: {
+      id?: string;
       tag: string;
       date: string;
       title: string;
@@ -65,14 +67,16 @@ export default function KnowledgeFeed({ data }: Props) {
               <p style={{ fontSize: '1.2rem', color: 'rgba(254,252,246,0.8)', lineHeight: 1.6, marginBottom: '2.5rem', maxWidth: '600px' }}>
                 {data.featured.desc}
               </p>
-              <button className="explore-btn" style={{ padding: '0.8rem 1rem 0.8rem 2rem', border: 'none', cursor: 'pointer' }}>
-                <span>{data.readMore}</span>
-                <div className="explore-icon-wrapper">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </div>
-              </button>
+              <Link href={`/knowledge/${data.featured.id || 'featured'}`}>
+                <button className="explore-btn" style={{ padding: '0.8rem 1rem 0.8rem 2rem', border: 'none', cursor: 'pointer' }}>
+                  <span>{data.readMore}</span>
+                  <div className="explore-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </div>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -107,38 +111,38 @@ export default function KnowledgeFeed({ data }: Props) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '4rem 3rem' }}>
           {filteredArticles.map((article, idx) => (
             <div key={article.id} className="reveal-base reveal-up is-revealed" style={{ animationDelay: `${idx * 100}ms` }}>
-              
-              {/* Corner Magic Image */}
-              <div style={{ backgroundColor: 'var(--white)', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', boxShadow: '0 10px 40px rgba(4,36,51,0.03)' }}>
-                <div style={{ width: '100%', aspectRatio: '4/3', position: 'relative', borderRadius: '8px', overflow: 'hidden' }}>
-                  <img src={article.image} alt={article.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} className="hover-scale" />
+              <Link href={`/knowledge/${article.id}`} style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}>
+                {/* Corner Magic Image */}
+                <div style={{ backgroundColor: 'var(--white)', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', boxShadow: '0 10px 40px rgba(4,36,51,0.03)' }}>
+                  <div style={{ width: '100%', aspectRatio: '4/3', position: 'relative', borderRadius: '8px', overflow: 'hidden' }}>
+                    <img src={article.image} alt={article.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} className="hover-scale" />
+                  </div>
                 </div>
-              </div>
 
-              {/* Meta */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                <span className="services-subtitle" style={{ color: 'var(--navy)', margin: 0 }}>
-                  <span className="dot" style={{ backgroundColor: 'var(--bronze)' }}></span> {article.category}
-                </span>
-                <span style={{ color: 'rgba(4,36,51,0.4)', fontSize: '0.8rem', letterSpacing: '1px' }}>{article.date}</span>
-              </div>
+                {/* Meta */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                  <span className="services-subtitle" style={{ color: 'var(--navy)', margin: 0 }}>
+                    <span className="dot" style={{ backgroundColor: 'var(--bronze)' }}></span> {article.category}
+                  </span>
+                  <span style={{ color: 'rgba(4,36,51,0.4)', fontSize: '0.8rem', letterSpacing: '1px' }}>{article.date}</span>
+                </div>
 
-              {/* Title & Desc */}
-              <h3 className="italic-serif" style={{ fontSize: '2rem', lineHeight: 1.2, color: 'var(--navy)', marginBottom: '1rem' }}>
-                {article.title}
-              </h3>
-              <p style={{ color: 'rgba(4,36,51,0.6)', lineHeight: 1.6, marginBottom: '1.5rem', minHeight: '75px' }}>
-                {article.desc}
-              </p>
+                {/* Title & Desc */}
+                <h3 className="italic-serif" style={{ fontSize: '2rem', lineHeight: 1.2, color: 'var(--navy)', marginBottom: '1rem' }}>
+                  {article.title}
+                </h3>
+                <p style={{ color: 'rgba(4,36,51,0.6)', lineHeight: 1.6, marginBottom: '1.5rem', minHeight: '75px' }}>
+                  {article.desc}
+                </p>
 
-              {/* Read More link */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--bronze)', fontWeight: 500, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase', cursor: 'pointer' }}>
-                {data.readMore}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </div>
-
+                {/* Read More link */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--bronze)', fontWeight: 500, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase', cursor: 'pointer' }}>
+                  {data.readMore}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
             </div>
           ))}
         </div>

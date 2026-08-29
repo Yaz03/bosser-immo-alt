@@ -406,51 +406,57 @@ export const de = {
   knowledge: {
     hero: {
       tag: 'EINBLICKE & BERICHTE',
-      title: 'Markt-',
+      title: 'Markt',
       titleSerif: 'Wissen.',
       subhead: 'Expertenanalysen, Off-Market-Trends und architektonische Perspektiven von Bossert Immobilien.'
     },
-    categories: ['Alle', 'Marktberichte', 'Architektur', 'Investment', 'Rechtliches'],
-    readMore: 'Artikel Lesen',
+    categories: ['Alle', 'Marktberichte', 'Architektur', 'Investment', 'Recht'],
+    readMore: 'Artikel lesen',
     featured: {
+      id: 'featured',
       tag: 'Marktberichte',
       date: 'OKTOBER 2023',
-      title: 'Der Q3 Luxusimmobilien-Marktbericht',
-      desc: 'Eine tiefgehende Analyse der Trends im High-End-Wohnimmobilienmarkt, Off-Market-Verschiebungen und Wertsteigerungen in den exklusivsten Lagen.',
-      image: '/images/owners_bg_wide.jpg'
+      title: 'Der Q3 Frankfurter Luxusmarkt-Bericht',
+      desc: 'Eine detaillierte Analyse der Trends bei hochwertigen Wohnimmobilien, Off-Market-Verschiebungen und Wertsteigerungen in den exklusivsten Vierteln Frankfurts.',
+      image: '/images/owners_bg_wide.jpg',
+      content: 'Der Frankfurter Luxusimmobilienmarkt hat im dritten Quartal 2023 beispiellose Verschiebungen erlebt. Während der breitere Markt aufgrund von Zinsanpassungen eine Abkühlung erfährt, bleibt das Ultra-Prime-Segment stark umkämpft.\n\n### Die Verlagerung zum Off-Market\nEiner der bemerkenswertesten Trends ist das zunehmende Volumen von Transaktionen, die vollständig off-market stattfinden. Vermögende Privatpersonen legen mehr denn je Wert auf Diskretion und verlassen sich auf private Maklernetzwerke, um Generationenwerte zu sichern.\n\n### Wertsteigerung im Westend und Holzhausenviertel\nTrotz makroökonomischem Gegenwind haben die Premium-Kernviertel ihren Wert gehalten, wobei ausgewählte renovierte historische Anwesen eine Wertsteigerung von 4% im Quartalsvergleich verzeichneten. Käufer suchen nach schlüsselfertigen Immobilien und sind bereit, einen Aufpreis für sofort beziehbaren Luxus zu zahlen.\n\n> "Die Definition von erstklassigen Immobilien entwickelt sich weiter. Es geht nicht mehr nur um die Lage, sondern um die nahtlose Integration moderner Technologie in historische Mauern." — Klaus Bossert'
     },
     articles: [
       {
-        id: 1,
+        id: 'preserving-heritage',
         category: 'Architektur',
         date: 'SEPTEMBER 2023',
-        title: 'Erhalt des Erbes: Die Wiederbelebung von Altbau-Anwesen',
-        desc: 'Wie historische Immobilien modernisiert werden, ohne ihre ursprüngliche architektonische Integrität zu verlieren.',
-        image: '/images/owners_editorial.jpg'
+        title: 'Erbe bewahren: Die Wiederbelebung von Altbau-Anwesen',
+        desc: 'Wie historische Immobilien modernisiert werden, ohne ihre ursprüngliche architektonische Integrität zu opfern.',
+        image: '/images/owners_editorial.jpg',
+        content: 'Deutschlands historische "Altbau"-Immobilien nehmen auf dem Luxusmarkt einen einzigartigen Platz ein. Geprägt durch hohe Decken, kunstvolle Stuckarbeiten und originales Parkett, sind diese Anwesen heiß begehrt.\n\n### Die Modernisierungs-Herausforderung\nDie Aktualisierung dieser Gebäude aus dem 19. und frühen 20. Jahrhundert auf den Standard des 21. Jahrhunderts, ohne ihre Seele zu zerstören, erfordert tiefes architektonisches Feingefühl. Die Integration von Smart-Home-Technologie, Fußbodenheizung und energieeffizienter Dämmung muss praktisch unsichtbar sein.\n\n### Werterhalt\nEin akribisch restaurierter Altbau erzielt oft einen höheren Quadratmeterpreis als ein Neubau in derselben Lage. Käufer erwerben nicht nur ein Zuhause; sie erwerben ein Stück Architekturgeschichte.'
       },
       {
-        id: 2,
+        id: 'navigating-off-market',
         category: 'Investment',
         date: 'AUGUST 2023',
-        title: 'Navigation durch die Off-Market Landschaft',
-        desc: 'Warum die bedeutendsten Transaktionen in Premiumlagen hinter verschlossenen Türen stattfinden.',
-        image: '/images/prop_penthouse_1787771396787.jpg'
+        title: 'Navigation durch die Off-Market-Landschaft',
+        desc: 'Warum die wichtigsten Transaktionen in Bestlagen hinter verschlosserten Türen stattfinden und wie man Zugang erhält.',
+        image: '/test_bg_penthouse.jpg',
+        content: 'In den oberen Etagen des Immobilienmarktes wird Sichtbarkeit oft als Nachteil angesehen. Die besten Immobilien werden selten auf öffentlichen Portalen gelistet.\n\n### Der Wert der Diskretion\nSowohl für Verkäufer als auch für Käufer bieten Off-Market-Transaktionen eine beispiellose Privatsphäre. Verkäufer vermeiden das Stigma einer Immobilie, die lange auf dem Markt "sitzt", während Käufer Bieterkriege und öffentliche Aufmerksamkeit vermeiden.\n\n### Zugang zum verborgenen Markt\nDie Navigation durch diesen verborgenen Markt erfordert Zugang zu etablierten, vertrauenswürdigen Netzwerken. Family Offices, private Vermögensverwalter und spezialisierte Boutique-Makler sind die Wächter dieser exklusiven Möglichkeiten.'
       },
       {
-        id: 3,
-        category: 'Rechtliches',
+        id: 'legal-regulations',
+        category: 'Recht',
         date: 'JULI 2023',
-        title: 'Neue Bestimmungen für denkmalgeschützte Immobilien',
-        desc: 'Ein umfassender Leitfaden zur Navigation durch die neuesten Bau- und Renovierungsgesetze.',
-        image: '/images/prop_villa_1787771383699.jpg'
+        title: 'Neue Vorschriften für denkmalgeschützte Immobilien',
+        desc: 'Ein umfassender Leitfaden zur Navigation durch die neuesten Bebauungs- und Renovierungsgesetze für denkmalgeschützte Gebäude.',
+        image: '/test_bg_villa.jpg',
+        content: 'Der Besitz eines denkmalgeschützten Gebäudes ist ein Privileg, das mit strengen Pflichten einhergeht. Jüngste Aktualisierungen der Denkmalschutzgesetze haben für Immobilieneigentümer neue Komplexitäten eingeführt.\n\n### Energieeffizienz vs. Denkmalschutz\nDas Bestreben nach umweltfreundlicheren Gebäuden kollidiert oft mit Denkmalschutzregeln. Die Installation von moderner Doppelverglasung oder Sonnenkollektoren erfordert Sondergenehmigungen und kreative architektonische Lösungen.\n\n### Steuerliche Anreize\nWährend die Vorschriften streng sind, können die finanziellen Vorteile erheblich sein. Das Verständnis der "Denkmal-AfA" (Abschreibung für denkmalgeschützte Gebäude) ist entscheidend, um das Investitionspotenzial historischer Immobilien zu maximieren.'
       },
       {
-        id: 4,
+        id: 'turnkey-luxury',
         category: 'Investment',
         date: 'JUNI 2023',
-        title: 'Der Aufstieg von schlüsselfertigem Luxus',
-        desc: 'Warum internationale Käufer zunehmend komplett eingerichtete, designfertige Immobilien fordern.',
-        image: '/images/prop_apartment_new.jpg'
+        title: 'Der Aufstieg des schlüsselfertigen Luxus',
+        desc: 'Warum internationale Käufer zunehmend komplett eingerichtete, designfertige Wohnungen nachfragen.',
+        image: '/test_bg_estate.jpg',
+        content: 'Zeit ist der ultimative Luxus. Für internationale Führungskräfte und Investoren ist der traditionelle Prozess des Kaufs, der Renovierung und der Einrichtung einer Immobilie nicht mehr attraktiv.\n\n### Die "Bezugsfertig"-Prämie\nSchlüsselfertige Immobilien – bei denen von den maßgefertigten italienischen Möbeln bis zum Besteck alles inbegriffen ist – erzielen erhebliche Aufschläge. Käufer sind bereit, bis zu 20% mehr für den Komfort zu zahlen, nur mit einem Koffer einziehen zu können.\n\n### Design als Unterscheidungsmerkmal\nIn diesem Segment muss die Inneneinrichtung Weltklasse-Standards entsprechen. Kooperationen mit renommierten Designhäusern und die Einbeziehung kuratierter Kunstsammlungen werden im schlüsselfertigen Luxusangebot zum Standard.'
       }
     ]
   },
@@ -503,6 +509,86 @@ export const de = {
         {
           title: 'Zusätzlicher Service',
           description: 'Wir erledigen alle Formalitäten wie Grundrisse und Energieausweise, plus unser Partnernetzwerk für Renovierung, Handwerk und Finanzierung.'
+        }
+      ]
+    }
+  },
+  referencesPageData: {
+    hero: {
+      tag: 'UNSER VERMÄCHTNIS',
+      title: 'Ein Portfolio der',
+      titleSerif: 'Exzellenz.',
+      description: 'Entdecken Sie eine kuratierte Auswahl an Premium-Immobilien, die von unserem Expertenteam erfolgreich vermarktet und betreut wurden. Jede Referenz ist ein Beweis für unser Engagement für absolute Präzision und Diskretion.'
+    },
+    featured: {
+      id: 'featured',
+      tag: 'HERAUSRAGENDE REFERENZ',
+      title: 'Das Sky Penthouse',
+      location: 'Frankfurter Finanzviertel',
+      stats: [
+        { label: 'Verkaufspreis', value: 'Vertraulich' },
+        { label: 'Vermarktungsdauer', value: '14 Tage' },
+        { label: 'Wohnfläche', value: '450 qm' }
+      ],
+      description: 'Eine exklusive Off-Market-Transaktion, die mit absoluter Diskretion abgewickelt wurde. Wir haben dieses außergewöhnliche Penthouse innerhalb von zwei Wochen nach Mandatserteilung erfolgreich an einen hochkarätigen internationalen Käufer vermittelt.',
+      fullDescription: 'Das Sky Penthouse repräsentiert den Gipfel des modernen Luxuswohnens im Herzen von Frankfurt. Mit einem 360-Grad-Panoramablick auf die Skyline und den Taunus wurde uns diese bemerkenswerte Immobilie für einen exklusiven Off-Market-Verkauf anvertraut. Unser maßgeschneiderter Ansatz konzentrierte sich auf unser privates internationales Netzwerk und umging öffentliche Portale vollständig, um maximale Diskretion zu gewährleisten. Innerhalb von nur 14 Tagen haben wir eine reibungslose Transaktion ermöglicht, die die Erwartungen unseres Kunden übertraf.',
+      features: [
+        'Privater Aufzug direkt in die Residenz',
+        'Maßgefertigte italienische Designerküche mit Gaggenau-Geräten',
+        'Smart-Home-Integration (KNX-System)',
+        'Drei private Terrassen einschließlich Dachgarten',
+        '24/7 Concierge- und Valet-Service'
+      ],
+      galleryImages: ['/test_bg_penthouse.jpg', '/test_bg_villa.jpg', '/test_bg_estate.jpg']
+    },
+    gallery: {
+      tag: 'ARCHIV',
+      title: 'Erfolgreich',
+      titleSerif: 'Vermittelt.',
+      items: [
+        {
+          id: 'historic-villa',
+          title: 'Historische Villa',
+          location: 'Taunus Region',
+          type: 'Verkauf',
+          image: '/test_bg_villa.jpg',
+          size: 'large',
+          fullDescription: 'Eine sorgfältig restaurierte historische Villa aus dem Jahr 1912, die klassische architektonische Eleganz mit modernsten Annehmlichkeiten verbindet. Die Vermarktungskampagne hob das einzigartige Erbe und den weitläufigen Privatpark hervor.',
+          features: ['Original Fischgrätparkett', 'Restaurierte Stuckdecken (3,8m Höhe)', 'Privater Weinkeller und Verkostungsraum', 'Beheizter Außenpool und Poolhaus', 'Modernstes Sicherheitssystem'],
+          galleryImages: ['/test_bg_villa.jpg', '/test_bg_estate.jpg', '/test_bg_penthouse.jpg']
+        },
+        {
+          id: 'modern-townhouse',
+          title: 'Modernes Stadthaus',
+          location: 'Westend, Frankfurt',
+          type: 'Vermietung',
+          image: '/test_bg_estate.jpg',
+          size: 'square',
+          fullDescription: 'Dieses zeitgenössische Stadthaus im begehrten Westend wurde erfolgreich an eine Führungskraft vermietet. Unser umfassender Service beinhaltete die komplette Möblierung und Relocation-Unterstützung.',
+          features: ['Bodentiefe Panoramafenster', 'Fußbodenheizung und -kühlung', 'Private Doppelgarage', 'Dachterrasse mit Skyline-Blick', 'Vollständig möbliert mit maßgeschneiderten italienischen Stücken'],
+          galleryImages: ['/test_bg_estate.jpg', '/test_bg_penthouse.jpg', '/test_bg_villa.jpg']
+        },
+        {
+          id: 'boutique-office',
+          title: 'Boutique-Büro',
+          location: 'Innenstadt',
+          type: 'Gewerblicher Verkauf',
+          image: '/test_bg_penthouse.jpg',
+          size: 'tall',
+          fullDescription: 'Eine außergewöhnliche gewerbliche Transaktion, die ein erstklassiges Boutique-Bürogebäude umfasste. Wir haben den gesamten Prozess von der Bewertung bis zur Suche nach einem geeigneten Family-Office-Käufer geleitet.',
+          features: ['Erstklassige Lage im zentralen Geschäftsviertel', 'BREEAM Excellent Zertifizierung', 'Flexible Grundrisse', 'Hochgeschwindigkeits-Glasfaseranschluss', 'Sichere Tiefgarage'],
+          galleryImages: ['/test_bg_penthouse.jpg', '/test_bg_estate.jpg', '/test_bg_villa.jpg']
+        },
+        {
+          id: 'lakefront-estate',
+          title: 'Anwesen am See',
+          location: 'Starnberg',
+          type: 'Verkauf',
+          image: '/test_bg_villa.jpg',
+          size: 'square',
+          fullDescription: 'Eine seltene Gelegenheit am Ufer des Starnberger Sees. Wir haben eine hochemotionale, filmische Vermarktungskampagne entworfen, um den einzigartigen Lebensstil dieser Immobilie einzufangen.',
+          features: ['Direkter Seezugang mit privatem Bootshaus', 'Master-Suite mit Panoramablick auf den See', 'Heimkino und Spa-Bereich', 'Gästehaus auf dem Gelände', 'Von Peter Wirtz gestaltete Gärten'],
+          galleryImages: ['/test_bg_villa.jpg', '/test_bg_penthouse.jpg', '/test_bg_estate.jpg']
         }
       ]
     }

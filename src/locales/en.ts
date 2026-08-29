@@ -413,44 +413,50 @@ export const en = {
     categories: ['All', 'Market Reports', 'Architecture', 'Investment', 'Legal'],
     readMore: 'Read Article',
     featured: {
+      id: 'featured',
       tag: 'Market Reports',
       date: 'OCTOBER 2023',
       title: 'The Q3 Frankfurt Luxury Market Report',
       desc: 'An in-depth analysis of high-end residential real estate trends, off-market shifts, and capital appreciation in Frankfurt\'s most exclusive districts.',
-      image: '/images/owners_bg_wide.jpg'
+      image: '/images/owners_bg_wide.jpg',
+      content: 'The Frankfurt luxury real estate market has seen unprecedented shifts in the third quarter of 2023. While the broader market experiences cooling due to interest rate adjustments, the ultra-prime segment remains fiercely competitive.\n\n### The Shift to Off-Market\nOne of the most notable trends is the increasing volume of transactions occurring entirely off-market. High-net-worth individuals are prioritizing discretion more than ever, relying on private broker networks to secure generational assets.\n\n### Capital Appreciation in Westend and Holzhausenviertel\nDespite macroeconomic headwinds, core premium districts have maintained their value, with select renovated historic estates seeing a 4% appreciation quarter-over-quarter. Buyers are seeking turnkey properties, willing to pay a premium for move-in ready luxury.\n\n> "The definition of prime real estate is evolving. It is no longer just about location, but about the seamless integration of modern technology within historic walls." — Klaus Bossert'
     },
     articles: [
       {
-        id: 1,
+        id: 'preserving-heritage',
         category: 'Architecture',
         date: 'SEPTEMBER 2023',
         title: 'Preserving Heritage: The Revival of Altbau Estates',
         desc: 'How historical properties are being modernized without sacrificing their original architectural integrity.',
-        image: '/images/owners_editorial.jpg'
+        image: '/images/owners_editorial.jpg',
+        content: 'Germany’s historic "Altbau" properties hold a unique place in the luxury market. Characterized by high ceilings, ornate stucco work, and original parquet flooring, these estates are highly sought after.\n\n### The Modernization Challenge\nUpdating these 19th and early 20th-century buildings to meet 21st-century standards without destroying their soul requires profound architectural sensitivity. The integration of smart home technology, underfloor heating, and energy-efficient insulation must be practically invisible.\n\n### Value Retention\nA meticulously restored Altbau often commands a higher price per square meter than a new build in the same location. Buyers are not just purchasing a home; they are acquiring a piece of architectural history.'
       },
       {
-        id: 2,
+        id: 'navigating-off-market',
         category: 'Investment',
         date: 'AUGUST 2023',
         title: 'Navigating the Off-Market Landscape',
         desc: 'Why the most significant transactions in prime locations happen behind closed doors, and how to access them.',
-        image: '/images/prop_penthouse_1787771396787.jpg'
+        image: '/test_bg_penthouse.jpg',
+        content: 'In the upper echelons of the real estate market, visibility is often viewed as a disadvantage. The finest properties are rarely listed on public portals. \n\n### The Value of Discretion\nFor both sellers and buyers, off-market transactions offer unparalleled privacy. Sellers avoid the stigma of a property "sitting" on the market, while buyers avoid bidding wars and public scrutiny.\n\n### Accessing the Hidden Market\nNavigating this hidden market requires access to established, trusted networks. Family offices, private wealth managers, and specialized boutique brokers are the gatekeepers to these exclusive opportunities.'
       },
       {
-        id: 3,
+        id: 'legal-regulations',
         category: 'Legal',
         date: 'JULY 2023',
         title: 'New Regulations for Heritage Properties',
         desc: 'A comprehensive guide to navigating the latest zoning and renovation laws for listed buildings.',
-        image: '/images/prop_villa_1787771383699.jpg'
+        image: '/test_bg_villa.jpg',
+        content: 'Owning a listed building (Denkmalschutz) is a privilege that comes with strict responsibilities. Recent updates to heritage conservation laws have introduced new complexities for property owners.\n\n### Energy Efficiency vs. Conservation\nThe push for greener buildings often clashes with heritage preservation rules. Installing modern double-glazing or solar panels requires special permits and creative architectural solutions.\n\n### Tax Incentives\nWhile the regulations are stringent, the financial benefits can be substantial. Understanding the "Denkmal-AfA" (depreciation of heritage buildings) is crucial for maximizing the investment potential of historic real estate.'
       },
       {
-        id: 4,
+        id: 'turnkey-luxury',
         category: 'Investment',
         date: 'JUNE 2023',
         title: 'The Rise of Turnkey Luxury',
         desc: 'Why international buyers are increasingly demanding fully furnished, design-ready homes.',
-        image: '/images/prop_apartment_new.jpg'
+        image: '/test_bg_estate.jpg',
+        content: 'Time is the ultimate luxury. For international executives and investors, the traditional process of buying, renovating, and furnishing a property is no longer appealing.\n\n### The "Move-In Ready" Premium\nTurnkey properties—where everything from the bespoke Italian furniture to the silverware is included—are commanding significant premiums. Buyers are willing to pay up to 20% more for the convenience of walking in with just a suitcase.\n\n### Design as a Differentiator\nIn this segment, the interior design must meet world-class standards. Collaborations with renowned design houses and the inclusion of curated art collections are becoming standard in turnkey luxury offerings.'
       }
     ]
   },
@@ -503,6 +509,86 @@ export const en = {
         {
           title: 'Additional Service',
           description: 'We handle all formalities like floor plans and energy certificates, plus our partner network for renovation, craftsmanship, and financing.'
+        }
+      ]
+    }
+  },
+  referencesPageData: {
+    hero: {
+      tag: 'OUR LEGACY',
+      title: 'A Portfolio of',
+      titleSerif: 'Excellence.',
+      description: 'Explore a curated selection of premium properties successfully marketed and managed by our expert team. Each reference is a testament to our dedication to absolute precision and discretion.'
+    },
+    featured: {
+      id: 'featured',
+      tag: 'FEATURED REFERENCE',
+      title: 'The Sky Penthouse',
+      location: 'Frankfurt Financial District',
+      stats: [
+        { label: 'Sale Price', value: 'Undisclosed' },
+        { label: 'Time on Market', value: '14 Days' },
+        { label: 'Living Space', value: '450 sqm' }
+      ],
+      description: 'An exclusive off-market transaction handled with absolute discretion. We successfully matched this extraordinary penthouse with a high-profile international buyer within two weeks of receiving the mandate.',
+      fullDescription: 'The Sky Penthouse represents the pinnacle of modern luxury living in the heart of Frankfurt. Offering panoramic 360-degree views of the skyline and the Taunus mountains, this remarkable property was entrusted to us for an exclusive off-market sale. Our tailored approach focused on our private international network, completely bypassing public portals to ensure maximum discretion. Within just 14 days, we facilitated a seamless transaction that exceeded our client\'s expectations.',
+      features: [
+        'Private elevator access directly into the residence',
+        'Custom Italian designer kitchen with Gaggenau appliances',
+        'Smart home integration (KNX system)',
+        'Three private terraces including a rooftop garden',
+        '24/7 concierge and valet service'
+      ],
+      galleryImages: ['/test_bg_penthouse.jpg', '/test_bg_villa.jpg', '/test_bg_estate.jpg']
+    },
+    gallery: {
+      tag: 'ARCHIVE',
+      title: 'Successfully',
+      titleSerif: 'Transacted.',
+      items: [
+        {
+          id: 'historic-villa',
+          title: 'Historic Villa',
+          location: 'Taunus Region',
+          type: 'Sale',
+          image: '/test_bg_villa.jpg',
+          size: 'large',
+          fullDescription: 'A meticulously restored historic villa from 1912, blending classic architectural elegance with state-of-the-art modern amenities. The marketing campaign highlighted its unique heritage and expansive private park.',
+          features: ['Original herringbone parquet flooring', 'Restored stucco ceilings (3.8m height)', 'Private wine cellar and tasting room', 'Heated outdoor pool and pool house', 'State-of-the-art security system'],
+          galleryImages: ['/test_bg_villa.jpg', '/test_bg_estate.jpg', '/test_bg_penthouse.jpg']
+        },
+        {
+          id: 'modern-townhouse',
+          title: 'Modern Townhouse',
+          location: 'Westend, Frankfurt',
+          type: 'Letting',
+          image: '/test_bg_estate.jpg',
+          size: 'square',
+          fullDescription: 'This contemporary townhouse in the highly sought-after Westend district was successfully let to a corporate executive. Our comprehensive service included full furnishing and relocation support.',
+          features: ['Floor-to-ceiling panoramic windows', 'Underfloor heating and cooling', 'Private double garage', 'Rooftop terrace with skyline views', 'Fully furnished with bespoke Italian pieces'],
+          galleryImages: ['/test_bg_estate.jpg', '/test_bg_penthouse.jpg', '/test_bg_villa.jpg']
+        },
+        {
+          id: 'boutique-office',
+          title: 'Boutique Office',
+          location: 'City Center',
+          type: 'Commercial Sale',
+          image: '/test_bg_penthouse.jpg',
+          size: 'tall',
+          fullDescription: 'An exceptional commercial transaction involving a prime boutique office building. We managed the entire process from valuation to finding a suitable family office buyer.',
+          features: ['Prime central business district location', 'BREEAM Excellent certification', 'Flexible floor plans', 'High-speed fiber optic connectivity', 'Secure underground parking'],
+          galleryImages: ['/test_bg_penthouse.jpg', '/test_bg_estate.jpg', '/test_bg_villa.jpg']
+        },
+        {
+          id: 'lakefront-estate',
+          title: 'Lakefront Estate',
+          location: 'Starnberg',
+          type: 'Sale',
+          image: '/test_bg_villa.jpg',
+          size: 'square',
+          fullDescription: 'A rare opportunity on the shores of Lake Starnberg. We crafted a highly emotional, cinematic marketing campaign to capture the unique lifestyle this property offers.',
+          features: ['Direct lake access with private boat house', 'Master suite with panoramic lake views', 'Home cinema and spa area', 'Guest house on the premises', 'Landscaped gardens designed by Peter Wirtz'],
+          galleryImages: ['/test_bg_villa.jpg', '/test_bg_penthouse.jpg', '/test_bg_estate.jpg']
         }
       ]
     }
