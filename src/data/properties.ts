@@ -124,9 +124,36 @@ const baseProperties: Property[] = [
   }
 ];
 
+const commonDummyData = {
+  description: 'An architectural masterpiece offering unparalleled luxury and sophistication. This stunning property features bespoke finishes, soaring ceilings, and panoramic views of the surrounding landscape. The expansive outdoor living spaces create a perfect sanctuary for relaxation and entertainment.',
+  amenities: ['Hardwood Floors', 'High Ceilings', 'Smart Home System', 'Chef\'s Kitchen', 'Spa & Sauna', 'Private Garden'],
+  videoUrl: 'https://www.youtube.com/embed/S2qYJdK0-hE',
+  virtualTourUrl: 'https://my.matterport.com/show/?m=placeholder',
+  floorPlans: ['/images/floorplan_placeholder.jpg'],
+  documents: [
+    { title: 'Property Brochure', url: '/brochure.pdf' },
+    { title: 'Energy Performance Certificate', url: '/epc.pdf' }
+  ],
+  locationData: {
+    coordinates: [34.0522, -118.2437] as [number, number],
+    schools: [
+      { name: 'Beverly Hills High', distance: '1.2 km' },
+      { name: 'Westwood Elementary', distance: '0.8 km' }
+    ],
+    transport: [
+      { name: 'Sunset Blvd Station', type: 'Bus', distance: '0.5 km' }
+    ]
+  },
+  financials: {
+    propertyTax: 25000,
+    hoaFees: 800
+  }
+};
+
 export const mockProperties: Property[] = Array.from({ length: 50 }, (_, i) => {
   const baseProp = baseProperties[i % baseProperties.length];
   return {
+    ...commonDummyData,
     ...baseProp,
     id: `prop-${i + 1}`
   };

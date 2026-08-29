@@ -29,36 +29,6 @@ export default function PropertyLocation({ locationData }: PropertyLocationProps
         </div>
       </div>
 
-      {/* POIs */}
-      <div className="location-pois-grid">
-        {locationData.schools && locationData.schools.length > 0 && (
-          <div className="poi-column">
-            <h4 className="poi-title">Nearby Schools</h4>
-            <ul className="poi-list">
-              {locationData.schools.map((school, idx) => (
-                <li key={idx}>
-                  <span className="poi-name">{school.name}</span>
-                  <span className="poi-dist">{school.distance}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {locationData.transport && locationData.transport.length > 0 && (
-          <div className="poi-column">
-            <h4 className="poi-title">Public Transport</h4>
-            <ul className="poi-list">
-              {locationData.transport.map((transit, idx) => (
-                <li key={idx}>
-                  <span className="poi-name">{transit.name} ({transit.type})</span>
-                  <span className="poi-dist">{transit.distance}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
     </div>
   );
 }

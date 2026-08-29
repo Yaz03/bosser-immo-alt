@@ -7,6 +7,7 @@ import PropertyHeader from '@/components/property/PropertyHeader';
 import PropertyMediaTabs from '@/components/property/PropertyMediaTabs';
 import PropertyLocation from '@/components/property/PropertyLocation';
 import MortgageCalculator from '@/components/property/MortgageCalculator';
+import PropertyPOIs from '@/components/property/PropertyPOIs';
 import Button from '@/components/ui/Button';
 
 interface PageProps {
@@ -25,7 +26,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
     <main style={{ backgroundColor: 'var(--cream)', minHeight: '100vh', paddingTop: '160px' }}>
       <Navbar invertOnLoad={true} />
       
-      <div className="inner-page-container page-fade-in">
+      <div className="inner-page-container">
         <PropertyGallery images={property.galleryImages} fallbackImage={property.imageSrc} />
         
         <div className="property-content-wrapper">
@@ -59,6 +60,8 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             
             <div className="property-side-col">
               <MortgageCalculator priceStr={property.price} financials={property.financials} />
+              
+              <PropertyPOIs locationData={property.locationData} />
               
               <div className="property-sidebar-widget agent-widget">
                 <h3>Interested in this property?</h3>
