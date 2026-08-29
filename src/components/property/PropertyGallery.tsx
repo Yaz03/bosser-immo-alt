@@ -93,6 +93,7 @@ export default function PropertyGallery({ images, fallbackImage }: PropertyGalle
           
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             <Image 
+              key={lightboxIndex}
               src={displayImages[lightboxIndex]} 
               alt={`Property image ${lightboxIndex + 1}`}
               fill
