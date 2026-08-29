@@ -3099,14 +3099,14 @@ body {
     max-width: 100%;
   }
   .headline-top {
-    font-size: 1.5rem;
-    letter-spacing: -1px;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
   }
   .headline-middle {
-    font-size: clamp(3.5rem, 18vw, 6rem);
+    font-size: clamp(2.2rem, 11vw, 4.5rem);
   }
   .headline-bottom {
-    font-size: clamp(2rem, 10vw, 4rem);
+    font-size: clamp(1.5rem, 8vw, 3rem);
   }
   .right-content {
     display: none;
