@@ -5,7 +5,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
 
 interface CtaSectionProps {
-  variant?: 'default' | 'properties';
+  variant?: 'default' | 'properties' | 'services';
 }
 
 export default function CtaSection({ variant = 'default' }: CtaSectionProps) {
@@ -13,9 +13,9 @@ export default function CtaSection({ variant = 'default' }: CtaSectionProps) {
   const { t } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
-  const headline = variant === 'properties' ? t.propertiesCta.headline : t.cta.headline;
-  const headlineSerif = variant === 'properties' ? t.propertiesCta.headlineSerif : t.cta.headlineSerif;
-  const subhead = variant === 'properties' ? t.propertiesCta.subhead : t.cta.subhead;
+  const headline = variant === 'properties' ? t.propertiesCta.headline : variant === 'services' ? (t as any).servicesCta.headline : t.cta.headline;
+  const headlineSerif = variant === 'properties' ? t.propertiesCta.headlineSerif : variant === 'services' ? (t as any).servicesCta.headlineSerif : t.cta.headlineSerif;
+  const subhead = variant === 'properties' ? t.propertiesCta.subhead : variant === 'services' ? (t as any).servicesCta.subhead : t.cta.subhead;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +39,11 @@ export default function CtaSection({ variant = 'default' }: CtaSectionProps) {
       {/* Left Column: Portrait Image */}
       <div 
         className={`cta-image-col reveal-base reveal-scale ${isVisible ? 'is-revealed' : ''}`}
-        style={variant === 'properties' ? { backgroundImage: 'url("/test_bg_villa.jpg")' } : undefined}
+        style={
+          variant === 'properties' ? { backgroundImage: 'url("/test_bg_villa.jpg")' } :
+          variant === 'services' ? { backgroundImage: 'url("/images/services_cta_bg.jpg")' } : 
+          undefined
+        }
       ></div>
 
       {/* Right Column: Form Block */}

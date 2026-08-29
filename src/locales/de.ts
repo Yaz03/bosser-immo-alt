@@ -137,21 +137,21 @@ export const de = {
     subhead: 'Erleben Sie Immobilien auf höchstem Niveau. Hören Sie direkt von denen, die uns ihre wertvollsten Vermögenswerte anvertraut haben, wo Diskretion und Präzision an erster Stelle stehen.',
     list: [
       {
-        quote: "Ein völlig anderes Serviceniveau. Die Diskretion und strategische Herangehensweise beim Verkauf unserer Immobilie waren unübertroffen.",
-        author: "M.K.",
-        location: "Villa im Taunus",
+        quote: "Nachdem unsere Kinder ausgezogen sind, haben wir uns verkleinert. Bossert Immobilien hat uns nicht nur beim Verkauf unterstützt, sondern auch geholfen, ein neues, passendes Zuhause zu finden. Die Begleitung war durchweg professionell, persönlich und verlässlich.",
+        author: "Schneider",
+        location: "Hausverkauf & Neukauf",
         image: "/test_bg_villa.jpg"
       },
       {
-        quote: "Bossert versteht, dass wahrer Luxus Stille ist. Alles wurde privat, effizient und mit absoluter Präzision abgewickelt.",
-        author: "L.S.",
-        location: "Penthouse, Frankfurt",
+        quote: "Hervorragendes Immobilien-Exposé, schnelle Reaktionszeit und eine absolut präzise Objektbeschreibung. Die gesamte Erfahrung war rundum zufriedenstellend.",
+        author: "Fr. H",
+        location: "Immobilienkauf",
         image: "/test_bg_penthouse.jpg"
       },
       {
-        quote: "Ihr Netzwerk ist unsichtbar, aber immens leistungsstark. Sie brachten uns mit genau dem Käufer zusammen, den wir brauchten, noch bevor die Immobilie überhaupt gelistet war.",
-        author: "Dr. A.H.",
-        location: "Historisches Anwesen",
+        quote: "Wir haben über die Jahre mehrfach mit Bossert Immobilien für die Immobilienvermarktung zusammengearbeitet. Jede Erfahrung war eine echte Erleichterung und durchweg positiv.",
+        author: "W. Mayer",
+        location: "Mehrfache Vermarktung",
         image: "/test_bg_estate.jpg"
       }
     ]
@@ -208,6 +208,13 @@ export const de = {
     headline: 'Benötigen Sie',
     headlineSerif: 'Beratung?',
     subhead: 'Unsere erfahrenen Berater stehen Ihnen zur Verfügung, um Sie durch unser exklusives Portfolio zu führen und die Immobilie zu finden, die perfekt zu Ihren Vorstellungen passt.'
+  },
+  servicesCta: {
+    headline: 'Brauchen Sie',
+    headlineSerif: 'Unterstützung?',
+    subhead: 'Sind Sie sich unsicher, wie Sie Ihre Immobilie am besten vermarkten? Wir helfen Ihnen gerne in einem persönlichen Gespräch.',
+    phone: '06196 - 7642184',
+    email: 'info@bo-immobilien.net'
   },
   propertyTranslations: {
     types: {
@@ -446,5 +453,58 @@ export const de = {
         image: '/images/prop_apartment_new.jpg'
       }
     ]
+  },
+  servicesPageData: {
+    hero: {
+      title: 'Expertenunterstützung auf Ihrer',
+      titleSerif: 'Immobilienreise.',
+      description: 'Professionell gemanagt, erfolgreich abgeschlossen.',
+      cta: 'Kontakt aufnehmen'
+    },
+    intro: {
+      tag: 'Komplexe Immobilienangelegenheiten?',
+      l1: 'Immobilien-',
+      s1: 'Herausforderungen',
+      l2: ', ',
+      l3: 'Vereinfacht.',
+      s2: '',
+      l4: '',
+      textLeft: 'Immobilienverwaltung, Vermarktung und Bewertung bringen jeweils erhebliche rechtliche, preisliche und administrative Komplexität mit sich.',
+      textRight: 'Wir übernehmen jeden Aspekt für Sie mit Professionalität und Klarheit, um einen reibungslosen Ablauf zu gewährleisten.'
+    },
+    benefits: {
+      tag: 'UNSER VERSPRECHEN',
+      title: 'Ihre Vorteile',
+      titleSerif: 'auf einen Blick.',
+      subhead: '',
+      list: [
+        { title: 'Umfassender Service', desc: 'Full-Service von der ersten Beratung bis zum Abschluss bei Verkauf, Vermietung und mehr.' },
+        { title: 'Maßgeschneiderte Lösungen', desc: 'Individuelles Marketing, strategische Planung und exklusive Zusatzleistungen.' },
+        { title: 'Präzise Bewertung', desc: 'Zertifizierte Bewertungen basierend auf fundierter Marktkenntnis und jahrzehntelanger Erfahrung.' },
+        { title: 'Zeitersparnis', desc: 'Der gesamte Prozess wird von uns übernommen, inklusive strenger Käufer- und Mieterqualifizierung.' },
+        { title: 'Transparente Prozesse', desc: 'Kontinuierliche Updates und ein strukturierter Workflow halten Sie auf dem Laufenden.' },
+        { title: 'Zusatzleistungen', desc: 'Ergänzende Services und ein vertrauenswürdiges Partnernetzwerk für Renovierung und Finanzierung.' }
+      ]
+    },
+    overview: {
+      tag: 'LEISTUNGEN',
+      title: 'Expertenrat für',
+      titleSerif: 'Ihre Immobilie.',
+      description: 'Über die Immobilie hinaus — wir vereinfachen, unterstützen und verfeinern jeden Schritt auf dem Weg.',
+      pillars: [
+        {
+          title: 'Bewertung und Gutachten',
+          description: 'Präzise Bewertungen, professionelle Berichte, maßgeschneidert und marktgerecht, damit Sie den wahren Wert verstehen.'
+        },
+        {
+          title: 'Vermittlung und Beratung',
+          description: 'Expertenunterstützung bei Verkauf, Vermietung und allen Immobilienfragen — professionell, persönlich und diskret.'
+        },
+        {
+          title: 'Zusätzlicher Service',
+          description: 'Wir erledigen alle Formalitäten wie Grundrisse und Energieausweise, plus unser Partnernetzwerk für Renovierung, Handwerk und Finanzierung.'
+        }
+      ]
+    }
   }
 };

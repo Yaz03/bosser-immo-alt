@@ -137,21 +137,21 @@ export const en = {
     subhead: 'Experience real estate at the highest level. Hear directly from those who have entrusted us with their most valuable assets, where discretion and precision are paramount.',
     list: [
       {
-        quote: "An entirely different caliber of service. The discretion and strategic approach they brought to the sale of our property was unmatched.",
-        author: "M.K.",
-        location: "Villa in Taunus",
+        quote: "On downsizing after our children moved out; Bossert Immobilien supported us not just in selling our previous property but also in finding a new, suitable home. The guidance felt professional, personal, and reliable throughout.",
+        author: "Schneider",
+        location: "Home Sale & Purchase",
         image: "/test_bg_villa.jpg"
       },
       {
-        quote: "Bossert understands that true luxury is silence. Everything was handled privately, efficiently, and with total precision.",
-        author: "L.S.",
-        location: "Penthouse, Frankfurt",
+        quote: "Excellent property exposé, prompt responsiveness, and accurate property description. The experience was fully satisfactory.",
+        author: "Fr. H",
+        location: "Property Purchase",
         image: "/test_bg_penthouse.jpg"
       },
       {
-        quote: "Their network is invisible but immensely powerful. They connected us with the exact buyer we needed before the property was ever listed.",
-        author: "Dr. A.H.",
-        location: "Historic Estate",
+        quote: "We have worked with Bossert Immobilien multiple times over the years for property marketing. Each experience has been a genuine relief and consistently positive.",
+        author: "W. Mayer",
+        location: "Multiple Transactions",
         image: "/test_bg_estate.jpg"
       }
     ]
@@ -208,6 +208,13 @@ export const en = {
     headline: 'Require',
     headlineSerif: 'Guidance?',
     subhead: 'Our senior advisors are at your disposal to help you navigate our exclusive portfolio and find the property that perfectly matches your vision.'
+  },
+  servicesCta: {
+    headline: 'Need support?',
+    headlineSerif: 'Contact us!',
+    subhead: 'Not sure how to best market your property? We\'re happy to help in a personal conversation.',
+    phone: '06196 - 7642184',
+    email: 'info@bo-immobilien.net'
   },
   propertyTranslations: {
     types: {
@@ -446,5 +453,58 @@ export const en = {
         image: '/images/prop_apartment_new.jpg'
       }
     ]
+  },
+  servicesPageData: {
+    hero: {
+      title: 'Expert Support Throughout Your',
+      titleSerif: 'Brokerage Journey.',
+      description: 'Professionally managed, successfully completed.',
+      cta: 'Get in Touch'
+    },
+    intro: {
+      tag: 'Complex Property Matters?',
+      l1: 'Property ',
+      s1: 'Challenges',
+      l2: ', ',
+      l3: 'Simplified.',
+      s2: '',
+      l4: '',
+      textLeft: 'Property management, marketing, and valuation each carry significant legal, pricing, and administrative complexity.',
+      textRight: 'We handle every aspect for you with professionalism and clarity, ensuring a seamless experience.'
+    },
+    benefits: {
+      tag: 'OUR COMMITMENT TO YOU',
+      title: 'Your Benefits',
+      titleSerif: 'at a Glance.',
+      subhead: '',
+      list: [
+        { title: 'Comprehensive Service', desc: 'Full-service from first consultation to completion across sales, lettings, and more.' },
+        { title: 'Tailored Solutions', desc: 'Bespoke marketing, strategic planning, and exclusive add-ons tailored to your property.' },
+        { title: 'Precise Valuation', desc: 'Certified valuations derived from profound market knowledge and decades of experience.' },
+        { title: 'Time Savings', desc: 'Full process handled entirely by us, including rigorous buyer and tenant qualification.' },
+        { title: 'Transparent Processes', desc: 'Continuous updates and a highly structured workflow keep you informed at every step.' },
+        { title: 'Additional Services', desc: 'Supplementary services and a trusted partner network for renovation and financing.' }
+      ]
+    },
+    overview: {
+      tag: 'SERVICES',
+      title: 'Expert Guidance for',
+      titleSerif: 'Your Property.',
+      description: 'Beyond the property itself — we simplify, support, and refine each step along the way.',
+      pillars: [
+        {
+          title: 'Valuation and Reports',
+          description: 'Accurate valuations, professional reports, tailored and market-aligned to ensure you understand true value.'
+        },
+        {
+          title: 'Brokerage and Advisory',
+          description: 'Expert support for sales, rentals, and all real estate matters — professional, personalized, and discreet.'
+        },
+        {
+          title: 'Additional Service',
+          description: 'We handle all formalities like floor plans and energy certificates, plus our partner network for renovation, craftsmanship, and financing.'
+        }
+      ]
+    }
   }
 };
