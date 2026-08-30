@@ -25,7 +25,7 @@ export default function AboutPage() {
   // Mock images for staggered philosophy section
   const philosophyImages = ['/card1.jpg', '/card2.jpg', '/card3.jpg'];
   // Mock vibrant portraits for founders
-  const portraitImages = ['/images/owners_editorial.jpg', '/images/owners_cream.jpg'];
+  const portraitImages = ['/maximilian bossert.webp', '/elena bossert.webp'];
 
   return (
     <main style={{ backgroundColor: 'var(--cream)' }}>
