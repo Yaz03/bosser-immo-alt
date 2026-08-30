@@ -25,7 +25,7 @@ export default function AboutPage() {
   // Mock images for staggered philosophy section
   const philosophyImages = ['/card1.jpg', '/card2.jpg', '/card3.jpg'];
   // Mock vibrant portraits for founders
-  const portraitImages = ['/images/owners_editorial.jpg', '/images/owners_cream.jpg'];
+  const portraitImages = ['/maximilian bossert.webp', '/elena bossert.webp'];
 
   return (
     <main style={{ backgroundColor: 'var(--cream)' }}>
@@ -88,7 +88,7 @@ export default function AboutPage() {
       <AboutStats stats={about.stats} />
 
       {/* 4. The Leadership / Founders */}
-      <section className="global-padding" ref={teamRef} style={{ paddingTop: '10rem', paddingBottom: '10rem' }}>
+      <section className="global-padding" ref={teamRef} style={{ paddingTop: '10rem', paddingBottom: '4rem' }}>
         <div className="inner-page-container">
         <div className={`reveal-base reveal-up ${teamVisible ? 'is-revealed' : ''}`} style={{ textAlign: 'center', marginBottom: '6rem' }}>
           <p className="services-subtitle" style={{ justifyContent: 'center' }}>
@@ -122,7 +122,7 @@ export default function AboutPage() {
       </section>
 
       {/* 5. CTA */}
-      <CtaSection variant="default" />
+      <CtaSection variant="about" />
 
       <Footer />
     </main>

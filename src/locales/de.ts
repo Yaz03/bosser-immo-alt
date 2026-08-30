@@ -253,7 +253,7 @@ export const de = {
       titleSerif: 'Erfahrung.',
       members: [
         {
-          name: 'Klaus Bossert',
+          name: 'Maximilian Bossert',
           title: 'Gründer & Geschäftsführer',
           quote: '"Wahrer Luxus bei Immobilien findet sich in den Details – sowohl in den Objekten, die wir vertreten, als auch in dem Service, den wir bieten."'
         },

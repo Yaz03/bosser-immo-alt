@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import PropertyCard from './PropertyCard';
 import { mockProperties } from '../data/properties';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -13,8 +14,62 @@ export default function PropertiesGrid() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
-  const totalPages = Math.ceil(mockProperties.length / itemsPerPage);
-  const currentProperties = mockProperties.slice(
+  const searchParams = useSearchParams();
+  const locationParam = searchParams.get('location')?.toLowerCase() || '';
+  const typeParam = searchParams.get('type') || '';
+  const bedsParam = searchParams.get('beds') || '';
+  const minPriceParam = parseInt(searchParams.get('minPrice') || '0', 10);
+  const maxPriceParam = parseInt(searchParams.get('maxPrice') || '0', 10);
+  const minSqmParam = parseInt(searchParams.get('minSqm') || '0', 10);
+  const maxSqmParam = parseInt(searchParams.get('maxSqm') || '0', 10);
+
+  // Filter properties
+  const filteredProperties = mockProperties.filter(prop => {
+    // 1. Location match
+    if (locationParam && !prop.location.toLowerCase().includes(locationParam)) return false;
+
+    // 2. Type match
+    if (typeParam && typeParam !== 'Any') {
+      if (!prop.type.toLowerCase().includes(typeParam.toLowerCase())) return false;
+    }
+
+    // 3. Bed match (parse specs "5 Beds • 6 Baths • 650 m²")
+    if (bedsParam && bedsParam !== 'Any') {
+      const bedsMatch = prop.specs.match(/(\d+)\s*Beds?/i);
+      if (bedsMatch) {
+        const beds = parseInt(bedsMatch[1], 10);
+        const reqBeds = parseInt(bedsParam.replace('+', ''), 10);
+        if (beds < reqBeds) return false;
+      }
+    }
+
+    // 4. Price Match (parse price "€ 4,250,000")
+    if (minPriceParam > 0 || maxPriceParam > 0) {
+      const priceNum = parseInt(prop.price.replace(/[^\d]/g, ''), 10);
+      if (minPriceParam > 0 && priceNum < minPriceParam) return false;
+      if (maxPriceParam > 0 && priceNum > maxPriceParam) return false;
+    }
+
+    // 5. Sqm Match (parse specs "650 m²")
+    if (minSqmParam > 0 || maxSqmParam > 0) {
+      const sqmMatch = prop.specs.match(/(\d+(?:,\d+)?)\s*m²/i);
+      if (sqmMatch) {
+        const sqm = parseInt(sqmMatch[1].replace(',', ''), 10);
+        if (minSqmParam > 0 && sqm < minSqmParam) return false;
+        if (maxSqmParam > 0 && sqm > maxSqmParam) return false;
+      }
+    }
+
+    return true;
+  });
+
+  // Reset to page 1 if filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchParams]);
+
+  const totalPages = Math.ceil(filteredProperties.length / itemsPerPage) || 1;
+  const currentProperties = filteredProperties.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -36,10 +91,10 @@ export default function PropertiesGrid() {
         {/* Results Header */}
         <div className={`properties-results-header reveal-base reveal-up delay-100 ${isVisible ? 'is-revealed' : ''}`}>
           <div className="results-count">
-            {t.propertiesPage.resultsCount
+            {filteredProperties.length === 0 ? '0 Results' : t.propertiesPage.resultsCount
               .replace('{start}', ((currentPage - 1) * itemsPerPage + 1).toString())
-              .replace('{end}', Math.min(currentPage * itemsPerPage, mockProperties.length).toString())
-              .replace('{total}', mockProperties.length.toString())}
+              .replace('{end}', Math.min(currentPage * itemsPerPage, filteredProperties.length).toString())
+              .replace('{total}', filteredProperties.length.toString())}
           </div>
           
           <div className="results-controls">

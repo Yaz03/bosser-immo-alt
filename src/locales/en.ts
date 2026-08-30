@@ -253,7 +253,7 @@ export const en = {
       titleSerif: 'experience.',
       members: [
         {
-          name: 'Klaus Bossert',
+          name: 'Maximilian Bossert',
           title: 'Founder & Managing Director',
           quote: '"True luxury in real estate is found in the details—both in the properties we represent and the service we provide."'
         },

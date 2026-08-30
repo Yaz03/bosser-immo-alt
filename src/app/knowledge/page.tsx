@@ -34,7 +34,7 @@ export default function KnowledgePage() {
       <KnowledgeFeed data={t.knowledge} />
 
       {/* 3. CTA */}
-      <CtaSection />
+      <CtaSection variant="knowledge" />
 
       <Footer />
     </main>

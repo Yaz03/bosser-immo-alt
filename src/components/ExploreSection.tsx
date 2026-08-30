@@ -66,7 +66,16 @@ export default function ExploreSection() {
         
         {/* Bottom Functional Grid */}
         <div className="explore-grid">
-          {mockProperties.slice(0, 4).map((prop, idx) => (
+          {mockProperties.filter(prop => {
+            if (activeFilter === 'all') return true;
+            if (activeFilter === 'villas') return prop.type.toLowerCase().includes('villa');
+            if (activeFilter === 'penthouses') return prop.type.toLowerCase().includes('penthouse');
+            if (activeFilter === 'historic') return prop.type.toLowerCase().includes('historic');
+            if (activeFilter === 'apartments') return prop.type.toLowerCase().includes('apartment') || prop.type.toLowerCase().includes('loft');
+            if (activeFilter === 'waterfront') return prop.type.toLowerCase().includes('waterfront');
+            if (activeFilter === 'offMarket') return prop.type.toLowerCase().includes('mansion') || prop.type.toLowerCase().includes('estate');
+            return true;
+          }).slice(0, 4).map((prop, idx) => (
             <PropertyCard 
               key={prop.id}
               id={prop.id}

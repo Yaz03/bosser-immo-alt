@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -16,6 +17,16 @@ export default function SearchSection({ hideHeader = false, isDarkBg = false, hi
   const [advBathrooms, setAdvBathrooms] = useState('Any');
   const [energyRating, setEnergyRating] = useState('Any');
   const [availability, setAvailability] = useState('Any');
+  
+  // New States for inputs
+  const [location, setLocation] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [minSqm, setMinSqm] = useState('');
+  const [maxSqm, setMaxSqm] = useState('');
+  const [features, setFeatures] = useState<string[]>([]);
+
+  const router = useRouter();
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   // Use the new reusable hook
@@ -49,17 +60,40 @@ export default function SearchSection({ hideHeader = false, isDarkBg = false, hi
     setAdvBathrooms('Any');
     setEnergyRating('Any');
     setAvailability('Any');
+    setLocation('');
+    setMinPrice('');
+    setMaxPrice('');
+    setMinSqm('');
+    setMaxSqm('');
+    setFeatures([]);
+  };
+
+  const handleFeatureToggle = (feature: string) => {
+    setFeatures(prev => 
+      prev.includes(feature) ? prev.filter(f => f !== feature) : [...prev, feature]
+    );
+  };
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (transactionType !== 'purchase') params.set('transaction', transactionType);
+    if (location) params.set('location', location);
+    if (propertyType !== 'Any') params.set('type', propertyType);
+    if (bedrooms !== 'Any') params.set('beds', bedrooms);
+    if (yearBuilt !== 'Any') params.set('year', yearBuilt);
     
-    if (containerRef.current) {
-      const inputs = containerRef.current.querySelectorAll('input');
-      inputs.forEach(input => {
-        if (input.type === 'checkbox' && input.id !== 'advancedSearch') {
-          input.checked = false;
-        } else if (input.type === 'number' || input.type === 'text') {
-          input.value = '';
-        }
-      });
+    if (isAdvancedOpen) {
+      if (minPrice) params.set('minPrice', minPrice);
+      if (maxPrice) params.set('maxPrice', maxPrice);
+      if (minSqm) params.set('minSqm', minSqm);
+      if (maxSqm) params.set('maxSqm', maxSqm);
+      if (advBathrooms !== 'Any') params.set('baths', advBathrooms);
+      if (energyRating !== 'Any') params.set('energy', energyRating);
+      if (availability !== 'Any') params.set('availability', availability);
+      if (features.length > 0) params.set('features', features.join(','));
     }
+
+    router.push('/properties?' + params.toString());
   };
 
   return (
@@ -104,7 +138,7 @@ export default function SearchSection({ hideHeader = false, isDarkBg = false, hi
             <div className="filter-label">{t.search.location}</div>
             <div className="filter-input-row">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <input type="text" placeholder={t.search.placeholder} className="search-input" />
+              <input type="text" placeholder={t.search.placeholder} className="search-input" value={location} onChange={e => setLocation(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
             </div>
           </div>
           <div className="search-divider"></div>
@@ -170,7 +204,7 @@ export default function SearchSection({ hideHeader = false, isDarkBg = false, hi
             )}
           </div>
           
-          <button className={`search-btn ${isAdvancedOpen ? 'hidden-btn' : ''}`}>
+          <button className={`search-btn ${isAdvancedOpen ? 'hidden-btn' : ''}`} onClick={handleSearch}>
             {t.search.searchBtn}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </button>
@@ -199,17 +233,17 @@ export default function SearchSection({ hideHeader = false, isDarkBg = false, hi
               <div className="adv-filter-box">
                 <div className="adv-label">{t.search.price}</div>
                 <div className="adv-input-group">
-                  <input type="number" min="0" placeholder={t.search.filters.minPrice} />
+                  <input type="number" min="0" placeholder={t.search.filters.minPrice} value={minPrice} onChange={e => setMinPrice(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
                   <span>{t.search.to}</span>
-                  <input type="number" min="0" placeholder={t.search.filters.maxPrice} />
+                  <input type="number" min="0" placeholder={t.search.filters.maxPrice} value={maxPrice} onChange={e => setMaxPrice(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
                 </div>
               </div>
               <div className="adv-filter-box">
                 <div className="adv-label">{t.search.size}</div>
                 <div className="adv-input-group">
-                  <input type="number" min="0" placeholder={t.search.filters.minSqm} />
+                  <input type="number" min="0" placeholder={t.search.filters.minSqm} value={minSqm} onChange={e => setMinSqm(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
                   <span>{t.search.to}</span>
-                  <input type="number" min="0" placeholder={t.search.filters.maxSqm} />
+                  <input type="number" min="0" placeholder={t.search.filters.maxSqm} value={maxSqm} onChange={e => setMaxSqm(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
                 </div>
               </div>
               <div className="adv-filter-box">
@@ -259,12 +293,12 @@ export default function SearchSection({ hideHeader = false, isDarkBg = false, hi
               <div className="adv-features">
                 <div className="adv-label">{t.search.features}</div>
                 <div className="adv-checkboxes">
-                  <label><input type="checkbox"/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="14" width="18" height="8" rx="2" ry="2"></rect><path d="M3 14h18M5 14v-4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"></path></svg> {t.search.filters.balcony}</label>
-                  <label><input type="checkbox"/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 20A7 7 0 0 1 14 6h7v7a7 7 0 0 1-10 7z"></path></svg> {t.search.filters.garden}</label>
-                  <label><input type="checkbox"/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a2 2 0 0 0-1.6-.8H9.3a2 2 0 0 0-1.6.8L5 11l-5.16.86a1 1 0 0 0-.84.99V16h3m10 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0zM5 16a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"></path></svg> {t.search.filters.garage}</label>
-                  <label><input type="checkbox"/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 22h20M12 2v20M6 10c0-4 3-8 6-8s6 4 6 8"></path></svg> {t.search.filters.terrace}</label>
-                  <label><input type="checkbox"/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><polyline points="12 6 12 18"></polyline><polyline points="9 9 12 6 15 9"></polyline><polyline points="9 15 12 18 15 15"></polyline></svg> {t.search.filters.elevator}</label>
-                  <label><input type="checkbox"/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> {t.search.filters.fireplace}</label>
+                  <label><input type="checkbox" checked={features.includes('balcony')} onChange={() => handleFeatureToggle('balcony')}/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="14" width="18" height="8" rx="2" ry="2"></rect><path d="M3 14h18M5 14v-4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"></path></svg> {t.search.filters.balcony}</label>
+                  <label><input type="checkbox" checked={features.includes('garden')} onChange={() => handleFeatureToggle('garden')}/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 20A7 7 0 0 1 14 6h7v7a7 7 0 0 1-10 7z"></path></svg> {t.search.filters.garden}</label>
+                  <label><input type="checkbox" checked={features.includes('garage')} onChange={() => handleFeatureToggle('garage')}/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a2 2 0 0 0-1.6-.8H9.3a2 2 0 0 0-1.6.8L5 11l-5.16.86a1 1 0 0 0-.84.99V16h3m10 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0zM5 16a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"></path></svg> {t.search.filters.garage}</label>
+                  <label><input type="checkbox" checked={features.includes('terrace')} onChange={() => handleFeatureToggle('terrace')}/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 22h20M12 2v20M6 10c0-4 3-8 6-8s6 4 6 8"></path></svg> {t.search.filters.terrace}</label>
+                  <label><input type="checkbox" checked={features.includes('elevator')} onChange={() => handleFeatureToggle('elevator')}/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><polyline points="12 6 12 18"></polyline><polyline points="9 9 12 6 15 9"></polyline><polyline points="9 15 12 18 15 15"></polyline></svg> {t.search.filters.elevator}</label>
+                  <label><input type="checkbox" checked={features.includes('fireplace')} onChange={() => handleFeatureToggle('fireplace')}/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> {t.search.filters.fireplace}</label>
                 </div>
               </div>
 
@@ -293,7 +327,7 @@ export default function SearchSection({ hideHeader = false, isDarkBg = false, hi
                 {t.search.reset}
               </button>
               {!hideResultsCount && <div className="adv-results">{t.search.found}</div>}
-              <button className="adv-submit">{t.search.show} &rarr;</button>
+              <button className="adv-submit" onClick={handleSearch}>{t.search.show} &rarr;</button>
             </div>
 
           </div>
