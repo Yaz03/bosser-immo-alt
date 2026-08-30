@@ -36,8 +36,11 @@ export default function OwnersPage() {
       <Navbar invertOnLoad={true} />
       
       {/* 1. Hero Section */}
-      <section className="global-padding" style={{ paddingTop: '15rem', paddingBottom: '8rem' }}>
-        <div className="inner-page-container reveal-base reveal-up is-revealed" style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center' }}>
+      <section className="global-padding" style={{ paddingTop: '8rem', paddingBottom: '8rem', position: 'relative' }}>
+        {/* Subtle top gradient to make the white logo pop, matching the screenshot */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '400px', background: 'linear-gradient(to bottom, rgba(4,36,51,0.15) 0%, rgba(4,36,51,0) 100%)', pointerEvents: 'none', zIndex: 0 }}></div>
+        
+        <div className="inner-page-container reveal-base reveal-up is-revealed" style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center', position: 'relative', zIndex: 1 }}>
           <div style={{ flex: '1 1 500px' }}>
             <p className="services-subtitle" style={{ marginBottom: '1.5rem' }}>
               <span className="dot"></span> {t.owners.hero.tag}
@@ -53,7 +56,7 @@ export default function OwnersPage() {
           
           <div style={{ flex: '1 1 400px' }}>
             {/* Corner Magic Image */}
-            <div style={{ backgroundColor: 'var(--white)', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 20px 60px rgba(4,36,51,0.08)', transform: 'rotate(2deg)' }}>
+            <div style={{ backgroundColor: 'var(--white)', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 20px 60px rgba(4,36,51,0.08)', transform: 'rotate(2deg) translateY(-2rem)' }}>
               <div style={{ width: '100%', aspectRatio: '3/4', position: 'relative', borderRadius: '8px', overflow: 'hidden' }}>
                 <img src="/images/owners_editorial.jpg" alt="Editorial property view" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
@@ -68,9 +71,12 @@ export default function OwnersPage() {
           
           {/* Left Accent */}
           <div style={{ flex: '1 1 200px', borderTop: '2px solid var(--bronze)', paddingTop: '1.5rem', maxWidth: '300px' }}>
-            <p className="services-subtitle" style={{ color: 'var(--bronze)' }}>
+            <p className="services-subtitle" style={{ color: 'var(--bronze)', marginBottom: '3rem' }}>
               {t.owners.narrative.tag}
             </p>
+            <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', borderRadius: '8px', overflow: 'hidden' }}>
+              <img src="/test_bg_estate.jpg" alt="Property Insight" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
           </div>
           
           {/* Main Text */}

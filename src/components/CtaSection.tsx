@@ -5,7 +5,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
 
 interface CtaSectionProps {
-  variant?: 'default' | 'properties' | 'services' | 'knowledge';
+  variant?: 'default' | 'properties' | 'services' | 'knowledge' | 'about';
 }
 
 export default function CtaSection({ variant = 'default' }: CtaSectionProps) {
@@ -43,6 +43,7 @@ export default function CtaSection({ variant = 'default' }: CtaSectionProps) {
           variant === 'properties' ? { backgroundImage: 'url("/test_bg_villa.jpg")' } :
           variant === 'services' ? { backgroundImage: 'url("/images/services_cta_bg.jpg")' } : 
           variant === 'knowledge' ? { backgroundImage: 'url("/test_bg_penthouse.jpg")' } : 
+          variant === 'about' ? { backgroundImage: 'url("/images/owners_editorial.jpg")' } : 
           undefined
         }
       ></div>
