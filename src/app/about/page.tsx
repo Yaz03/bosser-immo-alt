@@ -52,36 +52,27 @@ export default function AboutPage() {
           <div style={{ width: '100%', height: '70vh', minHeight: '500px', position: 'relative', borderRadius: '1.5rem', overflow: 'hidden' }}>
             <Image 
               src="/images/owners_bg_wide.jpg"  
-            alt="Bossert Immobilien Legacy"
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
+              alt="Bossert Immobilien Legacy"
+              fill
+              style={{ objectFit: 'cover' }}
+              priority
+            />
           </div>
         </div>
       </div>
-
-      {/* 2. Our Approach (Massive Typography Layout) */}
-      <section className="global-padding" ref={heritageRef} style={{ paddingTop: '6rem', paddingBottom: '6rem' }}>
-        <div className="inner-page-container">
-          
-          <div className={`reveal-base reveal-up ${heritageVisible ? 'is-revealed' : ''}`} style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <span className="dot" style={{ backgroundColor: 'var(--bronze)' }}></span>
-            <span style={{ fontSize: '0.85rem', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--navy)', marginLeft: '0.5rem' }}>
-              {about.approach.tag}
-            </span>
-          </div>
-
+        {/* 2. Our Approach (Massive Typography Layout) */}
+        <section ref={heritageRef} style={{ paddingTop: '6rem', paddingBottom: '6rem' }}>
           <ApproachHeadline 
+            tag={about.approach.tag}
             l1={about.approach.l1}
             s1={about.approach.s1}
             l2={about.approach.l2}
             l3={about.approach.l3}
             s2={about.approach.s2}
             l4={about.approach.l4}
+            bgImage="/images/about-section-2bg.png"
           />
-        </div>
-      </section>
+        </section>
 
       {/* 3. Our Philosophy (Horizontal Scroll Filmstrip) */}
       <HorizontalScrollPhilosophy 

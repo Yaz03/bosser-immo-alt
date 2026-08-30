@@ -12,6 +12,46 @@ interface Props {
   stats: Stat[];
 }
 
+const AnimatedCounter = ({ targetString, isVisible }: { targetString: string; isVisible: boolean }) => {
+  const [count, setCount] = React.useState(0);
+  
+  const match = targetString.match(/^([^0-9]*)([0-9.,]+)([^0-9]*)$/);
+  
+  React.useEffect(() => {
+    if (!isVisible || !match) return;
+    
+    const targetNumber = parseFloat(match[2].replace(/,/g, ''));
+    let startTimestamp: number;
+    const duration = 2500; // 2.5 seconds for dramatic effect
+    
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      
+      // easeOutExpo for the jackpot slow-down effect
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      
+      setCount(Math.floor(easeProgress * targetNumber));
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    
+    window.requestAnimationFrame(step);
+  }, [isVisible, targetString]);
+
+  if (!match) return <>{targetString}</>;
+
+  return (
+    <>
+      {match[1]}
+      {count}
+      {match[3]}
+    </>
+  );
+};
+
 export default function AboutStats({ stats }: Props) {
   const { ref, isVisible } = useScrollReveal(0.2);
 
@@ -56,7 +96,7 @@ export default function AboutStats({ stats }: Props) {
                   color: 'var(--cream)' 
                 }}
               >
-                {stat.number}
+                <AnimatedCounter targetString={stat.number} isVisible={isVisible} />
               </div>
               <div 
                 className="services-subtitle" 

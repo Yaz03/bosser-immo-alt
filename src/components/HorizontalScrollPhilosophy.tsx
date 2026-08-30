@@ -18,74 +18,83 @@ interface Props {
 
 export default function HorizontalScrollPhilosophy({ tag, title, titleSerif, description, pillars, images }: Props) {
   const containerRef = useRef<HTMLElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const headerInnerRef = useRef<HTMLDivElement>(null);
   
-  const [progress, setProgress] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
 
   useEffect(() => {
     const updateMeasurements = () => {
       if (headerInnerRef.current && trackRef.current) {
         const rect = headerInnerRef.current.getBoundingClientRect();
-        
-        // Dynamically align the track's start and end padding to match the exact 
-        // position of the inner-page-container (which caps at 1600px).
         trackRef.current.style.paddingLeft = `${rect.left}px`;
-        trackRef.current.style.paddingRight = `${window.innerWidth - rect.right}px`;
+        trackRef.current.style.paddingRight = `50vw`; // ensure plenty of space on the right
         
-        // Calculate the maximum distance the track can be translated
-        // Because paddingRight dynamically matches the container's right margin,
-        // stopping exactly at (scrollWidth - window.innerWidth) ensures the last card 
-        // aligns perfectly with the red line (the right margin of the container).
-        setMaxScroll(trackRef.current.scrollWidth - window.innerWidth);
+        const cards = trackRef.current.children;
+        if (cards.length > 1) {
+          const firstCard = cards[0] as HTMLElement;
+          const lastCard = cards[cards.length - 1] as HTMLElement;
+          // The distance to translate is exactly the distance between the first card and the last card
+          const distance = lastCard.getBoundingClientRect().left - firstCard.getBoundingClientRect().left;
+          setMaxScroll(distance);
+        } else {
+          setMaxScroll(0);
+        }
       }
     };
     
-    // Initial measurement after a tiny timeout to ensure styles are applied
     setTimeout(updateMeasurements, 50);
-    
-    // Recalculate on resize
     window.addEventListener('resize', updateMeasurements);
     return () => window.removeEventListener('resize', updateMeasurements);
-  }, [pillars]); // re-run if data changes
+  }, [pillars]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      
-      // The total scrollable distance of the container
-      const scrollableDistance = rect.height - window.innerHeight;
-      
-      // How far the top of the container has scrolled past the top of the viewport
-      const scrolledInto = -rect.top;
-      
-      let p = scrolledInto / scrollableDistance;
-      if (p < 0) p = 0;
-      if (p > 1) p = 1;
-      
-      setProgress(p);
+    let rafId: number;
+    let targetProgress = 0;
+    let currentProgress = 0;
+
+    const animate = () => {
+      if (containerRef.current && innerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const scrollableDistance = rect.height - window.innerHeight;
+        
+        if (rect.top <= 0) {
+          if (rect.top >= -scrollableDistance) {
+            targetProgress = -rect.top / scrollableDistance;
+          } else {
+            targetProgress = 1;
+          }
+        } else {
+          targetProgress = 0;
+        }
+
+        currentProgress += (targetProgress - currentProgress) * 0.08;
+        
+        if (Math.abs(targetProgress - currentProgress) < 0.0001) currentProgress = targetProgress;
+
+        if (trackRef.current) {
+          trackRef.current.style.transform = `translate3d(-${currentProgress * maxScroll}px, 0, 0)`;
+        }
+      }
+      rafId = requestAnimationFrame(animate);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    animate();
+    
+    return () => cancelAnimationFrame(rafId);
+  }, [maxScroll]);
 
   return (
     <section 
       ref={containerRef} 
-      style={{ 
-        height: '400vh', 
-        position: 'relative', 
-        backgroundColor: 'var(--cream)' 
-      }}
+      style={{ height: '400vh', position: 'relative', backgroundColor: 'var(--cream)' }}
     >
       <div 
+        ref={innerRef}
         style={{ 
           position: 'sticky', 
-          top: 0, 
+          top: 0,
           height: '100vh', 
           overflow: 'hidden', 
           display: 'flex', 
@@ -121,7 +130,6 @@ export default function HorizontalScrollPhilosophy({ tag, title, titleSerif, des
               display: 'flex', 
               gap: '2rem', 
               width: 'max-content',
-              transform: `translate3d(-${progress * maxScroll}px, 0, 0)`,
               willChange: 'transform' // GPU acceleration for smooth scrub
             }}
           >
