@@ -1,0 +1,378 @@
+// This is your Prisma schema file for Bossert Immobilien Sys-ops (MySQL)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────────
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  role          Role      @default(VIEWER)
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions      Session[]
+  auditLogs     AuditLog[]
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// ─────────────────────────────────────────────
+// PROPERTIES
+// ─────────────────────────────────────────────
+
+enum PropertyStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Property {
+  id              String          @id @default(cuid())
+  type            String
+  priceDisplay    String          // e.g. "€ 4,250,000"
+  priceValue      Float?          // numeric for sorting/filtering
+  location        String
+  specs           String          // e.g. "5 Beds • 6 Baths • 650 m²"
+  beds            Int?
+  baths           Int?
+  areaSqm         Float?
+  status          PropertyStatus  @default(DRAFT)
+  featured        Boolean         @default(false)
+
+  heroImage       String?         // Cloudinary URL
+  videoUrl        String?
+  virtualTourUrl  String?
+
+  descriptionEn   String?         @db.Text
+  descriptionDe   String?         @db.Text
+
+  lat             Float?
+  lng             Float?
+
+  propertyTax     Float?
+  hoaFees         Float?
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  images          PropertyImage[]
+  amenities       PropertyAmenity[]
+  floorPlans      PropertyFloorPlan[]
+  documents       PropertyDocument[]
+  schools         NearbySchool[]
+  transport       NearbyTransport[]
+
+  @@map("properties")
+}
+
+model PropertyImage {
+  id          String   @id @default(cuid())
+  propertyId  String
+  url         String
+  order       Int      @default(0)
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@map("property_images")
+}
+
+model PropertyAmenity {
+  id          String   @id @default(cuid())
+  propertyId  String
+  name        String
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@map("property_amenities")
+}
+
+model PropertyFloorPlan {
+  id          String   @id @default(cuid())
+  propertyId  String
+  url         String
+  order       Int      @default(0)
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@map("property_floor_plans")
+}
+
+model PropertyDocument {
+  id          String   @id @default(cuid())
+  propertyId  String
+  title       String
+  url         String
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@map("property_documents")
+}
+
+model NearbySchool {
+  id          String   @id @default(cuid())
+  propertyId  String
+  name        String
+  distance    String
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@map("nearby_schools")
+}
+
+model NearbyTransport {
+  id          String   @id @default(cuid())
+  propertyId  String
+  name        String
+  type        String   // Bus, Metro, Train
+  distance    String
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@map("nearby_transport")
+}
+
+// ─────────────────────────────────────────────
+// ARTICLES (Knowledge Hub)
+// ─────────────────────────────────────────────
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Article {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  category      String        // Market Reports, Architecture, Investment, Legal
+  date          String        // e.g. "OCTOBER 2023"
+  heroImage     String?
+  featured      Boolean       @default(false)
+  status        ArticleStatus @default(DRAFT)
+
+  titleEn       String
+  titleDe       String?
+  descEn        String        @db.Text
+  descDe        String?       @db.Text
+  contentEn     String        @db.LongText
+  contentDe     String?       @db.LongText
+  metaTitleEn   String?
+  metaDescEn    String?       @db.Text
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("articles")
+}
+
+// ─────────────────────────────────────────────
+// TESTIMONIALS
+// ─────────────────────────────────────────────
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  quoteEn     String   @db.Text
+  quoteDe     String?  @db.Text
+  author      String
+  location    String
+  image       String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+// ─────────────────────────────────────────────
+// REFERENCES (Past Transactions)
+// ─────────────────────────────────────────────
+
+model Reference {
+  id               String           @id @default(cuid())
+  slug             String           @unique
+  titleEn          String
+  titleDe          String?
+  location         String
+  type             String           // Sale, Letting, Commercial Sale
+  heroImage        String?
+  size             String?          // large, square, tall
+  featured         Boolean          @default(false)
+  order            Int              @default(0)
+
+  descriptionEn    String           @db.Text
+  descriptionDe    String?          @db.Text
+  fullDescEn       String?          @db.LongText
+  fullDescDe       String?          @db.LongText
+
+  // Featured reference stats (JSON stored as text)
+  statsJson        String?          @db.Text
+
+  isActive         Boolean          @default(true)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  images           ReferenceImage[]
+  features         ReferenceFeature[]
+
+  @@map("references")
+}
+
+model ReferenceImage {
+  id           String    @id @default(cuid())
+  referenceId  String
+  url          String
+  order        Int       @default(0)
+  reference    Reference @relation(fields: [referenceId], references: [id], onDelete: Cascade)
+
+  @@map("reference_images")
+}
+
+model ReferenceFeature {
+  id           String    @id @default(cuid())
+  referenceId  String
+  featureEn    String
+  featureDe    String?
+  order        Int       @default(0)
+  reference    Reference @relation(fields: [referenceId], references: [id], onDelete: Cascade)
+
+  @@map("reference_features")
+}
+
+// ─────────────────────────────────────────────
+// TEAM MEMBERS
+// ─────────────────────────────────────────────
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  titleEn   String
+  titleDe   String?
+  quoteEn   String?  @db.Text
+  quoteDe   String?  @db.Text
+  image     String?
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("team_members")
+}
+
+// ─────────────────────────────────────────────
+// FAQs
+// ─────────────────────────────────────────────
+
+model FAQ {
+  id         String   @id @default(cuid())
+  questionEn String
+  questionDe String?
+  answerEn   String   @db.Text
+  answerDe   String?  @db.Text
+  order      Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("faqs")
+}
+
+// ─────────────────────────────────────────────
+// SITE SETTINGS (key-value store per page)
+// ─────────────────────────────────────────────
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  page      String   // home, about, services, owners, contact, footer, global
+  keyName   String
+  valueEn   String   @db.Text
+  valueDe   String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([page, keyName])
+  @@map("site_settings")
+}
+
+// ─────────────────────────────────────────────
+// CONTACT SUBMISSIONS
+// ─────────────────────────────────────────────
+
+enum SubmissionStatus {
+  NEW
+  READ
+  RESPONDED
+}
+
+model ContactSubmission {
+  id          String            @id @default(cuid())
+  name        String
+  email       String?
+  phone       String?
+  inquiryType String?
+  message     String            @db.Text
+  source      String            @default("contact_page") // contact_page, home_cta
+  heardAbout  String?           // LinkedIn, Google Search, Friend / Referral, etc.
+  status      SubmissionStatus  @default(NEW)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@map("contact_submissions")
+}
+
+// ─────────────────────────────────────────────
+// NEWSLETTER SUBSCRIBERS
+// ─────────────────────────────────────────────
+
+model NewsletterSubscriber {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  isActive    Boolean  @default(true)
+  subscribedAt DateTime @default(now())
+
+  @@map("newsletter_subscribers")
+}
+
+// ─────────────────────────────────────────────
+// AUDIT LOG
+// ─────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  userEmail  String
+  action     String   // CREATE, UPDATE, DELETE
+  entityType String   // Property, Article, User, etc.
+  entityId   String?
+  detail     String?  @db.Text
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}

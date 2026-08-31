@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
@@ -18,14 +18,41 @@ export default function ContactPage() {
 
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [formError, setFormError] = useState('');
+  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const subjectRef = useRef<HTMLSelectElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const heardAboutRef = useRef<HTMLSelectElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
+    setFormError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nameRef.current?.value || '',
+          phone: phoneRef.current?.value || '',
+          subject: subjectRef.current?.value || 'General Inquiry',
+          message: messageRef.current?.value || '',
+          heardAbout: heardAboutRef.current?.value || '',
+          formType: 'contact_page',
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess(true);
+      } else {
+        setFormError(data.error || 'Submission failed. Please try again.');
+      }
+    } catch {
+      setFormError('Network error. Please try again.');
+    } finally {
       setSubmitting(false);
-      setSuccess(true);
-    }, 1500);
+    }
   };
 
   if (!contact) return null;
@@ -102,6 +129,7 @@ export default function ContactPage() {
                   
                   <div>
                     <input 
+                      ref={nameRef}
                       type="text" 
                       placeholder={contact.form.namePlaceholder} 
                       required 
@@ -111,6 +139,7 @@ export default function ContactPage() {
 
                   <div>
                     <input 
+                      ref={phoneRef}
                       type="tel" 
                       placeholder={contact.form.phonePlaceholder} 
                       className="cta-input"
@@ -119,6 +148,7 @@ export default function ContactPage() {
 
                   <div>
                     <select 
+                      ref={subjectRef}
                       className="cta-input"
                       style={{ appearance: 'none', cursor: 'pointer' }}
                     >
@@ -130,12 +160,31 @@ export default function ContactPage() {
 
                   <div>
                     <textarea 
+                      ref={messageRef}
                       placeholder={contact.form.messagePlaceholder} 
                       required 
                       rows={4}
                       className="cta-textarea"
                     />
                   </div>
+
+                  {/* How did you hear about us */}
+                  <div>
+                    <select
+                      ref={heardAboutRef}
+                      className="cta-input"
+                      style={{ appearance: 'none', cursor: 'pointer', color: heardAboutRef.current?.value ? 'var(--navy)' : 'rgba(4,36,51,0.45)' }}
+                    >
+                      <option value="">{contact.form.heardAbout || 'How did you hear about us?'}</option>
+                      {(contact.form.heardAboutOptions || []).map((opt: string, idx: number) => (
+                        <option key={idx} value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {formError && (
+                    <p style={{ color: '#DC2626', fontSize: '0.85rem', marginTop: '-0.5rem' }}>{formError}</p>
+                  )}
                   
                   <button 
                     type="submit" 

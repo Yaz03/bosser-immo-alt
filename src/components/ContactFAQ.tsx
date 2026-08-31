@@ -1,11 +1,21 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface FAQ {
   q: string;
   a: string;
+}
+
+// DB FAQ shape (from /api/faqs)
+interface DBFAQ {
+  id: string;
+  questionEn: string;
+  answerEn: string;
+  questionDe?: string;
+  answerDe?: string;
+  order: number;
 }
 
 interface Props {
@@ -16,13 +26,29 @@ interface Props {
     subhead: string;
     cardTitle: string;
     cardSub: string;
-    questions: FAQ[];
+    questions: FAQ[]; // fallback from locale
   };
 }
 
 export default function ContactFAQ({ faqData }: Props) {
   const { ref, isVisible } = useScrollReveal(0.2);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [questions, setQuestions] = useState<FAQ[]>(faqData.questions); // start with locale data
+
+  // Fetch FAQs from DB — if available, override locale data
+  useEffect(() => {
+    fetch('/api/faqs')
+      .then((r) => r.json())
+      .then((data: DBFAQ[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setQuestions(data.map((f) => ({ q: f.questionEn, a: f.answerEn })));
+        }
+        // If DB is empty, locale fallback stays
+      })
+      .catch(() => {
+        // Silently fall back to locale data on error
+      });
+  }, []);
 
   const toggleAccordion = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -31,7 +57,7 @@ export default function ContactFAQ({ faqData }: Props) {
   return (
     <section className="global-padding" ref={ref} style={{ paddingTop: '8rem', paddingBottom: '10rem' }}>
       <div className="inner-page-container">
-        
+
         {/* Header */}
         <div className={`reveal-base reveal-up ${isVisible ? 'is-revealed' : ''}`} style={{ marginBottom: '4rem' }}>
           <p className="services-subtitle" style={{ marginBottom: '1.5rem' }}>
@@ -46,13 +72,13 @@ export default function ContactFAQ({ faqData }: Props) {
 
         {/* Layout Grid */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem' }}>
-          
+
           {/* Left Side: Card */}
           <div className={`reveal-base reveal-up delay-100 ${isVisible ? 'is-revealed' : ''}`} style={{ flex: '1 1 350px' }}>
-            <div style={{ 
-              backgroundColor: 'var(--navy)', 
-              borderRadius: '8px', 
-              padding: '3rem 2rem', 
+            <div style={{
+              backgroundColor: 'var(--navy)',
+              borderRadius: '8px',
+              padding: '3rem 2rem',
               color: 'var(--white)',
               display: 'flex',
               flexDirection: 'column',
@@ -69,30 +95,30 @@ export default function ContactFAQ({ faqData }: Props) {
             </div>
           </div>
 
-          {/* Right Side: Accordion */}
+          {/* Right Side: Accordion — DB-driven */}
           <div className={`reveal-base reveal-up delay-200 ${isVisible ? 'is-revealed' : ''}`} style={{ flex: '2 1 500px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {faqData.questions.map((faq, idx) => (
-                <div 
-                  key={idx} 
-                  style={{ 
-                    backgroundColor: 'var(--white)', 
-                    borderRadius: '8px', 
+              {questions.map((faq, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    backgroundColor: 'var(--white)',
+                    borderRadius: '8px',
                     overflow: 'hidden',
                     border: '1px solid rgba(4,36,51,0.05)',
                     transition: 'all 0.3s ease'
                   }}
                 >
-                  <button 
+                  <button
                     onClick={() => toggleAccordion(idx)}
-                    style={{ 
-                      width: '100%', 
-                      display: 'flex', 
-                      justifyContent: 'space-between', 
-                      alignItems: 'center', 
-                      padding: '1.5rem', 
-                      background: 'none', 
-                      border: 'none', 
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: '1.5rem',
+                      background: 'none',
+                      border: 'none',
                       cursor: 'pointer',
                       textAlign: 'left'
                     }}
@@ -100,19 +126,21 @@ export default function ContactFAQ({ faqData }: Props) {
                     <span style={{ fontFamily: 'var(--font-inter)', fontWeight: 500, color: 'var(--navy)', fontSize: '1.1rem' }}>
                       {faq.q}
                     </span>
-                    <span style={{ 
-                      fontSize: '1.5rem', 
-                      color: 'var(--navy)', 
+                    <span style={{
+                      fontSize: '1.5rem',
+                      color: 'var(--navy)',
                       transform: openIndex === idx ? 'rotate(45deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.3s ease'
+                      transition: 'transform 0.3s ease',
+                      flexShrink: 0,
+                      marginLeft: '1rem',
                     }}>
                       +
                     </span>
                   </button>
-                  <div style={{ 
-                    maxHeight: openIndex === idx ? '500px' : '0', 
+                  <div style={{
+                    maxHeight: openIndex === idx ? '500px' : '0',
                     opacity: openIndex === idx ? 1 : 0,
-                    overflow: 'hidden', 
+                    overflow: 'hidden',
                     transition: 'all 0.4s ease-in-out',
                     padding: openIndex === idx ? '0 1.5rem 1.5rem 1.5rem' : '0 1.5rem'
                   }}>

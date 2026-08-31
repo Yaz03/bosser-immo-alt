@@ -318,6 +318,8 @@ export const en = {
       options: ['Buying Property', 'Selling Property', 'Off-Market Portfolio', 'General Inquiry'],
       message: 'Message (Optional)',
       messagePlaceholder: 'Tell us more about your property request.',
+      heardAbout: 'How did you hear about us?',
+      heardAboutOptions: ['LinkedIn', 'Indeed', 'Google Search', 'Instagram', 'Facebook', 'WhatsApp', 'College / University', 'Friend / Referral', 'Employee Referral', 'Other'],
       submit: 'Submit Inquiry',
       submitting: 'Submitting...',
       success: 'Thank you. We will contact you discreetly within 24 hours.',

@@ -4,26 +4,63 @@ import React, { useState, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
 
+interface Testimonial {
+  author: string;
+  location: string;
+  quote: string;
+  image: string;
+}
+
+interface DBTestimonial {
+  id: string;
+  quoteEn: string;
+  author: string;
+  location: string;
+  image: string | null;
+}
+
 export default function TestimonialSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const { ref: sectionRef, isVisible } = useScrollReveal(0.2);
   const { t } = useLanguage();
-  const testimonials = t.testimonials.list;
 
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  // Start with locale data, override with DB data when loaded
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(
+    (t.testimonials.list as Testimonial[]) || []
+  );
 
   useEffect(() => {
+    fetch('/api/testimonials')
+      .then((r) => r.json())
+      .then((data: DBTestimonial[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setTestimonials(
+            data.map((d) => ({
+              author: d.author,
+              location: d.location,
+              quote: d.quoteEn,
+              image: d.image || '/images/prop_villa_1787771383699.jpg',
+            }))
+          );
+          // Reset index in case DB has fewer items
+          setActiveIndex(0);
+        }
+      })
+      .catch(() => {}); // silently fall back to locale
+  }, []);
+
+  const nextSlide = () => setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  const prevSlide = () => setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+
+  useEffect(() => {
+    if (testimonials.length === 0) return;
     const interval = setInterval(() => {
       setActiveIndex((current) => (current + 1) % testimonials.length);
-    }, 7000); // Auto-advance every 7 seconds
+    }, 7000);
     return () => clearInterval(interval);
   }, [testimonials.length]);
+
+  if (testimonials.length === 0) return null;
 
   return (
     <section className="testimonial-section" ref={sectionRef}>
@@ -42,9 +79,9 @@ export default function TestimonialSection() {
       <div className={`test-card-container reveal-base reveal-scale delay-200 ${isVisible ? 'is-revealed' : ''}`}>
         {/* Background Images */}
         {testimonials.map((test, index) => (
-          <div 
-            key={index} 
-            className={`test-bg-image ${index === activeIndex ? 'active' : ''}`} 
+          <div
+            key={index}
+            className={`test-bg-image ${index === activeIndex ? 'active' : ''}`}
             style={{ backgroundImage: `url(${test.image})` }}
           />
         ))}
@@ -53,8 +90,8 @@ export default function TestimonialSection() {
         <div className="test-indicator">
           <span className="test-index">0{activeIndex + 1} / 0{testimonials.length}</span>
           <div className="test-progress-bar">
-            <div 
-              className="test-progress-fill" 
+            <div
+              className="test-progress-fill"
               style={{ width: `${((activeIndex + 1) / testimonials.length) * 100}%` }}
             ></div>
           </div>
@@ -62,7 +99,6 @@ export default function TestimonialSection() {
 
         {/* Inner Overlay Box */}
         <div className="test-inner-box">
-          
           <div className="test-box-content" key={activeIndex}>
             <div className="test-author-row">
               <div className="test-avatar">
@@ -73,26 +109,26 @@ export default function TestimonialSection() {
                 <span>Private Client</span>
               </div>
             </div>
-            
+
             <div className="test-property-purchased">
               <strong>Property:</strong> {testimonials[activeIndex].location}
             </div>
-            
+
             <div className="test-quote">
-              "{testimonials[activeIndex].quote}"
+              &ldquo;{testimonials[activeIndex].quote}&rdquo;
             </div>
           </div>
-          
+
           <div className="test-box-footer">
             <div className="test-stars">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#EAB308" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#EAB308" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#EAB308" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#EAB308" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#EAB308" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="#EAB308" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              ))}
               <span className="star-rating">5.0</span>
             </div>
-            
+
             <div className="test-nav-arrows">
               <button onClick={prevSlide} className="test-arrow-btn prev-btn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -103,7 +139,6 @@ export default function TestimonialSection() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

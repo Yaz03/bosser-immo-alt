@@ -318,11 +318,14 @@ export const de = {
       options: ['Immobilienkauf', 'Immobilienverkauf', 'Off-Market Portfolio', 'Allgemeine Anfrage'],
       message: 'Nachricht (Optional)',
       messagePlaceholder: 'Erzählen Sie uns mehr über Ihr Anliegen.',
+      heardAbout: 'Wie haben Sie von uns erfahren?',
+      heardAboutOptions: ['LinkedIn', 'Indeed', 'Google-Suche', 'Instagram', 'Facebook', 'WhatsApp', 'Universität / Hochschule', 'Freund / Empfehlung', 'Mitarbeiterempfehlung', 'Sonstiges'],
       submit: 'Anfrage Senden',
       submitting: 'Senden...',
       success: 'Vielen Dank. Wir werden Sie innerhalb von 24 Stunden diskret kontaktieren.',
       privacy: 'Durch Absenden dieses Formulars stimme ich der Datenschutzerklärung zu.'
     },
+
     faq: {
       tag: 'Hilfe-Center',
       title: 'Unterstützung &',

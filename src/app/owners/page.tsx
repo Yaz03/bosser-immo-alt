@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -21,6 +21,10 @@ export default function ForOwnersPage() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalRoute, setModalRoute] = useState<'top_contact' | 'consultation' | 'valuation' | 'buyer' | 'general' | 'profile'>('top_contact');
+  const [leadStatus, setLeadStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [leadMessage, setLeadMessage] = useState('');
+  const leadNameRef = useRef<HTMLInputElement>(null);
+  const leadEmailRef = useRef<HTMLInputElement>(null);
 
   if (!data) return null;
 
@@ -459,16 +463,55 @@ export default function ForOwnersPage() {
               <h3 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 500, marginBottom: '3rem', fontFamily: 'var(--font-satoshi), sans-serif', letterSpacing: '-0.03em' }}>
                 The best decisions for your Property begin with the right advice
               </h3>
-              <form style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', maxWidth: '800px', margin: '0 auto' }} onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }}>
-                <input type="text" placeholder="Name" required style={{ padding: '1.25rem 1.5rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.2)', backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--white)', flex: '1 1 200px', fontSize: '1rem', fontFamily: 'var(--font-satoshi), sans-serif' }} />
-                <input type="email" placeholder="E-Mail" required style={{ padding: '1.25rem 1.5rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.2)', backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--white)', flex: '1 1 200px', fontSize: '1rem', fontFamily: 'var(--font-satoshi), sans-serif' }} />
-                <button type="submit" style={{ padding: '1.25rem 3rem', backgroundColor: 'var(--bronze)', color: 'var(--white)', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '1.1rem', fontWeight: 500, fontFamily: 'var(--font-satoshi), sans-serif', transition: 'background-color 0.2s, transform 0.2s' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(181, 143, 98, 0.9)'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bronze)'}
+              {leadStatus === 'success' ? (
+                <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.1rem', marginTop: '1rem' }}>
+                  ✓ {leadMessage}
+                </p>
+              ) : (
+                <form
+                  style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', maxWidth: '800px', margin: '0 auto' }}
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    setLeadStatus('loading');
+                    try {
+                      const res = await fetch('/api/newsletter', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          name: leadNameRef.current?.value || '',
+                          email: leadEmailRef.current?.value || '',
+                        }),
+                      });
+                      const data = await res.json();
+                      if (res.ok) {
+                        setLeadStatus('success');
+                        setLeadMessage(data.message);
+                      } else {
+                        setLeadStatus('error');
+                        setLeadMessage(data.error || 'Something went wrong.');
+                      }
+                    } catch {
+                      setLeadStatus('error');
+                      setLeadMessage('Network error. Please try again.');
+                    }
+                  }}
                 >
-                  Subscribe
-                </button>
-              </form>
+                  <input ref={leadNameRef} type="text" placeholder="Name" required style={{ padding: '1.25rem 1.5rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.2)', backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--white)', flex: '1 1 200px', fontSize: '1rem', fontFamily: 'var(--font-satoshi), sans-serif' }} />
+                  <input ref={leadEmailRef} type="email" placeholder="E-Mail" required style={{ padding: '1.25rem 1.5rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.2)', backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--white)', flex: '1 1 200px', fontSize: '1rem', fontFamily: 'var(--font-satoshi), sans-serif' }} />
+                  <button
+                    type="submit"
+                    disabled={leadStatus === 'loading'}
+                    style={{ padding: '1.25rem 3rem', backgroundColor: leadStatus === 'loading' ? 'rgba(181,143,98,0.5)' : 'var(--bronze)', color: 'var(--white)', border: 'none', borderRadius: '8px', cursor: leadStatus === 'loading' ? 'not-allowed' : 'pointer', fontSize: '1.1rem', fontWeight: 500, fontFamily: 'var(--font-satoshi), sans-serif', transition: 'background-color 0.2s, transform 0.2s' }}
+                    onMouseEnter={(e) => { if (leadStatus !== 'loading') e.currentTarget.style.backgroundColor = 'rgba(181, 143, 98, 0.9)'; }}
+                    onMouseLeave={(e) => { if (leadStatus !== 'loading') e.currentTarget.style.backgroundColor = 'var(--bronze)'; }}
+                  >
+                    {leadStatus === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                  </button>
+                  {leadStatus === 'error' && (
+                    <p style={{ width: '100%', textAlign: 'center', color: '#FCA5A5', fontSize: '0.9rem', marginTop: '0.5rem' }}>{leadMessage}</p>
+                  )}
+                </form>
+              )}
             </div>
           </div>
         </div>

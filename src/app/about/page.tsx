@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CtaSection from '@/components/CtaSection';
@@ -20,11 +20,29 @@ export default function AboutPage() {
   const { t } = useLanguage();
   const about = (t as any).about;
 
+  // Team members state — fetched from DB, falls back to locale data
+  interface TeamMember { id: string; name: string; titleEn: string; quoteEn?: string; image?: string; }
+  const [teamMembers, setTeamMembers] = useState<TeamMember[] | null>(null);
+
+  useEffect(() => {
+    fetch('/api/team')
+      .then((r) => r.json())
+      .then((data: TeamMember[]) => {
+        if (Array.isArray(data) && data.length > 0) setTeamMembers(data);
+      })
+      .catch(() => {}); // silently fall back to locale
+  }, []);
+
   if (!about) return null;
 
-  // Mock images for staggered philosophy section
-  const philosophyImages = ['/card1.jpg', '/card2.jpg', '/card3.jpg'];
-  // Mock vibrant portraits for founders
+  // Locale fallback members
+  const localeMembers = about.team?.members || [];
+  // DB members mapped to same shape as locale
+  const displayMembers: { name: string; title: string; quote: string; image?: string }[] = teamMembers
+    ? teamMembers.map((m) => ({ name: m.name, title: m.titleEn, quote: m.quoteEn || '', image: m.image || undefined }))
+    : localeMembers.map((m: { name: string; title: string; quote: string }) => ({ ...m }));
+
+  // Portrait images fallback (used when no DB image is set)
   const portraitImages = ['/maximilian bossert.webp', '/elena bossert.webp'];
 
   return (
@@ -100,13 +118,13 @@ export default function AboutPage() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '6rem' }}>
-          {about.team.members.map((member: any, idx: number) => (
+          {displayMembers.map((member, idx) => (
             <div key={idx} className={`reveal-base reveal-up delay-${(idx + 1) * 200} ${teamVisible ? 'is-revealed' : ''}`}>
               <div style={{ position: 'relative', width: '100%', aspectRatio: '4/5', borderRadius: '4px', overflow: 'hidden', marginBottom: '2rem' }}>
-                <Image 
-                  src={portraitImages[idx % portraitImages.length]} 
-                  alt={member.name} 
-                  fill 
+                <Image
+                  src={member.image || portraitImages[idx % portraitImages.length]}
+                  alt={member.name}
+                  fill
                   style={{ objectFit: 'cover' }}
                 />
               </div>
