@@ -7,6 +7,7 @@ export const de = {
     references: 'REFERENZEN',
     knowledge: 'WISSEN',
     contact: 'KONTAKT',
+    cancelContract: 'Widerrufsrecht',
   },
   hero: {
     since: 'Seit 1991',
@@ -371,7 +372,7 @@ export const de = {
         { name: 'Vorbereitung', desc: 'Umfassende Immobilienbesichtigung, Dokumentenprüfung, datengestützte Bewertung und individuelles Verkaufskonzept.' },
         { name: 'Marketing', desc: 'Professionelle Immobilienpräsentation sowie exklusive Koordination und Durchführung von Besichtigungen.' },
         { name: 'Verhandlung', desc: 'Strenge Käuferprüfung, Qualifizierung und strategisches Preismanagement.' },
-        { name: 'Transaktion', desc: 'Koordination der Vertragserstellung, Notartermin, Zahlungsabwicklung und finale Übergabe.' }
+        { name: 'Transaktion', desc: 'Koordination der Vertragserstellung, Notartermin und Vertragsabschluss, Zahlungsabwicklung und finale Übergabe.' }
       ]
     },
     renting: {
@@ -380,7 +381,7 @@ export const de = {
       titleSerif: 'Leicht Gemacht.',
       subhead: 'Genießen Sie einen reibungslosen, effizienten und sicheren Vermietungsprozess. Wir kümmern uns um alles von der Mieterqualifizierung bis zur finalen Übergabe.',
       steps: [
-        { name: 'Vorbereitung', desc: 'Immobilienbesichtigung, Dokumentenaufbereitung und Ermittlung des optimalen Mietpreises.' },
+        { name: 'Vorbereitung', desc: 'Umfassende Immobilienbesichtigung, Aufbereitung der Unterlagen und Ermittlung des optimalen Mietpreises.' },
         { name: 'Marketing', desc: 'Hochwertige Immobilienpräsentation und akribisches Besichtigungsmanagement.' },
         { name: 'Transaktion', desc: 'Strenge Mieterqualifizierung, Vertragsabschluss und sichere Schlüsselübergabe.' }
       ]
@@ -401,6 +402,109 @@ export const de = {
         { title: '02. Bewertungsanalyse', desc: 'Eine tiefgehende Marktanalyse bildet die Grundlage für den Wert Ihrer Immobilie.' },
         { title: '03. Wertermittlung', desc: 'Ein verfeinerter Marktwert, abgeleitet durch Sachwert-, Ertragswert- und Vergleichsverfahren.' }
       ]
+    },
+    modals: {
+      freeConsultation: {
+        title: "Ihre kostenfreie Beratung",
+        selectIntro: "Um Sie bestmöglich beraten zu können, benötigen wir nur wenige Eckdaten.",
+        house: "Einfamilien- oder Mehrfamilienhaus",
+        apartment: "Wohnung",
+        commercial: "Gewerbe",
+        
+        houseFormTitle: "Erzählen Sie uns kurz etwas über Ihre Immobilie",
+        apartmentFormTitle: "Erzählen Sie uns kurz etwas über Ihre Immobilie",
+        commercialFormTitle: "Erzählen Sie uns kurz etwas über Ihre Immobilie",
+        
+        houseType: "Haustyp",
+        apartmentType: "Wohnungstyp",
+        commercialType: "Art der Gewerbeimmobilie",
+        
+        yearBuilt: "Baujahr (ca.)",
+        livingArea: "Wohnfläche (ca.)",
+        plotArea: "Grundstücksfläche (ca.)",
+        usableArea: "Nutzfläche (ca.)",
+        totalArea: "Gesamtfläche (m²)",
+        rooms: "Anzahl Zimmer",
+        bathrooms: "Anzahl Badezimmer",
+        parkingSpaces: "Anzahl Stellplätze",
+        condition: "Zustand",
+        
+        features: "Verfügt Ihre Immobilie über diese Ausstattungen?",
+        
+        plans: "Ihre Pläne",
+        sell: "Verkaufen",
+        rentOut: "Vermieten",
+        
+        timeframe: "Zeitrahmen",
+        notDecided: "Noch nicht entschieden",
+        laterPoint: "Zu einem späteren Zeitpunkt",
+        fewMonths: "Innerhalb der nächsten Monate",
+        yesSoon: "Ja, bald",
+        
+        additional: "Was sollten wir sonst noch über Ihre Immobilie wissen?",
+        location: "Standort",
+        contactInfo: "Kontaktdaten",
+        firstName: "Vorname",
+        lastName: "Nachname",
+        email: "E-Mail",
+        phone: "Telefonnummer",
+        
+        consent: "Ich habe die AGB und die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu.",
+        submit: "Absenden ⟶",
+        
+        rentalStatus: "Ist die Immobilie aktuell vermietet?",
+        yes: "Ja",
+        no: "Nein",
+        netColdRent: "Nettokaltmiete gesamt (€ pro Monat)"
+      },
+      buyerSearch: {
+        title: "Wonach suchen Sie?",
+        intro: "Wählen Sie Ihr Anliegen — unser Team wird Sie persönlich und zeitnah unterstützen.",
+        formTitle: "Erzählen Sie uns kurz, wonach Sie suchen",
+        inquiryType: "Ihre Anfrage",
+        buy: "Immobilie kaufen",
+        rent: "Immobilie mieten",
+        propertyType: "Immobilienart",
+        homesForSale: "Häuser",
+        apartments: "Wohnungen",
+        desiredRooms: "Anzahl der gewünschten Zimmer",
+        purchasePrice: "Kaufpreis",
+        message: "Ihre Nachricht (optional)",
+        importantFeatures: "Was ist Ihnen bei der Ausstattung wichtig?",
+        searchArea: "In welcher Stadt oder Region suchen Sie?"
+      },
+      valuation: {
+        title: "Welche Art von Immobilie möchten Sie bewerten?",
+        intro: "Bitte wählen Sie die Immobilienart",
+        formTitle: "Individuelle Wertermittlung Ihrer Immobilie",
+        subhead: "Fundiert & präzise – für Ihre Entscheidungssicherheit",
+        lastStep: "Letzter Schritt – wohin dürfen wir Ihre Einschätzung senden?"
+      },
+      generalInquiry: {
+        title: "Wie können wir Ihnen helfen?",
+        intro: "Erzählen Sie uns kurz von Ihrem Anliegen.",
+        reason: "Grund der Anfrage (optional)",
+        whatAbout: "Worum geht es bei Ihrer Anfrage?",
+        specificListing: "Bezieht sich Ihre Anfrage auf ein konkretes Objekt?"
+      },
+      searchProfile: {
+        title: "Erstellen Sie Ihr exklusives Suchprofil",
+        subhead: "Individuell. Diskret. Persönlich.",
+        salutation: "Anrede",
+        mr: "Herr",
+        ms: "Frau",
+        company: "Firma",
+        family: "Familie",
+        couple: "Paar",
+        transactionType: "Transaktionsart",
+        lease: "Pacht",
+        landLease: "Erbbaurecht",
+        city: "Stadt",
+        radius: "Umkreis",
+        price: "Preis",
+        specialRequirements: "Ihre besonderen Anforderungen / Wünsche",
+        submit: "Suchprofil erstellen"
+      }
     }
   },
   knowledge: {

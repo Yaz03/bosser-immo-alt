@@ -7,6 +7,7 @@ export const en = {
     references: 'REFERENCES',
     knowledge: 'KNOWLEDGE',
     contact: 'CONTACT',
+    cancelContract: 'Right of Withdrawal',
   },
   hero: {
     since: 'Since 1991',
@@ -371,7 +372,7 @@ export const en = {
         { name: 'Preparation', desc: 'Comprehensive property inspection, document verification, data-driven valuation, and individual sales concept.' },
         { name: 'Marketing', desc: 'Professional property presentation and exclusive viewing coordination and management.' },
         { name: 'Negotiation', desc: 'Strict buyer screening, qualification, and strategic price management.' },
-        { name: 'Transaction', desc: 'Coordination of contract drafting, notary appointment, payment processing, and final handover.' }
+        { name: 'Transaction', desc: 'Coordination of contract drafting, notary appointment and closing, payment processing, and final handover.' }
       ]
     },
     renting: {
@@ -380,7 +381,7 @@ export const en = {
       titleSerif: 'Made Easy.',
       subhead: 'Enjoy a smooth, efficient, and secure rental process. We take care of everything from tenant qualification to the final handover.',
       steps: [
-        { name: 'Preparation', desc: 'Property inspection, document preparation, and determination of the optimal rental price.' },
+        { name: 'Preparation', desc: 'Comprehensive property inspection, preparation of all required documents, and determination of the optimal rental price.' },
         { name: 'Marketing', desc: 'High-end property presentation and meticulous viewing management.' },
         { name: 'Transaction', desc: 'Rigorous tenant qualification, contract execution, and secure key handover.' }
       ]
@@ -401,6 +402,109 @@ export const en = {
         { title: '02. Valuation Analysis', desc: 'In-depth market analysis forms the foundation of your property’s value.' },
         { title: '03. Assessment', desc: 'A refined market value derived through cost, income, and comparable benchmarks.' }
       ]
+    },
+    modals: {
+      freeConsultation: {
+        title: "Get your Free Consultation",
+        selectIntro: "To provide you with the best possible advice, we just need a few key details.",
+        house: "Single-Family or Multi-Family Home",
+        apartment: "Apartment",
+        commercial: "Commercial",
+        
+        houseFormTitle: "Share a few details about your property",
+        apartmentFormTitle: "Tell us briefly about your property",
+        commercialFormTitle: "Share a few details about your property",
+        
+        houseType: "House Type",
+        apartmentType: "Apartment Type",
+        commercialType: "Type of Commercial Property",
+        
+        yearBuilt: "Year Built (approx.)",
+        livingArea: "Living Area (approx.)",
+        plotArea: "Plot Area (approx.)",
+        usableArea: "Usable Area (approx.)",
+        totalArea: "Total Area (m²)",
+        rooms: "Number of Rooms",
+        bathrooms: "Number of Bathrooms",
+        parkingSpaces: "Number of Parking Spaces",
+        condition: "Condition",
+        
+        features: "Does your property have any of these features?",
+        
+        plans: "Plans for the property",
+        sell: "Sell",
+        rentOut: "Rent out",
+        
+        timeframe: "Timeframe",
+        notDecided: "Not decided yet",
+        laterPoint: "At a later point in time",
+        fewMonths: "Within the next few months",
+        yesSoon: "Yes, soon",
+        
+        additional: "Tell us anything else we should know about your property.",
+        location: "Location",
+        contactInfo: "Contact info",
+        firstName: "First Name",
+        lastName: "Last Name",
+        email: "E-Mail",
+        phone: "Phone Number",
+        
+        consent: "I have read the Terms & Conditions and the Privacy Policy and consent to the processing of my data for the purpose of handling my inquiry.",
+        submit: "Submit ⟶",
+        
+        rentalStatus: "Is the property currently rented?",
+        yes: "Yes",
+        no: "No",
+        netColdRent: "Total Net Cold Rent (€ per Month)"
+      },
+      buyerSearch: {
+        title: "What type of property are you looking for?",
+        intro: "Select your request — our team will assist you personally and promptly.",
+        formTitle: "Tell us briefly what you're looking for",
+        inquiryType: "Your inquiry",
+        buy: "Buy Property",
+        rent: "Rent Property",
+        propertyType: "Property Type",
+        homesForSale: "Homes for Sale",
+        apartments: "Apartment",
+        desiredRooms: "Number of Desired Rooms",
+        purchasePrice: "Purchase Price",
+        message: "Your Message (optional)",
+        importantFeatures: "What matters to you in terms of features?",
+        searchArea: "In which city or region are you looking for the property?"
+      },
+      valuation: {
+        title: "Which type of property would you like valued?",
+        intro: "Please select the property type.",
+        formTitle: "Individual Property Valuation",
+        subhead: "Well-founded & precise — for confidence in your decision",
+        lastStep: "Last step — where should we send your assessment?"
+      },
+      generalInquiry: {
+        title: "How can we assist you?",
+        intro: "Briefly tell us about your inquiry, and we will respond in a timely manner.",
+        reason: "Reason for inquiry (optional)",
+        whatAbout: "What is your inquiry about?",
+        specificListing: "Does your request relate to a specific listing?"
+      },
+      searchProfile: {
+        title: "Create your exclusive search profile",
+        subhead: "Individual. Discreet. Personal.",
+        salutation: "Salutation",
+        mr: "Mr.",
+        ms: "Ms.",
+        company: "Company",
+        family: "Family",
+        couple: "Couple",
+        transactionType: "Transaction Type",
+        lease: "Lease",
+        landLease: "Land Lease",
+        city: "City",
+        radius: "Radius",
+        price: "Price",
+        specialRequirements: "Your Special Requirements / Preferences",
+        submit: "Create Search Profile"
+      }
     }
   },
   knowledge: {

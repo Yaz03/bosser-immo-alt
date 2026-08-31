@@ -13,7 +13,7 @@ export default function KnowledgePage() {
   return (
     <main style={{ backgroundColor: 'var(--cream)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar invertOnLoad={true} />
-      
+
       {/* 1. Hero Section */}
       <section className="global-padding" style={{ paddingTop: '15rem', paddingBottom: '4rem' }}>
         <div className="inner-page-container reveal-base reveal-up is-revealed">
@@ -21,7 +21,7 @@ export default function KnowledgePage() {
             <span className="dot"></span> {t.knowledge.hero.tag}
           </p>
           <h1 className="editorial-headline" style={{ marginBottom: '2rem' }}>
-            {t.knowledge.hero.title} <br/>
+            {t.knowledge.hero.title} <br />
             <span className="italic-serif">{t.knowledge.hero.titleSerif}</span>
           </h1>
           <p style={{ fontSize: '1.5rem', color: 'rgba(4,36,51,0.7)', maxWidth: '800px', lineHeight: 1.6 }}>

@@ -70,7 +70,7 @@ export default function AboutPage() {
             l3={about.approach.l3}
             s2={about.approach.s2}
             l4={about.approach.l4}
-            bgImage="/images/about-section-2bg.png"
+            bgImage="/aboutbg.png"
           />
         </section>
 

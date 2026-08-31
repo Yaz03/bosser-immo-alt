@@ -41,7 +41,8 @@ export default function Footer() {
             <li><a href="#">{t.nav.references}</a></li>
             <li><a href="#">{t.nav.knowledge}</a></li>
             <li><a href="#">{t.nav.contact}</a></li>
-            <li style={{ marginTop: '1rem' }}><a href="#" style={{ opacity: 0.6 }}>{t.footer.privacy}</a></li>
+            <li style={{ marginTop: '1rem' }}><a href="#" style={{ opacity: 0.6 }}>{t.nav.cancelContract}</a></li>
+            <li><a href="#" style={{ opacity: 0.6 }}>{t.footer.privacy}</a></li>
             <li><a href="#" style={{ opacity: 0.6 }}>{t.footer.imprint}</a></li>
           </ul>
           </div>
@@ -103,7 +104,7 @@ export default function Footer() {
         <div className="footer-bottom-bar">
           <div className="footer-copyright">
             <span className="footer-logo">Bossert Immobilien</span>
-            <span>© 2026 Bossert Immobilien. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Bossert Immobilien. All rights reserved.</span>
           </div>
           <div className="footer-credits">
             Created by Bossert

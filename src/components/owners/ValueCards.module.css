@@ -1,0 +1,52 @@
+.card {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, box-shadow;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4rem 3rem;
+  border-radius: 16px;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(4, 36, 51, 0.08);
+}
+
+.cardDark {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, box-shadow;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4rem 3rem;
+  border-radius: 16px;
+}
+
+.cardDark:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.iconWrapper {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 20px rgba(4, 36, 51, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapperDark {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  border-radius: 50%;
+  background: rgba(4, 36, 51, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
