@@ -6,9 +6,10 @@ import { useLanguage } from '../context/LanguageContext';
 
 interface CtaSectionProps {
   variant?: 'default' | 'properties' | 'services' | 'knowledge' | 'about';
+  invert?: boolean;
 }
 
-export default function CtaSection({ variant = 'default' }: CtaSectionProps) {
+export default function CtaSection({ variant = 'default', invert = false }: CtaSectionProps) {
   const { ref: sectionRef, isVisible } = useScrollReveal(0.2);
   const { t } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
@@ -35,7 +36,7 @@ export default function CtaSection({ variant = 'default' }: CtaSectionProps) {
   };
 
   return (
-    <section className="cta-section" ref={sectionRef}>
+    <section className={`cta-section ${invert ? 'cta-inverted' : ''}`} ref={sectionRef}>
       {/* Left Column: Portrait Image */}
       <div 
         className={`cta-image-col reveal-base reveal-scale ${isVisible ? 'is-revealed' : ''}`}

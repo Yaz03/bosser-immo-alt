@@ -4449,3 +4449,39 @@ body {
 .pillar-card:hover::before {
   transform: scaleX(1);
 }
+
+/* Inverted CTA Section */
+.cta-section.cta-inverted {
+  background-color: var(--navy);
+}
+.cta-section.cta-inverted .cta-form-col {
+  background-color: var(--navy);
+}
+.cta-section.cta-inverted .cta-headline {
+  color: var(--white);
+}
+.cta-section.cta-inverted .cta-subhead {
+  color: rgba(254, 252, 246, 0.7);
+}
+.cta-section.cta-inverted .cta-input, 
+.cta-section.cta-inverted .cta-textarea {
+  color: var(--white);
+  border-bottom: 1px solid rgba(254, 252, 246, 0.2);
+}
+.cta-section.cta-inverted .cta-input::placeholder,
+.cta-section.cta-inverted .cta-textarea::placeholder {
+  color: rgba(254, 252, 246, 0.4);
+}
+.cta-section.cta-inverted .cta-input:focus, 
+.cta-section.cta-inverted .cta-textarea:focus {
+  border-bottom: 1px solid var(--bronze);
+  outline: none;
+}
+.cta-section.cta-inverted .explore-btn-dark {
+  background-color: var(--white);
+  color: var(--navy);
+}
+.cta-section.cta-inverted .explore-btn-dark .explore-icon-wrapper {
+  background-color: var(--navy);
+  color: var(--white);
+}
