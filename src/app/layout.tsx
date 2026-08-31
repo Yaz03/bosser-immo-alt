@@ -27,6 +27,7 @@ const instrumentSerif = Instrument_Serif({
 
 import SmoothScroll from "@/components/SmoothScroll";
 import { LanguageProvider } from "@/context/LanguageContext";
+import Providers from "@/app/providers";
 
 export default function RootLayout({
   children,
@@ -38,13 +39,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${instrumentSerif.variable}`}>
-        <LanguageProvider>
-          <SmoothScroll>
-            {children}
-            {modal}
-          </SmoothScroll>
-        </LanguageProvider>
+        <Providers>
+          <LanguageProvider>
+            <SmoothScroll>
+              {children}
+              {modal}
+            </SmoothScroll>
+          </LanguageProvider>
+        </Providers>
       </body>
     </html>
   );
 }
+

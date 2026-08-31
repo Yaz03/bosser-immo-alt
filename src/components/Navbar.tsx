@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,21 +13,16 @@ export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolea
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [userInitial, setUserInitial] = useState<string | null>(null);
+  const { data: session, status } = useSession();
 
-  useEffect(() => {
-    const checkAuth = () => {
-      const mockUser = localStorage.getItem('mockUser');
-      if (mockUser) {
-        setUserInitial(mockUser);
-      } else {
-        setUserInitial(null);
-      }
-    };
-    checkAuth();
-    window.addEventListener('auth-change', checkAuth);
-    return () => window.removeEventListener('auth-change', checkAuth);
-  }, []);
+  // Derive user initial from real session
+  const userInitial = session?.user?.name
+    ? session.user.name.charAt(0).toUpperCase()
+    : session?.user?.email
+    ? session.user.email.charAt(0).toUpperCase()
+    : null;
+
+  const isLoggedIn = status === 'authenticated';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,16 +105,30 @@ export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolea
           </div>
 
           <Link href="/contact" className="contact-btn">{t.nav.contact}</Link>
-          <Link href="/login" className="login-icon-btn" aria-label="Login">
-            {userInitial ? (
-              <span style={{ fontSize: '1.2rem', fontFamily: 'var(--font-instrument), serif', fontWeight: 400 }}>{userInitial}</span>
-            ) : (
+
+          {/* Auth button — shows initials when logged in with dropdown */}
+          {isLoggedIn ? (
+            <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
+              <button
+                className="login-icon-btn"
+                aria-label="Account"
+                title={session?.user?.name || session?.user?.email || 'Account'}
+                onClick={() => signOut({ callbackUrl: '/' })}
+                style={{ cursor: 'pointer', border: '1.5px solid var(--bronze)', color: 'var(--bronze)' }}
+              >
+                <span style={{ fontSize: '1.1rem', fontFamily: 'var(--font-instrument), serif', fontWeight: 400 }}>
+                  {userInitial}
+                </span>
+              </button>
+            </div>
+          ) : (
+            <Link href="/login" className="login-icon-btn" aria-label="Login">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-            )}
-          </Link>
+            </Link>
+          )}
         </div>
 
         {/* Mobile Right Side: Lang Toggle + Hamburger */}
@@ -177,16 +187,23 @@ export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolea
         </div>
         <div className="mobile-nav-footer">
           <Link href="/contact" className="mobile-contact-btn" onClick={() => setMenuOpen(false)}>{t.nav.contact}</Link>
-          <Link href="/login" className="login-icon-btn" aria-label="Login" onClick={() => setMenuOpen(false)} style={{ margin: '0 auto', marginTop: '1rem', border: '1px solid var(--bronze)', color: 'var(--bronze)' }}>
-            {userInitial ? (
+          {isLoggedIn ? (
+            <button
+              className="login-icon-btn"
+              aria-label="Account"
+              onClick={() => { signOut({ callbackUrl: '/' }); setMenuOpen(false); }}
+              style={{ margin: '0 auto', marginTop: '1rem', cursor: 'pointer', border: '1px solid var(--bronze)', color: 'var(--bronze)' }}
+            >
               <span style={{ fontSize: '1.2rem', fontFamily: 'var(--font-instrument), serif', fontWeight: 400 }}>{userInitial}</span>
-            ) : (
+            </button>
+          ) : (
+            <Link href="/login" className="login-icon-btn" aria-label="Login" onClick={() => setMenuOpen(false)} style={{ margin: '0 auto', marginTop: '1rem', border: '1px solid var(--bronze)', color: 'var(--bronze)' }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-            )}
-          </Link>
+            </Link>
+          )}
         </div>
       </div>
     </>

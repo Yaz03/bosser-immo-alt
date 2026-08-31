@@ -247,3 +247,15 @@
   box-shadow: 0 10px 30px rgba(4, 36, 51, 0.1);
   overflow: hidden;
 }
+
+.errorBanner {
+  background-color: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  color: #DC2626;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
