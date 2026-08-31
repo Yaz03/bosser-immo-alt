@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 interface AccordionCardProps {
   number: string;
@@ -9,9 +10,10 @@ interface AccordionCardProps {
   linkText: string;
   bgImage: string;
   className?: string;
+  href?: string;
 }
 
-export default function AccordionCard({ number, category, title, subtitle, description, linkText, bgImage, className = "" }: AccordionCardProps) {
+export default function AccordionCard({ number, category, title, subtitle, description, linkText, bgImage, className = "", href = "#" }: AccordionCardProps) {
   return (
     <div className={`accordion-card ${className}`}>
       <div className="accordion-bg" style={{ backgroundImage: `url('${bgImage}')` }}></div>
@@ -27,7 +29,7 @@ export default function AccordionCard({ number, category, title, subtitle, descr
         <div className="card-desc-wrapper">
           <p className="card-desc">{description}</p>
         </div>
-        <a href="#" className="card-link">{linkText} &rarr;</a>
+        <Link href={href} className="card-link">{linkText} &rarr;</Link>
       </div>
     </div>
   );

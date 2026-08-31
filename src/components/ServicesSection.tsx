@@ -17,7 +17,8 @@ export default function ServicesSection() {
       subtitle: t.services.cards[0].subtitle,
       description: t.services.cards[0].description,
       linkText: t.services.cards[0].linkText,
-      bgImage: "/card1.jpg"
+      bgImage: "/card1.jpg",
+      href: "/properties"
     },
     {
       number: "02",
@@ -26,7 +27,8 @@ export default function ServicesSection() {
       subtitle: t.services.cards[1].subtitle,
       description: t.services.cards[1].description,
       linkText: t.services.cards[1].linkText,
-      bgImage: "/card2.jpg"
+      bgImage: "/card2.jpg",
+      href: "/owners"
     },
     {
       number: "03",
@@ -35,7 +37,8 @@ export default function ServicesSection() {
       subtitle: t.services.cards[2].subtitle,
       description: t.services.cards[2].description,
       linkText: t.services.cards[2].linkText,
-      bgImage: "/card3.jpg"
+      bgImage: "/card3.jpg",
+      href: "/services"
     },
     {
       number: "04",
@@ -44,7 +47,8 @@ export default function ServicesSection() {
       subtitle: t.services.cards[3].subtitle,
       description: t.services.cards[3].description,
       linkText: t.services.cards[3].linkText,
-      bgImage: "/card4.jpg"
+      bgImage: "/card4.jpg",
+      href: "/about"
     }
   ];
 

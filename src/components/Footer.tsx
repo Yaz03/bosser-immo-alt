@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -34,16 +35,16 @@ export default function Footer() {
           {/* Left Column: Navigation */}
           <div className={`footer-col reveal-base reveal-up ${isVisible ? 'is-revealed' : ''}`}>
             <ul className="footer-links">
-            <li><a href="#">{t.nav.properties}</a></li>
-            <li><a href="#">{t.nav.forOwners}</a></li>
-            <li><a href="#">{t.nav.services}</a></li>
-            <li><a href="#">{t.nav.about}</a></li>
-            <li><a href="#">{t.nav.references}</a></li>
-            <li><a href="#">{t.nav.knowledge}</a></li>
-            <li><a href="#">{t.nav.contact}</a></li>
-            <li style={{ marginTop: '1rem' }}><a href="#" style={{ opacity: 0.6 }}>{t.nav.cancelContract}</a></li>
-            <li><a href="#" style={{ opacity: 0.6 }}>{t.footer.privacy}</a></li>
-            <li><a href="#" style={{ opacity: 0.6 }}>{t.footer.imprint}</a></li>
+            <li><Link href="/properties">{t.nav.properties}</Link></li>
+            <li><Link href="/owners">{t.nav.forOwners}</Link></li>
+            <li><Link href="/services">{t.nav.services}</Link></li>
+            <li><Link href="/about">{t.nav.about}</Link></li>
+            <li><Link href="/references">{t.nav.references}</Link></li>
+            <li><Link href="/knowledge">{t.nav.knowledge}</Link></li>
+            <li><Link href="/contact">{t.nav.contact}</Link></li>
+            <li style={{ marginTop: '1rem' }}><Link href="#" style={{ opacity: 0.6 }}>{t.nav.cancelContract}</Link></li>
+            <li><Link href="#" style={{ opacity: 0.6 }}>{t.footer.privacy}</Link></li>
+            <li><Link href="#" style={{ opacity: 0.6 }}>{t.footer.imprint}</Link></li>
           </ul>
           </div>
 
