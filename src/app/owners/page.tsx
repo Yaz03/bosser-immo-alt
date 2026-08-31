@@ -157,6 +157,9 @@ export default function ForOwnersPage() {
                       height: '100%',
                       color: 'var(--cream)',
                       cursor: 'pointer',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      padding: '1rem'
                     }}
                     onMouseEnter={(e) => {
                       const img = e.currentTarget.querySelector('.pillar-bg-img') as HTMLElement;
@@ -171,21 +174,23 @@ export default function ForOwnersPage() {
                       if(overlay) overlay.style.background = 'linear-gradient(to top, rgba(4,36,51,0.9) 0%, rgba(4,36,51,0.2) 60%, transparent 100%)';
                     }}
                   >
-                    {/* Background Image */}
-                    <div className="pillar-bg-img" style={{ position: 'absolute', inset: 0, zIndex: 0, transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' }}>
-                      <Image 
-                        src={bgImages[idx] || '/images/services_hero.jpg'}
-                        alt={pillar.title}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                      />
+                    {/* Background Image Wrapper with Corner Magic */}
+                    <div style={{ position: 'absolute', inset: '1rem', borderRadius: '1rem', overflow: 'hidden', zIndex: 0 }}>
+                      <div className="pillar-bg-img" style={{ position: 'absolute', inset: 0, transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+                        <Image 
+                          src={bgImages[idx] || '/images/services_hero.jpg'}
+                          alt={pillar.title}
+                          fill
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
+                      
+                      {/* Dark Gradient Overlay */}
+                      <div className="pillar-overlay" style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(to top, rgba(4,36,51,0.9) 0%, rgba(4,36,51,0.2) 60%, transparent 100%)', transition: 'background 0.4s ease' }}></div>
                     </div>
-                    
-                    {/* Dark Gradient Overlay */}
-                    <div className="pillar-overlay" style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(to top, rgba(4,36,51,0.9) 0%, rgba(4,36,51,0.2) 60%, transparent 100%)', transition: 'background 0.4s ease' }}></div>
 
                     {/* Content */}
-                    <div style={{ position: 'relative', zIndex: 2, padding: '3rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div style={{ position: 'relative', zIndex: 2, padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', pointerEvents: 'none' }}>
                       <div style={{ 
                         width: '64px', 
                         height: '64px', 
@@ -252,9 +257,8 @@ export default function ForOwnersPage() {
           justify-content: flex-end; 
           color: white; 
           border: none;
-        }
-        .bento-0 .bento-overlay {
-          position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,36,51,0.95) 0%, rgba(4,36,51,0.2) 60%, transparent 100%); z-index: 1;
+          background-color: var(--navy);
+          padding: 1rem;
         }
         
         /* Card 1: Top right */
@@ -278,14 +282,12 @@ export default function ForOwnersPage() {
           flex-direction: row; 
           align-items: center; 
           justify-content: flex-end;
-          padding: 0;
+          padding: 1rem;
           border: none;
-        }
-        .bento-3 .bento-overlay {
-          position: absolute; inset: 0; background: linear-gradient(to right, rgba(4,36,51,0.1) 0%, rgba(4,36,51,0.9) 80%); z-index: 1;
+          background-color: var(--navy);
         }
         .bento-3-content {
-          position: relative; z-index: 2; color: white; max-width: 450px; padding: 2.5rem; text-align: right;
+          position: relative; z-index: 2; color: white; max-width: 450px; padding: 1.5rem; text-align: right;
         }
         
         .bento-content { position: relative; z-index: 2; }
@@ -310,7 +312,7 @@ export default function ForOwnersPage() {
             background: linear-gradient(to top, rgba(4,36,51,0.9) 0%, transparent 100%);
           }
           .bento-3-content {
-            text-align: left; padding: 2.5rem; max-width: 100%;
+            text-align: left; padding: 1.5rem; max-width: 100%;
           }
         }
       `}</style>
@@ -333,9 +335,11 @@ export default function ForOwnersPage() {
           <div className="bento-grid">
             {/* Card 0: Precise Valuation */}
             <div className={`bento-card bento-0 reveal-base reveal-scale delay-100 ${valuationVisible ? 'is-revealed' : ''}`}>
-              <Image src="/images/prop_villa_1787771383699.jpg" alt={data.valuation.benefits[0].title} fill style={{ objectFit: 'cover' }} />
-              <div className="bento-overlay"></div>
-              <div className="bento-content">
+              <div style={{ position: 'absolute', inset: '1rem', borderRadius: '1rem', overflow: 'hidden', zIndex: 0 }}>
+                <Image src="/images/prop_villa_1787771383699.jpg" alt={data.valuation.benefits[0].title} fill style={{ objectFit: 'cover' }} />
+                <div className="bento-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(4,36,51,0.95) 0%, rgba(4,36,51,0.2) 60%, transparent 100%)', zIndex: 1 }}></div>
+              </div>
+              <div className="bento-content" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
                 <div className="bento-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 </div>
@@ -368,9 +372,11 @@ export default function ForOwnersPage() {
 
             {/* Card 3: Strategic Pricing */}
             <div className={`bento-card bento-3 reveal-base reveal-scale delay-400 ${valuationVisible ? 'is-revealed' : ''}`}>
-              <Image src="/images/valuation_blueprint.jpg" alt={data.valuation.benefits[3].title} fill style={{ objectFit: 'cover' }} />
-              <div className="bento-overlay"></div>
-              <div className="bento-3-content">
+              <div style={{ position: 'absolute', inset: '1rem', borderRadius: '1rem', overflow: 'hidden', zIndex: 0 }}>
+                <Image src="/images/valuation_blueprint.jpg" alt={data.valuation.benefits[3].title} fill style={{ objectFit: 'cover' }} />
+                <div className="bento-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(4,36,51,0.1) 0%, rgba(4,36,51,0.9) 80%)', zIndex: 1 }}></div>
+              </div>
+              <div className="bento-3-content" style={{ marginLeft: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
                 <h4 style={{ fontSize: '2.5rem', fontWeight: 500, marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>{data.valuation.benefits[3].title}</h4>
                 <p style={{ opacity: 0.8, fontSize: '1.15rem', lineHeight: 1.6 }}>{data.valuation.benefits[3].desc}</p>
               </div>
