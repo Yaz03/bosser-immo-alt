@@ -7,7 +7,6 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import ConsultationModal from '@/components/modals/ConsultationModal';
-import GlassSurface from '@/components/GlassSurface';
 import ProcessList from '@/components/ProcessList';
 
 export default function ForOwnersPage() {
@@ -443,14 +442,18 @@ export default function ForOwnersPage() {
         </div>
         
         <div className="inner-page-container" style={{ position: 'relative', zIndex: 1, maxWidth: '1000px', margin: '0 auto' }}>
-          <GlassSurface
-             width="100%"
-             height="auto"
-             borderRadius={24}
-             opacity={0.15}
-             blur={18}
-             borderWidth={1}
+          <div
              className="owners-lead-glass"
+             style={{
+               width: '100%',
+               height: 'auto',
+               borderRadius: '24px',
+               backgroundColor: 'rgba(255, 255, 255, 0.05)',
+               backdropFilter: 'blur(18px)',
+               WebkitBackdropFilter: 'blur(18px)',
+               border: '1px solid rgba(255, 255, 255, 0.1)',
+               boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)'
+             }}
           >
             <div style={{ padding: '6rem 3rem', textAlign: 'center', color: 'var(--white)' }}>
               <h3 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 500, marginBottom: '3rem', fontFamily: 'var(--font-satoshi), sans-serif', letterSpacing: '-0.03em' }}>
@@ -467,7 +470,7 @@ export default function ForOwnersPage() {
                 </button>
               </form>
             </div>
-          </GlassSurface>
+          </div>
         </div>
       </section>
 

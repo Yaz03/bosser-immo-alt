@@ -1520,7 +1520,7 @@ body {
   position: relative;
 }
 .dropdown-item.sub-item::before {
-  content: '—';
+  content: 'â€”';
   position: absolute;
   left: 1.2rem;
   opacity: 0.5;
@@ -2675,7 +2675,7 @@ body {
 }
 
 /* =============================================
-   MOBILE NAV — Hamburger & Drawer
+   MOBILE NAV â€” Hamburger & Drawer
    ============================================= */
 
 .hamburger-btn {
@@ -2872,7 +2872,7 @@ body {
 }
 
 /* =============================================
-   SMALL LAPTOP — max-width: 1350px
+   SMALL LAPTOP â€” max-width: 1350px
    ============================================= */
 @media (max-width: 1350px) {
   .property-card {
@@ -2881,7 +2881,7 @@ body {
 }
 
 /* =============================================
-   TABLET & SMALL LAPTOP — max-width: 1250px
+   TABLET & SMALL LAPTOP â€” max-width: 1250px
    ============================================= */
 @media (max-width: 1250px) {
   /* Navbar */
@@ -2897,7 +2897,7 @@ body {
 }
 
 /* =============================================
-   TABLET — max-width: 1024px
+   TABLET â€” max-width: 1024px
    ============================================= */
 @media (max-width: 1024px) {
 
@@ -3065,7 +3065,7 @@ body {
 }
 
 /* =============================================
-   MOBILE — max-width: 768px
+   MOBILE â€” max-width: 768px
    ============================================= */
 @media (max-width: 768px) {
 
@@ -3371,7 +3371,7 @@ body {
     align-self: flex-start;
   }
 
-  /* Property cards — details sit below image on mobile */
+  /* Property cards â€” details sit below image on mobile */
   .property-card {
     aspect-ratio: unset;
     display: flex;
@@ -4041,7 +4041,7 @@ body {
 }
 
 .property-amenities-list li::before {
-  content: "•";
+  content: "â€¢";
   color: var(--bronze);
   margin-right: 0.5rem;
   font-size: 1.5rem;
@@ -4485,3 +4485,9 @@ body {
   background-color: var(--navy);
   color: var(--white);
 }
+.login-icon-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; color: var(--navy); transition: all 0.3s ease; border: 1px solid rgba(4,36,51,0.15); }
+.login-icon-btn:hover { background: rgba(4,36,51,0.05); }
+.navbar.navbar-invert .login-icon-btn { color: var(--white); border-color: rgba(255,255,255,0.15); }
+.navbar.navbar-invert .login-icon-btn:hover { background: rgba(255,255,255,0.1); }
+
+/* Force HMR trigger to clear Turbopack cache */

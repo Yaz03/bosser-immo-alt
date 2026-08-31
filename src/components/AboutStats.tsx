@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import GlassSurface from './GlassSurface';
 
 interface Stat {
   number: string;
@@ -89,19 +88,18 @@ export default function AboutStats({ stats }: Props) {
                 display: 'flex',
               }}
             >
-              <GlassSurface 
-                width="100%"
-                height="100%"
-                borderRadius={24}
-                displace={0}
-                distortionScale={-20}
-                redOffset={5}
-                greenOffset={15}
-                blueOffset={25}
-                brightness={70}
-                opacity={0.8}
-                backgroundOpacity={0}
-                mixBlendMode="screen"
+              <div 
+                className="stats-glass-card"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '24px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)'
+                }}
               >
                 <div style={{
                   display: 'flex',
@@ -132,7 +130,7 @@ export default function AboutStats({ stats }: Props) {
                     {stat.label}
                   </div>
                 </div>
-              </GlassSurface>
+              </div>
             </div>
           ))}
         </div>

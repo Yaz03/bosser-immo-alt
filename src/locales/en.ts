@@ -696,5 +696,42 @@ export const en = {
         }
       ]
     }
+  },
+  auth: {
+    login: {
+      title: 'Log In',
+      email: 'Email Address',
+      password: 'Password',
+      rememberMe: 'Remember me',
+      forgotPasswordLink: 'Forgot password?',
+      submitBtn: 'Log In',
+      noAccountText: "Don't have an account?",
+      signupLink: 'Sign up',
+      successMsg: 'Logged in — TODO: connect to auth backend',
+      loading: 'Logging in...'
+    },
+    signup: {
+      title: 'Create Account',
+      fullName: 'Full Name',
+      email: 'Email Address',
+      password: 'Password',
+      passwordHint: 'At least 8 characters',
+      confirmPassword: 'Confirm Password',
+      passwordMismatch: 'Passwords do not match',
+      termsText: 'I agree to the Terms & Privacy Policy',
+      submitBtn: 'Create Account',
+      hasAccountText: 'Already have an account?',
+      loginLink: 'Log in',
+      successMsg: 'Account created — TODO: connect to auth backend',
+      loading: 'Creating...'
+    },
+    forgotPassword: {
+      title: 'Reset Password',
+      email: 'Email Address',
+      submitBtn: 'Send Reset Link',
+      successMsg: 'If an account exists for this email, a reset link has been sent.',
+      backToLogin: 'Back to login',
+      loading: 'Sending...'
+    }
   }
 };

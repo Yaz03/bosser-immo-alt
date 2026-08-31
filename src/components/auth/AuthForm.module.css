@@ -1,0 +1,249 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(4, 36, 51, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.modalContainer {
+  position: relative;
+  width: 90%;
+  max-width: 440px;
+  background: var(--cream);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(4, 36, 51, 0.25);
+  transform: translateY(20px) scale(0.98);
+  opacity: 0;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modalContainer {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--navy);
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.closeButton:hover, .closeButton:focus {
+  opacity: 1;
+  outline: none;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--bronze);
+  border-radius: 4px;
+}
+
+.formWrapper {
+  padding: 3rem 2.5rem;
+  color: var(--navy);
+}
+
+.title {
+  font-family: var(--font-instrument), serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(4, 36, 51, 0.15);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--navy);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--bronze);
+  box-shadow: 0 0 0 1px var(--bronze);
+  background: var(--white);
+}
+
+.input.error {
+  border-color: #dc2626;
+}
+
+.errorText {
+  color: #dc2626;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.hintText {
+  color: rgba(4, 36, 51, 0.6);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 1rem;
+  top: 2.35rem;
+  background: none;
+  border: none;
+  color: rgba(4, 36, 51, 0.5);
+  cursor: pointer;
+}
+
+.passwordToggle:hover {
+  color: var(--navy);
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkboxLabel {
+  font-size: 0.9rem;
+  color: rgba(4, 36, 51, 0.8);
+  cursor: pointer;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--bronze);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submitBtn:hover {
+  background: #9a7844;
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.forgotLink {
+  font-size: 0.85rem;
+  color: var(--bronze);
+  text-decoration: none;
+  float: right;
+  margin-top: -3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+.footerText {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: rgba(4, 36, 51, 0.7);
+}
+
+.footerLink {
+  color: var(--bronze);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+.successMessage {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--navy);
+}
+
+.successIcon {
+  color: var(--bronze);
+  margin-bottom: 1rem;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Standalone Page Styles */
+.standaloneContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 4rem;
+}
+
+.standaloneCard {
+  width: 100%;
+  max-width: 440px;
+  background: var(--cream);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(4, 36, 51, 0.1);
+  overflow: hidden;
+}

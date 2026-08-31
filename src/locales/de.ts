@@ -696,5 +696,42 @@ export const de = {
         }
       ]
     }
+  },
+  auth: {
+    login: {
+      title: 'Anmelden',
+      email: 'E-Mail Adresse',
+      password: 'Passwort',
+      rememberMe: 'Angemeldet bleiben',
+      forgotPasswordLink: 'Passwort vergessen?',
+      submitBtn: 'Anmelden',
+      noAccountText: "Sie haben noch kein Konto?",
+      signupLink: 'Registrieren',
+      successMsg: 'Angemeldet — TODO: connect to auth backend',
+      loading: 'Anmeldung läuft...'
+    },
+    signup: {
+      title: 'Konto erstellen',
+      fullName: 'Vollständiger Name',
+      email: 'E-Mail Adresse',
+      password: 'Passwort',
+      passwordHint: 'Mindestens 8 Zeichen',
+      confirmPassword: 'Passwort bestätigen',
+      passwordMismatch: 'Passwörter stimmen nicht überein',
+      termsText: 'Ich stimme den Nutzungsbedingungen und der Datenschutzerklärung zu',
+      submitBtn: 'Konto erstellen',
+      hasAccountText: 'Sie haben bereits ein Konto?',
+      loginLink: 'Anmelden',
+      successMsg: 'Konto erstellt — TODO: connect to auth backend',
+      loading: 'Wird erstellt...'
+    },
+    forgotPassword: {
+      title: 'Passwort zurücksetzen',
+      email: 'E-Mail Adresse',
+      submitBtn: 'Link zum Zurücksetzen senden',
+      successMsg: 'Wenn ein Konto für diese E-Mail existiert, wurde ein Link zum Zurücksetzen gesendet.',
+      backToLogin: 'Zurück zur Anmeldung',
+      loading: 'Wird gesendet...'
+    }
   }
 };
