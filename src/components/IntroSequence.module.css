@@ -1,0 +1,71 @@
+.introWrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  overflow: hidden; /* Prevent massive shadow from creating scrollbars */
+}
+
+.scaleContainer {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Signature high-end Expo.easeInOut motion curve */
+  transition: transform 2.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.5s ease 1.7s;
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+/* 
+  The core of the Mask Zoom technique.
+  This creates a transparent window in the center, 
+  while the 5000px box-shadow paints the rest of the screen Navy.
+*/
+.doorwayHole {
+  position: absolute;
+  width: 140px; 
+  height: 300px;
+  background: transparent;
+  box-shadow: 0 0 0 5000px var(--navy);
+  /* Roughly match the inner arch shape so the shadow doesn't clip the white logo */
+  border-radius: 100px 100px 0 0; 
+  z-index: 1;
+  will-change: transform;
+}
+
+/* The pure white vector logo placed perfectly over the hole */
+.logoImage {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-image: url('/bossert%20logo%20mark.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 2; 
+  will-change: transform;
+}
+
+/* The Action */
+.isZooming {
+  /* Scale 80x: The 140px hole becomes 11,200px wide, swallowing the screen */
+  transform: scale(80);
+  opacity: 0; 
+}
+
+@media (max-width: 768px) {
+  .scaleContainer {
+    /* Need to scale even larger on mobile to clear the screen height */
+    transform: scale(0.6); /* Initial load scale down */
+  }
+  .isZooming {
+    transform: scale(150); /* Massive zoom to clear the screen */
+    opacity: 0;
+  }
+}

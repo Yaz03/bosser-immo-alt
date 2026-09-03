@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -9,20 +9,24 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Bossert Immobilien | Premium Real Estate Rhein-Main",
-  description: "Bossert Immobilien — Discretion and precision in every transaction. Premium residential real estate in the Rhein-Main region since 1991.",
+  title: "Bossert Immobilien | Established expertise. Contemporary discretion.",
+  description: "Bossert Immobilien — An independent real-estate house rooted in the Rhein-Main region, combining more than three decades of market knowledge with personal advisory and discretion.",
 };
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
+// Placeholder for The Seasons font — will be replaced with self-hosted @font-face
+// once font files are placed in /public/fonts/
+const cormorant = Cormorant_Garamond({
+  weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
   style: ["normal", "italic"],
-  variable: "--font-instrument",
+  variable: "--font-seasons",
+  display: "swap",
 });
 
 import SmoothScroll from "@/components/SmoothScroll";
@@ -37,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${instrumentSerif.variable}`}>
+      <body className={`${inter.variable} ${cormorant.variable}`}>
         <LanguageProvider>
           <SmoothScroll>
             {children}

@@ -1,191 +1,190 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function Navbar({ invertOnLoad = false }: { invertOnLoad?: boolean }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const { lang, setLang, t } = useLanguage();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [userInitial, setUserInitial] = useState<string | null>(null);
+interface NavbarProps {
+  /** Pass true on light-background pages (e.g. /properties) */
+  inverted?: boolean;
+  /** Legacy alias — same as inverted */
+  invertOnLoad?: boolean;
+}
 
+export default function Navbar({ inverted = false, invertOnLoad = false }: NavbarProps) {
+  const isInverted = inverted || invertOnLoad;
+
+  const [scrolled, setScrolled]   = useState(false);
+  const [hidden,   setHidden]     = useState(false);
+  const [open,     setOpen]       = useState(false);
+  const [user,     setUser]       = useState<string | null>(null);
+  const lastY = useRef(0);
+
+  const pathname  = usePathname();
+  const { lang, setLang, t } = useLanguage();
+
+  /* ---- auth ---- */
   useEffect(() => {
-    const checkAuth = () => {
-      const mockUser = localStorage.getItem('mockUser');
-      if (mockUser) {
-        setUserInitial(mockUser);
-      } else {
-        setUserInitial(null);
-      }
-    };
-    checkAuth();
-    window.addEventListener('auth-change', checkAuth);
-    return () => window.removeEventListener('auth-change', checkAuth);
+    const sync = () => setUser(localStorage.getItem('mockUser'));
+    sync();
+    window.addEventListener('auth-change', sync);
+    return () => window.removeEventListener('auth-change', sync);
   }, []);
 
+  /* ---- scroll ---- */
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // If we've scrolled past the top
-      if (currentScrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-      
-      // Hide on scroll down, show on scroll up
-      if (currentScrollY > lastScrollY && currentScrollY > 300) {
-        setIsHidden(true);
-      } else if (currentScrollY < lastScrollY) {
-        setIsHidden(false);
-      }
-      
-      setLastScrollY(currentScrollY);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      setHidden(y > lastY.current && y > 280);
+      lastY.current = y;
     };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
-
-  // Lock body scroll when mobile menu is open
+  /* ---- body lock ---- */
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    }
-    
-    return () => {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    };
-  }, [menuOpen]);
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
 
-  const invertClass = invertOnLoad && !isScrolled && !menuOpen ? 'navbar-invert' : '';
+  const cls = [
+    'b-nav',
+    scrolled  ? 'is-scrolled' : '',
+    hidden    ? 'is-hidden'   : '',
+    isInverted && !scrolled && !open ? 'is-inverted' : '',
+  ].filter(Boolean).join(' ');
+
+
+  const active = (href: string) =>
+    pathname === href ? 'b-nav__link is-active' : 'b-nav__link';
 
   return (
     <>
-      <nav className={`navbar ${isScrolled ? 'fixed' : ''} ${isHidden ? 'hidden' : ''} ${invertClass}`}>
-        <Link href="/" className="logo">
-          <img src="/logo.png" alt="Bossert Immobilien Logo" className="logo-img" />
-        </Link>
+      {/* ================================================================
+          DESKTOP NAV — logo centered, links split L / R
+          ================================================================ */}
+      <nav className={cls} aria-label="Main navigation">
 
-        {/* Desktop Nav */}
-        <div className="nav-links desktop-nav">
-          <Link href="/properties" className={`nav-item ${pathname === '/properties' ? 'active' : ''}`}>{t.nav.properties}</Link>
-          <Link href="/owners" className={`nav-item ${pathname === '/owners' ? 'active' : ''}`}>{t.nav.forOwners}</Link>
-          <Link href="/services" className={`nav-item ${pathname === '/services' ? 'active' : ''}`}>{t.nav.services}</Link>
-          <Link href="/about" className={`nav-item ${pathname === '/about' ? 'active' : ''}`}>{t.nav.about}</Link>
-          <Link href="/references" className={`nav-item ${pathname === '/references' ? 'active' : ''}`}>{t.nav.references}</Link>
-          <Link href="/knowledge" className={`nav-item ${pathname === '/knowledge' ? 'active' : ''}`}>{t.nav.knowledge}</Link>
-          
-          <div className="lang-toggle">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}>
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-            <span 
-              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+        {/* LEFT */}
+        <div className="b-nav__left">
+          {/* Language Switch */}
+          <div className="b-nav__lang" style={{ marginRight: 'auto', marginLeft: 0 }}>
+            <button
+              className={`b-nav__lang-btn${lang === 'en' ? ' is-active' : ''}`}
               onClick={() => setLang('en')}
-            >
-              EN
-            </span>
-            <span className="lang-sep">|</span>
-            <span 
-              className={`lang-btn ${lang === 'de' ? 'active' : ''}`}
+              aria-label="English"
+            >EN</button>
+            <span className="b-nav__lang-sep" aria-hidden="true">|</span>
+            <button
+              className={`b-nav__lang-btn${lang === 'de' ? ' is-active' : ''}`}
               onClick={() => setLang('de')}
-            >
-              DE
-            </span>
+              aria-label="Deutsch"
+            >DE</button>
           </div>
 
-          <Link href="/contact" className="contact-btn">{t.nav.contact}</Link>
-          <Link href="/login" className="login-icon-btn" aria-label="Login">
-            {userInitial ? (
-              <span style={{ fontSize: '1.2rem', fontFamily: 'var(--font-instrument), serif', fontWeight: 400 }}>{userInitial}</span>
-            ) : (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            )}
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Link href="/properties"  className={active('/properties')}>{t.nav.properties}</Link>
+            <Link href="/owners"      className={active('/owners')}>{t.nav.forOwners}</Link>
+            <Link href="/services"    className={active('/services')}>{t.nav.services}</Link>
+          </div>
         </div>
 
-        {/* Mobile Right Side: Lang Toggle + Hamburger */}
-        <div className="mobile-nav-right">
-          <div className="lang-toggle mobile-lang-inline">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mobile-lang-icon">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-            <span 
-              className={`lang-btn ${lang === 'en' ? 'active' : ''}`} 
-              onClick={() => setLang('en')}
-            >EN</span>
-            <span className="lang-divider">|</span>
-            <span 
-              className={`lang-btn ${lang === 'de' ? 'active' : ''}`} 
-              onClick={() => setLang('de')}
-            >DE</span>
+        {/* CENTER — logo */}
+        <Link href="/" className="b-nav__logo" aria-label="Bossert Immobilien">
+          <img src="/logo.png" alt="Bossert Immobilien" className="b-nav__logo-img" />
+        </Link>
+
+        {/* RIGHT */}
+        <div className="b-nav__right">
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Link href="/about"       className={active('/about')}>{t.nav.about}</Link>
+            <Link href="/references"  className={active('/references')}>{t.nav.references}</Link>
+            <Link href="/knowledge"   className={active('/knowledge')}>{t.nav.knowledge}</Link>
           </div>
 
-          <button
-            className={`hamburger-btn ${menuOpen ? 'open' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', marginRight: 0 }}>
+            <Link href="/contact" className="b-nav__cta">{t.nav.contact}</Link>
+
+            <Link href="/login" className="b-nav__user" aria-label="Account">
+              {user ? (
+                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem' }}>{user}</span>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <rect x="8" y="2" width="8" height="9"/>
+                </svg>
+              )}
+            </Link>
+
+            {/* Mobile — lang inline + hamburger */}
+            <div className="b-nav__mobile-lang">
+              <button
+                className={`b-nav__lang-btn${lang === 'en' ? ' is-active' : ''}`}
+                onClick={() => setLang('en')}
+              >EN</button>
+              <span className="b-nav__lang-sep">|</span>
+              <button
+                className={`b-nav__lang-btn${lang === 'de' ? ' is-active' : ''}`}
+                onClick={() => setLang('de')}
+              >DE</button>
+            </div>
+
+            <button
+              className={`b-nav__hamburger${open ? ' is-open' : ''}`}
+              onClick={() => setOpen(v => !v)}
+              aria-expanded={open}
+              aria-label="Toggle menu"
+            >
+              <span/><span/><span/>
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
-      <div className={`mobile-drawer ${menuOpen ? 'open' : ''}`} data-lenis-prevent>
+      {/* ================================================================
+          MOBILE DRAWER
+          ================================================================ */}
+      <div className={`b-drawer${open ? ' is-open' : ''}`} aria-hidden={!open} data-lenis-prevent>
 
-        {/* Close button inside drawer */}
         <button
-          className="mobile-drawer-close"
-          onClick={() => setMenuOpen(false)}
+          className="b-drawer__close"
+          onClick={() => setOpen(false)}
           aria-label="Close menu"
         >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+            <line x1="18" y1="6"  x2="6"  y2="18"/>
+            <line x1="6"  y1="6"  x2="18" y2="18"/>
           </svg>
         </button>
 
-        <div className="mobile-nav-links">
-          <Link href="/properties" className={`mobile-nav-item ${pathname === '/properties' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.properties}</Link>
-          <Link href="/owners" className={`mobile-nav-item ${pathname === '/owners' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.forOwners}</Link>
-          <Link href="/services" className={`mobile-nav-item ${pathname === '/services' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.services}</Link>
-          <Link href="/about" className={`mobile-nav-item ${pathname === '/about' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.about}</Link>
-          <Link href="/references" className={`mobile-nav-item ${pathname === '/references' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.references}</Link>
-          <Link href="/knowledge" className={`mobile-nav-item ${pathname === '/knowledge' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{t.nav.knowledge}</Link>
-        </div>
-        <div className="mobile-nav-footer">
-          <Link href="/contact" className="mobile-contact-btn" onClick={() => setMenuOpen(false)}>{t.nav.contact}</Link>
-          <Link href="/login" className="login-icon-btn" aria-label="Login" onClick={() => setMenuOpen(false)} style={{ margin: '0 auto', marginTop: '1rem', border: '1px solid var(--bronze)', color: 'var(--bronze)' }}>
-            {userInitial ? (
-              <span style={{ fontSize: '1.2rem', fontFamily: 'var(--font-instrument), serif', fontWeight: 400 }}>{userInitial}</span>
-            ) : (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            )}
+        <nav className="b-drawer__links" aria-label="Mobile navigation">
+          {[
+            { href: '/properties', label: t.nav.properties },
+            { href: '/owners',     label: t.nav.forOwners },
+            { href: '/services',   label: t.nav.services },
+            { href: '/about',      label: t.nav.about },
+            { href: '/references', label: t.nav.references },
+            { href: '/knowledge',  label: t.nav.knowledge },
+          ].map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`b-drawer__link${pathname === href ? ' is-active' : ''}`}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="b-drawer__footer">
+          <Link href="/contact" className="b-drawer__cta" onClick={() => setOpen(false)}>
+            {t.nav.contact}
           </Link>
         </div>
       </div>

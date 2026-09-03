@@ -9,7 +9,7 @@ export default function StatsCard() {
     <GlassSurface
       width="100%"
       height="auto"
-      borderRadius={24}
+      borderRadius={0}
       opacity={0.8}
       blur={11}
       displace={0.5}
