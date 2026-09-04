@@ -1,5 +1,11 @@
 import HeroSection from '@/components/HeroSection';
 import IntroSequence from '@/components/IntroSequence';
+import AboutSection from '@/components/AboutSection';
+import FindPropertySection from '@/components/FindPropertySection';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import ConsultationSection from '@/components/ConsultationSection';
+import SearchProfileBanner from '@/components/SearchProfileBanner';
+import Footer from '@/components/Footer';
 
 // Phase 1: Hero + Navbar only.
 // Old section components remain in /components/ for reference.
@@ -10,6 +16,12 @@ export default function Home() {
     <main>
       <IntroSequence />
       <HeroSection />
+      <AboutSection />
+      <FindPropertySection />
+      <TestimonialsSection />
+      <ConsultationSection />
+      <SearchProfileBanner />
+      <Footer />
     </main>
   );
 }

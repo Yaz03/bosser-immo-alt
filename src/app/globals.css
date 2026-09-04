@@ -122,18 +122,19 @@ img, video { display: block; max-width: 100%; }
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 0 4.5rem;
-  height: 96px;
+  padding: 2rem 4.5rem;
+  height: auto;
   transition:
     background var(--ease-out) 0.35s,
-    height     var(--ease-out) 0.35s,
-    border-color var(--ease-out) 0.35s;
+    padding var(--ease-out) 0.35s,
+    border-color var(--ease-out) 0.35s,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   border-bottom: 1px solid transparent;
 }
 
 /* Scrolled */
 .b-nav.is-scrolled {
-  height: 72px;
+  padding: 1rem 4.5rem;
   background: rgba(4, 36, 51, 0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -180,6 +181,7 @@ img, video { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 4rem;
 }
 
 .b-nav__logo-img {

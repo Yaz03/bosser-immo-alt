@@ -1,79 +1,67 @@
 "use client";
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './ServicesSection.module.css';
 
-import React from 'react';
-import AccordionCard from './AccordionCard';
-import { useScrollReveal } from '../hooks/useScrollReveal';
-import { useLanguage } from '../context/LanguageContext';
+const services = [
+  {
+    id: 1,
+    title: "Brokerage and Advisory",
+    description: "We provide expert support for property sales, rentals, and all real estate matters — delivered with professionalism, foresight, and a personalized approach.",
+    image: "/service-brokerage.jpg"
+  },
+  {
+    id: 2,
+    title: "Valuation and Reports",
+    description: "Accurate, data-driven valuations and detailed property reports to ensure you make the most informed real estate decisions.",
+    image: "/service-valuation.jpg"
+  },
+  {
+    id: 3,
+    title: "Additional Service",
+    description: "Tailored architectural planning, project management, and specialized consulting to elevate your real estate portfolio.",
+    image: "/service-additional.jpg"
+  }
+];
 
 export default function ServicesSection() {
-  const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
-  const { t } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const cards = [
-    {
-      number: "01",
-      category: t.services.cards[0].category,
-      title: t.services.cards[0].title,
-      subtitle: t.services.cards[0].subtitle,
-      description: t.services.cards[0].description,
-      linkText: t.services.cards[0].linkText,
-      bgImage: "/card1.jpg",
-      href: "/properties"
-    },
-    {
-      number: "02",
-      category: t.services.cards[1].category,
-      title: t.services.cards[1].title,
-      subtitle: t.services.cards[1].subtitle,
-      description: t.services.cards[1].description,
-      linkText: t.services.cards[1].linkText,
-      bgImage: "/card2.jpg",
-      href: "/owners"
-    },
-    {
-      number: "03",
-      category: t.services.cards[2].category,
-      title: t.services.cards[2].title,
-      subtitle: t.services.cards[2].subtitle,
-      description: t.services.cards[2].description,
-      linkText: t.services.cards[2].linkText,
-      bgImage: "/card3.jpg",
-      href: "/services"
-    },
-    {
-      number: "04",
-      category: t.services.cards[3].category,
-      title: t.services.cards[3].title,
-      subtitle: t.services.cards[3].subtitle,
-      description: t.services.cards[3].description,
-      linkText: t.services.cards[3].linkText,
-      bgImage: "/card4.jpg",
-      href: "/about"
-    }
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 } // Trigger earlier to pop right after zoom
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="services-section" ref={sectionRef}>
-      <div className={`services-left reveal-base reveal-scale ${isVisible ? 'is-revealed' : ''}`}>
-        <div className="services-subtitle">
-          <span className="dot"></span> {t.services.tag}
-        </div>
-        <div className="services-headline">
-          <div className="headline-top-s">{t.services.headline}</div>
-          <div className="headline-mid-s">{t.services.headlineMid}</div>
-          <div className="headline-bot-s"><span>{t.services.headlineSerif}</span> {t.services.headlineBot}</div>
-        </div>
-        <div className="services-desc">
-          {t.services.subhead}
-        </div>
-        <div className="services-footer">
-          {t.services.footer}
-        </div>
+    <section className={`${styles.section} ${isVisible ? styles.visible : ''}`} ref={sectionRef}>
+      <div className={styles.headerBand}>
+        <h2 className={styles.headerText}>Your Key to Trusted Real Estate Expertise</h2>
       </div>
 
-      <div className="services-right accordion-container">
-        {cards.map((card, idx) => (
-          <AccordionCard key={idx} {...card} />
+      <div className={styles.grid}>
+        {services.map(service => (
+          <div key={service.id} className={styles.card}>
+            <div className={styles.bgWrapper}>
+              <img src={service.image} alt={service.title} className={styles.bgImage} />
+              <div className={styles.overlay}></div>
+            </div>
+            <div className={styles.content}>
+              <h3 className={styles.title}>{service.title}</h3>
+              <div className={styles.detailsWrapper}>
+                <p className={styles.description}>{service.description}</p>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>

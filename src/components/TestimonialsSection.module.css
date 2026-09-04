@@ -1,0 +1,142 @@
+.section {
+  width: 100%;
+  background-color: #052632;
+  padding: 7rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Bronze floating quote character — no circle bg */
+.quoteChar {
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  color: var(--bronze);
+  line-height: 1;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 300;
+  color: var(--white);
+  margin: 0 0 2rem 0;
+  text-align: center;
+}
+
+.divider {
+  width: 180px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 4rem;
+}
+
+/* Slider */
+.sliderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+.navArrow {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.navArrow:hover {
+  border-color: var(--bronze);
+  color: var(--bronze);
+  background-color: rgba(175, 140, 83, 0.1);
+}
+
+.sliderContent {
+  flex: 1;
+  text-align: center;
+  padding: 0 3rem;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slideInner {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.slideIn {
+  opacity: 1;
+}
+
+.slideOut {
+  opacity: 0;
+}
+
+.quoteText {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--white);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.authorName {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--bronze);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* Dash pagination */
+.pagination {
+  display: flex;
+  gap: 10px;
+}
+
+.dash {
+  width: 30px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.4s ease, width 0.4s ease;
+}
+
+.activeDash {
+  background-color: var(--bronze);
+  width: 45px;
+}
+
+@media (max-width: 600px) {
+  .sliderContent {
+    padding: 0 1rem;
+  }
+  .quoteText {
+    font-size: 1.05rem;
+  }
+}

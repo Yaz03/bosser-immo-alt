@@ -33,15 +33,44 @@ export default function Navbar({ inverted = false, invertOnLoad = false }: Navba
   }, []);
 
   /* ---- scroll ---- */
+  const hideTimer = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
+      const isScrollingDown = y > lastY.current;
+      
       setScrolled(y > 40);
-      setHidden(y > lastY.current && y > 280);
+
+      // Clear any existing auto-hide timer when user scrolls
+      if (hideTimer.current) {
+        clearTimeout(hideTimer.current);
+      }
+
+      if (isScrollingDown && y > 280) {
+        // Scrolling down past threshold -> hide immediately
+        setHidden(true);
+      } else if (!isScrollingDown) {
+        // Scrolling up -> show immediately
+        setHidden(false);
+        
+        // If not at the top, auto-hide after 2 seconds of no scrolling
+        if (y > 280) {
+          hideTimer.current = setTimeout(() => {
+            setHidden(true);
+          }, 2000);
+        }
+      }
+
       lastY.current = y;
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (hideTimer.current) {
+        clearTimeout(hideTimer.current);
+      }
+    };
   }, []);
 
   /* ---- body lock ---- */

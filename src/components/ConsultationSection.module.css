@@ -1,0 +1,148 @@
+.section {
+  width: 100%;
+  background-color: var(--navy);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0; /* Creates the navy gap at top and bottom */
+}
+
+/* Recreating the elegant grid lines from the screenshot */
+.topLine {
+  position: absolute;
+  top: 4rem;
+  left: 30%;
+  right: 0;
+  height: 1px;
+  background-color: rgba(152, 120, 69, 0.5);
+  z-index: 2;
+}
+
+.verticalLine {
+  position: absolute;
+  top: 4rem;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: rgba(152, 120, 69, 0.5);
+  z-index: 2;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  position: relative;
+  z-index: 3;
+}
+
+.leftCol {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.contentBox {
+  border: 1px solid rgba(152, 120, 69, 0.5); /* Bronze border */
+  padding: 4rem 3rem;
+  max-width: 500px;
+  width: 100%;
+  background-color: var(--navy); /* Match section bg */
+}
+
+.logoText {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  letter-spacing: 0.02em;
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.25;
+  margin: 0 0 2rem 0;
+}
+
+.subtext {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.6;
+  margin: 0 0 3rem 0;
+  opacity: 0.9;
+}
+
+.ctaButton {
+  background: transparent;
+  border: 1px solid rgba(152, 120, 69, 0.8); /* Bronze */
+  color: rgba(152, 120, 69, 1); /* Bronze */
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  padding: 0.8rem 2rem;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: rgba(152, 120, 69, 0.1);
+  color: var(--white);
+  border-color: rgba(152, 120, 69, 1);
+}
+
+.rightCol {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imageWrapper {
+  width: 100%;
+  max-width: 650px;
+  height: 600px; /* Force consistent height */
+  margin-right: 4rem; /* Gap on the right */
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .topLine, .verticalLine {
+    display: none;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .leftCol {
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+  .contentBox {
+    padding: 3rem 2rem;
+  }
+  .rightCol {
+    width: 100%;
+    justify-content: center;
+  }
+  .imageWrapper {
+    margin-right: 0;
+    max-width: 100%;
+    height: 400px;
+  }
+}

@@ -3,69 +3,108 @@
   inset: 0;
   z-index: 9999;
   display: flex;
-  justify-content: center;
-  align-items: center;
   pointer-events: none;
-  overflow: hidden; /* Prevent massive shadow from creating scrollbars */
+  overflow: hidden;
+  /* Perspective on the parent gives both doors consistent 3D depth */
+  perspective: 1800px;
 }
 
-.scaleContainer {
-  position: relative;
-  width: 500px;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Signature high-end Expo.easeInOut motion curve */
-  transition: transform 2.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.5s ease 1.7s;
-  will-change: transform, opacity;
-  transform-origin: center center;
-}
-
-/* 
-  The core of the Mask Zoom technique.
-  This creates a transparent window in the center, 
-  while the 5000px box-shadow paints the rest of the screen Navy.
-*/
-.doorwayHole {
+.door {
   position: absolute;
-  width: 140px; 
-  height: 300px;
-  background: transparent;
-  box-shadow: 0 0 0 5000px var(--navy);
-  /* Roughly match the inner arch shape so the shadow doesn't clip the white logo */
-  border-radius: 100px 100px 0 0; 
-  z-index: 1;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background-color: var(--navy);
+  overflow: hidden;
+  /* Premium easing — doors decelerate smoothly as they swing toward us */
+  transition: transform 3.2s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
+  backface-visibility: hidden;
 }
 
-/* The pure white vector logo placed perfectly over the hole */
+.leftDoor {
+  left: 0;
+  /* Hinge on the left edge of the left door */
+  transform-origin: left center;
+}
+
+.rightDoor {
+  right: 0;
+  /* Hinge on the right edge of the right door */
+  transform-origin: right center;
+}
+
+/* Ensure the logo aligns perfectly in the center of the screen across both doors */
+.logoContainer {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.leftDoor .logoContainer {
+  left: 0;
+}
+
+.rightDoor .logoContainer {
+  left: -50vw;
+}
+
 .logoImage {
   position: absolute;
+  left: 50%;
+  top: 50%;
   width: 500px;
   height: 500px;
+  transform: translate(-50%, -50%);
   background-image: url('/bossert%20logo%20mark.svg');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 2; 
-  will-change: transform;
+  /* Logo sits above the 3D shading */
+  z-index: 2;
 }
 
-/* The Action */
-.isZooming {
-  /* Scale 80x: The 140px hole becomes 11,200px wide, swallowing the screen */
-  transform: scale(80);
-  opacity: 0; 
+/* 3D shading overlay to give the doors volume as they swing */
+.door::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 3.2s cubic-bezier(0.76, 0, 0.24, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.leftDoor::after {
+  /* Light catches the inner edge of the left door as it pulls toward us */
+  background: linear-gradient(to right, transparent 40%, rgba(255, 255, 255, 0.08) 95%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.rightDoor::after {
+  /* Light catches the inner edge of the right door as it pulls toward us */
+  background: linear-gradient(to left, transparent 40%, rgba(255, 255, 255, 0.08) 95%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.doorOpenLeft::after,
+.doorOpenRight::after {
+  opacity: 1;
+}
+
+/* Pull-open: doors swing TOWARD the viewer */
+.doorOpenLeft {
+  /* Negative Y rotation swings the right edge toward the camera */
+  transform: rotateY(-85deg) skewY(3deg);
+}
+
+.doorOpenRight {
+  /* Positive Y rotation swings the left edge toward the camera */
+  transform: rotateY(85deg) skewY(-3deg);
 }
 
 @media (max-width: 768px) {
-  .scaleContainer {
-    /* Need to scale even larger on mobile to clear the screen height */
-    transform: scale(0.6); /* Initial load scale down */
-  }
-  .isZooming {
-    transform: scale(150); /* Massive zoom to clear the screen */
-    opacity: 0;
+  .logoImage {
+    width: 280px;
+    height: 280px;
   }
 }

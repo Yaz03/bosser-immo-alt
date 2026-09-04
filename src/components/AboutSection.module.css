@@ -1,0 +1,293 @@
+.section {
+  position: relative;
+  width: 100%;
+  background-color: var(--cream);
+  height: 800vh; /* Extremely long scroll track to make revealing much slower in motion */
+}
+
+.stickyWrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bgWrapper {
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bgImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  will-change: opacity, transform; /* optimize for smooth scroll fading */
+}
+
+/* Base states for elegant scroll-in animation */
+.eyebrow,
+.headline,
+.subtext,
+.ctaButton {
+  /* opacity and transform are now strictly controlled by the parent .content div's inline styles */
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 2rem;
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.4vw, 2.8rem); /* Much smaller to guarantee 2 lines */
+  line-height: 1.2;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+}
+
+.subtext {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--navy-a70);
+  margin-bottom: 2.5rem;
+  max-width: 650px;
+}
+
+.ctaButton {
+  display: inline-block;
+  background-color: var(--bronze);
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 1.1rem 3rem;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: #987845; /* Darker bronze */
+  color: var(--white);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+/* ========================================= */
+/* MERGED SERVICES STYLES                    */
+/* ========================================= */
+
+.servicesContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.servicesHeaderBand {
+  width: 100%;
+  padding: 4rem 2rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.servicesHeaderText {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--navy);
+  text-align: center;
+  margin: 0;
+}
+
+.servicesGrid {
+  display: flex;
+  width: 100%;
+  height: 65vh; 
+}
+
+.serviceCard {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: none;
+  border-radius: 0; /* Strict 0 corner radius */
+  transition: border-color 0.6s ease;
+}
+
+.serviceCard:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.serviceCard:first-child {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.serviceCard:hover {
+  border-color: rgba(212, 175, 55, 0.6); /* Bronze elegant glow */
+  z-index: 10;
+}
+
+.serviceBgWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.serviceBgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.serviceOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(3, 43, 59, 0.9) 0%, rgba(3, 43, 59, 0.3) 100%);
+  opacity: 0.7;
+  transition: opacity 0.8s ease;
+}
+
+.serviceCard:hover .serviceBgImage {
+  transform: scale(1.08);
+}
+
+.serviceCard:hover .serviceOverlay {
+  opacity: 0.85;
+}
+
+.serviceContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 3rem 2rem;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Push content towards bottom for elegance */
+}
+
+.serviceTitle {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  line-height: 1.2;
+  margin: 0;
+  color: var(--white);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+  transform: translateY(40px);
+  max-width: 300px;
+}
+
+.serviceCard:hover .serviceTitle {
+  transform: translateY(0);
+  color: var(--bronze);
+}
+
+.serviceDetailsWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  margin-top: 0;
+  transition: grid-template-rows 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, margin-top 0.8s ease;
+  width: 100%;
+  max-width: 320px;
+}
+
+.serviceCard:hover .serviceDetailsWrapper {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 1.5rem;
+}
+
+.serviceLine {
+  width: 40px;
+  height: 1px;
+  background-color: var(--bronze);
+  margin: 0 auto 1.2rem auto;
+}
+
+.serviceDescription {
+  overflow: hidden;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .servicesGrid {
+    flex-direction: column;
+    height: auto;
+  }
+  .serviceCard {
+    height: 400px;
+  }
+  .serviceTitle {
+    transform: translateY(0);
+  }
+  .serviceDetailsWrapper {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 1.5rem;
+  }
+  .serviceOverlay {
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2.2rem;
+  }
+  .horizontalLine {
+    width: 25px;
+  }
+  .bgImage {
+    opacity: 0.08; /* Make background fainter on mobile to keep text readable */
+  }
+}
