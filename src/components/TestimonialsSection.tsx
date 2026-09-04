@@ -1,6 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './TestimonialsSection.module.css';
+import { useGSAP } from '@/hooks/useGSAP';
+import { fadeSlideUp, scaleXReveal } from '@/utils/animations';
 
 const testimonials = [
   {
@@ -24,6 +26,31 @@ export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
   const [isAnimating, setIsAnimating] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Section entry animations — once: true (no replay on scroll-back)
+  useGSAP(sectionRef, () => {
+    fadeSlideUp(`.${styles.quoteChar}`, {
+      y: 20, duration: 0.6, ease: 'power2.out',
+      start: 'top 85%', once: true,
+    });
+    fadeSlideUp(`.${styles.headline}`, {
+      y: 30, duration: 0.7, delay: 0.1, ease: 'power2.out',
+      start: 'top 85%', once: true,
+    });
+    scaleXReveal(`.${styles.divider}`, {
+      duration: 0.6, delay: 0.25, ease: 'power2.out',
+      start: 'top 85%', once: true,
+    });
+    fadeSlideUp(`.${styles.sliderWrapper}`, {
+      y: 25, duration: 0.7, delay: 0.3, ease: 'power2.out',
+      start: 'top 85%', once: true,
+    });
+    fadeSlideUp(`.${styles.pagination}`, {
+      y: 10, duration: 0.5, delay: 0.45, ease: 'power2.out',
+      start: 'top 85%', once: true,
+    });
+  });
 
   const handlePrev = () => {
     if (isAnimating) return;
@@ -56,12 +83,9 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} ref={sectionRef}>
       <div className={styles.container}>
-        
-        {/* Bronze quote character */}
         <span className={styles.quoteChar}>&ldquo;</span>
-
         <h2 className={styles.headline}>What Clients Say About Us</h2>
         <div className={styles.divider}></div>
 
@@ -73,11 +97,11 @@ export default function TestimonialsSection() {
           </button>
 
           <div className={styles.sliderContent}>
-            <div 
+            <div
               className={`${styles.slideInner} ${isAnimating ? styles.slideOut : styles.slideIn}`}
               style={{
-                transform: isAnimating 
-                  ? `translateX(${slideDirection === 'right' ? '-30px' : '30px'})` 
+                transform: isAnimating
+                  ? `translateX(${slideDirection === 'right' ? '-30px' : '30px'})`
                   : 'translateX(0)',
               }}
             >
@@ -93,18 +117,16 @@ export default function TestimonialsSection() {
           </button>
         </div>
 
-        {/* Dash-style pagination */}
         <div className={styles.pagination}>
           {testimonials.map((_, idx) => (
-            <button 
-              key={idx} 
+            <button
+              key={idx}
               className={`${styles.dash} ${idx === currentIndex ? styles.activeDash : ''}`}
               onClick={() => handleDot(idx)}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
         </div>
-
       </div>
     </section>
   );

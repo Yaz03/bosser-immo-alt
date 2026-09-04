@@ -51,49 +51,48 @@
   color: var(--white);
   font-weight: 300;
   font-size: clamp(2rem, 3.5vw, 3.5rem);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.2rem;
   text-align: center;
-  position: relative;
-  padding-bottom: 1.5rem;
 }
 
-.headline::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+/* Real DOM underline element — GSAP scaleX reveal */
+.headlineUnderline {
+  display: block;
   width: 60px;
   height: 2px;
   background-color: var(--bronze);
+  margin: 0 auto 2.5rem auto;
+  transform-origin: left center;
 }
 
 .searchContainer {
   background: var(--white);
-  padding: 15px;
+  padding: 1rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 0.75rem;
   width: 100%;
   border: 1px solid var(--bronze);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 .inputField,
 .selectField,
 .searchBtn {
-  padding: 12px 16px;
+  padding: 0.875rem 1.25rem;
   font-family: var(--font-sans);
-  font-size: 0.95rem;
-  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  border: 1px solid rgba(175, 140, 83, 0.25);
   outline: none;
   background: transparent;
   color: #333;
+  transition: border-color 0.3s ease, background-color 0.25s ease;
 }
 
 .inputField:focus,
 .selectField:focus {
   border-color: var(--bronze);
+  background-color: rgba(175, 140, 83, 0.04);
 }
 
 .inputField {
@@ -115,16 +114,22 @@
 .searchBtn {
   flex: 1;
   min-width: 120px;
-  background-color: #032b3b; /* Deep Navy */
+  background-color: var(--navy);
   color: var(--white);
   border: none;
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.15s ease;
 }
 
 .searchBtn:hover {
   background-color: var(--bronze);
+}
+
+.searchBtn:active {
+  transform: scale(0.98);
 }
 
 /* --- Bottom Features Area --- */
@@ -139,28 +144,28 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 2.5rem;
   max-width: 1200px;
   width: 100%;
 }
 
 .card {
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-left: 3px solid transparent;
-  padding: 3rem 2rem;
+  padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease, background-color 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
   border-left-color: var(--bronze);
   border-color: rgba(175, 140, 83, 0.4);
-  border-left-color: var(--bronze);
   background-color: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
 
 .iconWrapper {
@@ -184,19 +189,18 @@
 
 .cardTitle {
   font-family: var(--font-serif);
-  color: var(--bronze);
-  font-size: 1.5rem;
+  color: var(--white);
+  font-size: 1.35rem;
   font-weight: 400;
   line-height: 1.3;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .cardDesc {
-  color: var(--white);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  color: var(--white-a70);
+  font-size: 0.9rem;
+  line-height: 1.65;
   font-weight: 300;
-  opacity: 0.9;
 }
 
 /* Responsive */

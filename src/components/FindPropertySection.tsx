@@ -1,40 +1,74 @@
 "use client";
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './FindPropertySection.module.css';
+import { useGSAP } from '@/hooks/useGSAP';
+import { fadeSlideUp, scaleXReveal, batchReveal } from '@/utils/animations';
 
 export default function FindPropertySection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(sectionRef, () => {
+    // Headline fade-slide
+    fadeSlideUp(`.${styles.headline}`, {
+      y: 35, duration: 0.7, ease: 'power2.out',
+      start: 'top 85%', once: true,
+    });
+
+    // Bronze underline span — scaleX reveal (pseudo-elements can't be GSAP'd)
+    scaleXReveal(`.${styles.headlineUnderline}`, {
+      duration: 0.6, delay: 0.25, ease: 'power2.out',
+      start: 'top 85%', once: true,
+    });
+
+    // Search container
+    fadeSlideUp(`.${styles.searchContainer}`, {
+      y: 30, duration: 0.6, delay: 0.15, ease: 'power2.out',
+      start: 'top 85%', once: true,
+    });
+
+    // Feature cards — ScrollTrigger.batch for performance
+    batchReveal(`.${styles.card}`, {
+      stagger: 0.12, y: 40, duration: 0.7,
+      once: true, start: 'top 88%',
+    });
+  });
+
   return (
-    <section className={styles.section}>
-      
+    <section className={styles.section} ref={sectionRef}>
+
       {/* Top half: Image background with search bar */}
       <div className={styles.searchArea}>
         <div className={styles.bgWrapper}>
           <img src="/property-search-bg.jpg" alt="Luxury property interior" className={styles.bgImage} />
           <div className={styles.overlay}></div>
         </div>
-        
+
         <div className={styles.searchContent}>
-          <h2 className={styles.headline}>Find Your Next Property</h2>
-          
+          <h2 className={styles.headline}>
+            Find Your Next Property
+          </h2>
+          {/* Real DOM element for the bronze underline — pseudo can't be GSAP targeted */}
+          <span className={styles.headlineUnderline}></span>
+
           <div className={styles.searchContainer}>
-            <input 
-              type="text" 
-              placeholder="Title or Property ID" 
-              className={styles.inputField} 
+            <input
+              type="text"
+              placeholder="Title or Property ID"
+              className={styles.inputField}
             />
-            
+
             <select className={styles.selectField} defaultValue="all">
               <option value="all">All Property Types</option>
               <option value="house">House</option>
               <option value="apartment">Apartment</option>
               <option value="villa">Villa</option>
             </select>
-            
+
             <select className={styles.selectField} defaultValue="buy">
               <option value="buy">Buy</option>
               <option value="rent">Rent</option>
             </select>
-            
+
             <button className={styles.searchBtn}>Search</button>
           </div>
         </div>
@@ -43,8 +77,7 @@ export default function FindPropertySection() {
       {/* Bottom half: Navy background with feature cards */}
       <div className={styles.featuresArea}>
         <div className={styles.grid}>
-          
-          {/* Card 1 */}
+
           <div className={styles.card}>
             <div className={styles.iconWrapper}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className={styles.icon}>
@@ -57,7 +90,6 @@ export default function FindPropertySection() {
             </p>
           </div>
 
-          {/* Card 2 */}
           <div className={styles.card}>
             <div className={styles.iconWrapper}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className={styles.icon}>
@@ -70,7 +102,6 @@ export default function FindPropertySection() {
             </p>
           </div>
 
-          {/* Card 3 */}
           <div className={styles.card}>
             <div className={styles.iconWrapper}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className={styles.icon}>

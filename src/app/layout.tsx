@@ -30,6 +30,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 import SmoothScroll from "@/components/SmoothScroll";
+import GSAPInit from "@/components/GSAPInit";
 import { LanguageProvider } from "@/context/LanguageContext";
 
 export default function RootLayout({
@@ -44,6 +45,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${cormorant.variable}`}>
         <LanguageProvider>
           <SmoothScroll>
+            <GSAPInit />
             {children}
             {modal}
           </SmoothScroll>

@@ -1,6 +1,12 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+
+import React, { useRef } from 'react';
 import styles from './ServicesSection.module.css';
+import { useGSAP } from '@/hooks/useGSAP';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
@@ -25,44 +31,70 @@ const services = [
 
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const headerRef = useRef<HTMLHeadingElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
+  useGSAP(sectionRef, () => {
+    // Reveal header
+    gsap.fromTo(headerRef.current, 
+      { opacity: 0, y: 40 },
+      { 
+        opacity: 1, y: 0, 
+        duration: 0.8, 
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: 'top 85%',
+          once: true
         }
-      },
-      { threshold: 0.1 } // Trigger earlier to pop right after zoom
+      }
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+    // Stagger reveal cards
+    gsap.fromTo(cardsRef.current,
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          once: true
+        }
+      }
+    );
+  });
 
   return (
-    <section className={`${styles.section} ${isVisible ? styles.visible : ''}`} ref={sectionRef}>
-      <div className={styles.headerBand}>
-        <h2 className={styles.headerText}>Your Key to Trusted Real Estate Expertise</h2>
-      </div>
+    <section className={styles.section} ref={sectionRef}>
+      <div className={styles.container}>
+        
+        <h2 className={styles.headline} ref={headerRef}>
+          Your Key to Trusted Real Estate Expertise
+        </h2>
 
-      <div className={styles.grid}>
-        {services.map(service => (
-          <div key={service.id} className={styles.card}>
-            <div className={styles.bgWrapper}>
-              <img src={service.image} alt={service.title} className={styles.bgImage} />
-              <div className={styles.overlay}></div>
-            </div>
-            <div className={styles.content}>
-              <h3 className={styles.title}>{service.title}</h3>
-              <div className={styles.detailsWrapper}>
+        <div className={styles.grid}>
+          {services.map((service, i) => (
+            <div 
+              key={service.id} 
+              className={styles.card}
+              ref={el => { cardsRef.current[i] = el; }}
+            >
+              <div className={styles.imageWrapper}>
+                <img src={service.image} alt={service.title} className={styles.image} />
+              </div>
+              <div className={styles.content}>
+                <h3 className={styles.title}>{service.title}</h3>
+                <div className={styles.separator} />
                 <p className={styles.description}>{service.description}</p>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
       </div>
     </section>
   );

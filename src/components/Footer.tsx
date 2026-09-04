@@ -1,11 +1,26 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import styles from './Footer.module.css';
+import { useGSAP } from '@/hooks/useGSAP';
+import { fadeSlideUp, batchReveal } from '@/utils/animations';
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
   const [subscribed, setSubscribed] = useState(false);
   const [subscribing, setSubscribing] = useState(false);
+
+  // Staggered column reveal — once: true
+  useGSAP(footerRef, () => {
+    batchReveal(`.${styles.col}`, {
+      stagger: 0.12, y: 30, duration: 0.7,
+      once: true, start: 'top 88%',
+    });
+    fadeSlideUp(`.${styles.bottomBar}`, {
+      y: 20, duration: 0.5, delay: 0.4, ease: 'power2.out',
+      start: 'top 90%', once: true,
+    });
+  });
 
   const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,10 +39,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} ref={footerRef}>
       <div className={styles.container}>
         <div className={styles.grid}>
-          
+
           {/* Left Column: Navigation */}
           <div className={styles.col}>
             <h4 className={styles.colTitle}>Navigation</h4>
@@ -46,13 +61,13 @@ export default function Footer() {
           <div className={styles.col}>
             <h4 className={styles.colTitle}>Stay Updated</h4>
             <form className={styles.subscribeForm} onSubmit={handleSubscribe} noValidate>
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                required 
+              <input
+                type="email"
+                placeholder="Your email address"
+                required
                 maxLength={100}
-                className={styles.subscribeInput} 
-                disabled={subscribing} 
+                className={styles.subscribeInput}
+                disabled={subscribing}
               />
               <button type="submit" className={styles.subscribeBtn} disabled={subscribing}>
                 {subscribing ? '...' : subscribed ? 'Done' : 'Subscribe'}

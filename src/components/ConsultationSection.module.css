@@ -1,11 +1,11 @@
 .section {
   width: 100%;
-  background-color: var(--navy);
+  background-color: var(--white);
   position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
-  padding: 4rem 0; /* Creates the navy gap at top and bottom */
+  padding: 4rem 0;
 }
 
 /* Recreating the elegant grid lines from the screenshot */
@@ -15,8 +15,9 @@
   left: 30%;
   right: 0;
   height: 1px;
-  background-color: rgba(152, 120, 69, 0.5);
+  background-color: rgba(4, 36, 51, 0.15);
   z-index: 2;
+  transform-origin: left center;
 }
 
 .verticalLine {
@@ -25,8 +26,9 @@
   bottom: 0;
   left: 50%;
   width: 1px;
-  background-color: rgba(152, 120, 69, 0.5);
+  background-color: rgba(4, 36, 51, 0.12);
   z-index: 2;
+  transform-origin: top center;
 }
 
 .container {
@@ -46,28 +48,29 @@
 }
 
 .contentBox {
-  border: 1px solid rgba(152, 120, 69, 0.5); /* Bronze border */
-  padding: 4rem 3rem;
+  border: 1px solid rgba(4, 36, 51, 0.15);
+  padding: 3.5rem;
   max-width: 500px;
   width: 100%;
-  background-color: var(--navy); /* Match section bg */
+  background-color: var(--white);
 }
 
 .logoText {
   font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: var(--white);
-  line-height: 1.2;
-  margin-bottom: 3rem;
-  letter-spacing: 0.02em;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
 }
 
 .headline {
   font-family: var(--font-serif);
   font-size: clamp(2rem, 3vw, 2.6rem);
   font-weight: 300;
-  color: var(--white);
+  color: var(--navy);
   line-height: 1.25;
   margin: 0 0 2rem 0;
 }
@@ -76,30 +79,29 @@
   font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 300;
-  color: var(--white);
-  line-height: 1.6;
-  margin: 0 0 3rem 0;
-  opacity: 0.9;
+  color: var(--navy-a70);
+  line-height: 1.65;
+  margin: 0 0 2.5rem 0;
 }
 
 .ctaButton {
   background: transparent;
-  border: 1px solid rgba(152, 120, 69, 0.8); /* Bronze */
-  color: rgba(152, 120, 69, 1); /* Bronze */
+  border: 1px solid rgba(4, 36, 51, 0.4);
+  color: var(--navy);
   font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  padding: 0.8rem 2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 0.9rem 2rem;
   border-radius: 0;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .ctaButton:hover {
-  background-color: rgba(152, 120, 69, 0.1);
+  background-color: var(--navy);
   color: var(--white);
-  border-color: rgba(152, 120, 69, 1);
+  border-color: var(--navy);
 }
 
 .rightCol {
@@ -111,14 +113,20 @@
 .imageWrapper {
   width: 100%;
   max-width: 650px;
-  height: 600px; /* Force consistent height */
-  margin-right: 4rem; /* Gap on the right */
+  height: 580px;
+  margin-right: 4rem;
 }
 
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media (max-width: 1280px) {
+  .imageWrapper {
+    height: 480px;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -134,7 +142,7 @@
     padding: 2rem 1rem;
   }
   .contentBox {
-    padding: 3rem 2rem;
+    padding: 2.5rem 2rem;
   }
   .rightCol {
     width: 100%;
@@ -143,6 +151,12 @@
   .imageWrapper {
     margin-right: 0;
     max-width: 100%;
-    height: 400px;
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .imageWrapper {
+    height: 280px;
   }
 }
